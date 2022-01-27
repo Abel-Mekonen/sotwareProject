@@ -123,7 +123,7 @@
    
             <div class="mb-2">
               <label class="form-label" for="Expertise">Device type</label>
-              <select class="form-select" name="course" id="Expertise">
+              <select class="form-select" name="device" id="Expertise">
                 <option
                   th:each="device:${T(software.project.mainClasses.Technician.Device).values()}"
                   th:value="${device}"

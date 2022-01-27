@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchTutor {
+public class SearchTechnician {
     private Device device;
 }

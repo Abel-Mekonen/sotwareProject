@@ -35,7 +35,7 @@ public class TechnicianProfileController {
 
 
     @GetMapping("/editTechnicianProfile")
-    public ModelAndView editTutorProfile(@RequestParam Long userId, @RequestParam Long technicianId, UserHelper userHelper ){ 
+    public ModelAndView editTechnicianProfile(@RequestParam Long userId, @RequestParam Long technicianId, UserHelper userHelper ){ 
         return technicianProfileService.editTutorProfile(userId, technicianId, userHelper);
     }
     

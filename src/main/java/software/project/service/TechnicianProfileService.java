@@ -23,7 +23,7 @@ import software.project.repository.RequestRepo;
 public class TechnicianProfileService {
     
     @Autowired
-    private final TechnicianRepository profileRepository;
+    private final TechnicianRepository technicianRepository;
     private final UserRepository userRepo;
     // private final CustomerRepository tuteeProfileRepository;
     private final RequestRepo requestRepo;
@@ -39,10 +39,10 @@ public class TechnicianProfileService {
     } 
 
 
-    public ModelAndView editTutorProfile(@RequestParam Long userId, @RequestParam  Long tutorId,  UserHelper userHelper){
+    public ModelAndView editTutorProfile(@RequestParam Long userId, @RequestParam  Long technicianId,  UserHelper userHelper){
         ModelAndView mav = new ModelAndView("editTechnicianProfile");
         User techUser = userRepo.findById(userId).get();
-        Technician tProfile = profileRepository.findById(tutorId).get();
+        Technician tProfile = technicianRepository.findById(technicianId).get();
 
         userHelper.setFirstName(techUser.getFirstName());
         userHelper.setLastName(techUser.getLastName());
@@ -63,7 +63,7 @@ public class TechnicianProfileService {
 
     public String saveTutor(@AuthenticationPrincipal User user, UserHelper userHelper){
         var profile = user.getTechnicianProfile();
-
+        // var profile = new Technician();
         // profile.setCourse(userHelper.getCourse());
         profile.setDescription(userHelper.getDescription());
         profile.setDevice(userHelper.getDevice());
@@ -74,8 +74,10 @@ public class TechnicianProfileService {
         user.setPhone(userHelper.getPhone());
         user.setLocation(userHelper.getLocation());
         user.setPassword(encoder.encode(userHelper.getPassword()));
+
         userRepo.save(user);
-        profileRepository.save(profile);
+        technicianRepository.save(profile);
+
         return "redirect:/displayTechnicianProfile";
     }
 
