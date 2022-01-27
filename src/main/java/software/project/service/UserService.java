@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import software.project.*;
+// import software.project.*;
 import software.project.mainClasses.Customer;
 import software.project.mainClasses.RegistrationForm;
 import software.project.mainClasses.Technician;

@@ -42,6 +42,9 @@ public class Technician {
     @Column(nullable = true)
     private String organizationName;
 
+    @Column(nullable = true)
+    private String description;
+
 
     public static enum Device{
         LAPTOP,

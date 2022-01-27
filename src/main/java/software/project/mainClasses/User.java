@@ -65,7 +65,7 @@ public class User implements UserDetails {
     private Technician technicianProfile;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Customer customeProfile;
+    private Customer customerProfile;
 
     public static enum Role {
         CUSTOMER,

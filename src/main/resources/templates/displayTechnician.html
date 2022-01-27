@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html lang="en">
+    <head th:object="${TechnicianProfile}">
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <!-- <title th:text="*{user.firstName} +' '+ *{user.lastName} + ' (' + *{user.role} +')' ">Tutee Name</title> -->
+      <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+      <link th:href="@{/css/profile.css}" rel="stylesheet" />
+      <link th:href="@{/css/common.css}" rel="stylesheet" />
+    </head>
+    <body>
+      <main>
+        <header class="row align-items-center ps-5 pe-5 shadow bg-body">
+          <div class="col fs-5">
+            <b><a href="/">THE TUTOR</a></b>
+          </div>
+          <div class="col text-end">
+            <form th:object="${TechnicianProfile}" class="col" action="/logout" method="post">
+              <div class="dropdown">
+                <a
+                  href="#"
+                  role="button"
+                  class="dropdown-toggle"
+                  id="signup_options"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    th:src="@{/images/default_avatar.png}"
+                    class="rounded-circle"
+                    data-bs-toggle="tooltip"
+                    th:title="|Logged in as *{user.firstName} *{user.lastName} (*{user.role})|"
+                    alt="Avatar"
+                    height="35"
+                  />
+                </a>
+                <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                  <li>
+                    <form th:action="@{/logout}" method="post">
+                      <button type="submit" class="btn-sm btn w-100">
+                        Log out
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </header>
+      <div class="con profile_con row">
+        <div
+          class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
+          th:object="${TechnicianProfile}"
+        >
+
+          <h4>
+            <span th:text="*{user.firstName}"></span>
+            <span th:text="*{user.lastName}"></span>
+            (<span th:text="*{user.role}"></span>)
+          </h4>
+          <div class="text-start">
+            <p>
+              <b>Location</b>
+              <i th:text="*{user.location}">Arada | A/A | Ethiopia</i>
+            </p>
+            <p>
+              <b>Email</b> <i th:text="*{user.email}">Henson.gray@gmail.com</i>
+            </p>
+            <p><b>Phone</b> <i th:text="*{user.phone}">0976348700</i></p>
+            <p><b>Username</b> <i th:text="*{user.username}">username</i></p>
+          </div>
+          <div class="row">
+            <a
+              class="col"
+              th:href="@{/editTechnicianProfile(userId=*{user.Id},technicianId=${TechnicianProfile.id})}"
+            >
+              <button class="btn w-100 btn-sm btn-primary">Edit profile</button>
+            </a>
+            <form class="col" th:action="@{'/deleteTechnicianAccount/' + *{user.id}}" method="post">
+              <input class="btn w-100 btn-sm btn-primary" type="submit" value="Delete Account">
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+      <footer class="text-center p-2 align-items-center justify-content-center">
+        <div class="footer_nav row">
+          <a href="/">Feed</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/">Saved</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/">Other</a>
+          <br />
+          <br />
+        </div>
+        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      </footer>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+  </body>
+</html>

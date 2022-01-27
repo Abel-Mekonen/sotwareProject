@@ -20,9 +20,7 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    // @OneToMany
     private Long customer;
-    // @OneToMany
     private  Long techinician;
 
     private Status status;

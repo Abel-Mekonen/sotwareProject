@@ -27,16 +27,16 @@ public class SimpleAuthenticationuccessHandler implements AuthenticationSuccessH
                 // public Collection<? extends GrantedAuthority> getAuthorities()
 Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		authorities.forEach(authority -> {
-			if(authority.getAuthority().equals("ROLE_TUTOR")) {
+			if(authority.getAuthority().equals("ROLE_TECHNICIAN")) {
 				try {
-					redirectStrategy.sendRedirect(request, response, "/displayTutorProfile");
+					redirectStrategy.sendRedirect(request, response, "/displayTechnicianProfile");
 				} catch (Exception e) {
 
                     e.printStackTrace();
 				}
-			} else if(authority.getAuthority().equals("ROLE_TUTEE")) {
+			} else if(authority.getAuthority().equals("ROLE_CUSTOMER")) {
 				try {
-					redirectStrategy.sendRedirect(request, response, "/displayTuteeProfile");
+					redirectStrategy.sendRedirect(request, response, "/displayCustomerProfile");
 				} catch (Exception e) {
 
                     e.printStackTrace();
