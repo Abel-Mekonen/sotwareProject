@@ -44,7 +44,7 @@ public class SecurityConfig {
                 // .antMatchers("/","/displayTuteeProfile","/editTuteeProfile").hasRole("TUTEE")
                 // .antMatchers("/displayTutorProfile","/editTutorProfile","/displayTutorProfile").hasRole("TUTOR")
                 // .antMatchers("/adminDashBoard/**").hasRole("ADMIN")       
-                .antMatchers("/login").permitAll()
+                .antMatchers("/login", "/**").permitAll()
                 .and()
                 .formLogin().successHandler(successHandler)
                 .loginPage("/login")

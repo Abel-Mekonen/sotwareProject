@@ -17,8 +17,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString.Exclude;
 
-
-
 @Data
 @Entity
 @NoArgsConstructor
@@ -41,6 +39,8 @@ public class Technician {
 
     @Column(nullable = true)
     private String organizationName;
+
+    private String description;
 
 
     public static enum Device{
