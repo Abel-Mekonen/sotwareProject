@@ -1,6 +1,8 @@
 package software.project.mainClasses;
 
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,5 +36,9 @@ public class Request {
 
         }
     }
+    private Date sentDate = new Date();
+
+//     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+// System.out.println(formatter.format(date));
 
 }

@@ -44,7 +44,6 @@ public class OrderService {
         
     }
 
-    
     public String sendRequest(@PathVariable String id, @AuthenticationPrincipal User user) {
         
         Technician currentTechnician = technicianRepository.findById(Long.parseLong(id)).get();

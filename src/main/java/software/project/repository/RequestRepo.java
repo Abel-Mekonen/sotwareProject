@@ -10,7 +10,10 @@ import org.springframework.data.repository.query.Param;
 import software.project.mainClasses.Request;
 
 public interface RequestRepo extends CrudRepository<Request, Long>{
-    // @Query(value = "select tutee from request where tutor = :tutorId", nativeQuery = true)
-    // Optional<List<Long>> search(@Param("tutorId") Long tutorId);
+    @Query(value = "select customer from request where techinician = :technicianId", nativeQuery = true)
+    Optional<List<Long>> search(@Param("technicianId") Long technicianId);
 
+
+    @Query(value = "select sent_date from request where techinician = :technicianId", nativeQuery = true)
+    Optional<List<Long>> searchdate(@Param("technicianId") Long technicianId);
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+// import lombok.NoArgsConstructor;
 import software.project.mainClasses.Customer;
 import software.project.mainClasses.User;
 import software.project.mainClasses.UserHelper;
@@ -36,7 +36,7 @@ public class CustomerProfileService {
     public ModelAndView editCustomerProfile(@RequestParam Long userId, @RequestParam  Long customerId,  UserHelper userHelper){
         ModelAndView mav = new ModelAndView("editCustomerProfile");
         User custUser = userRepo.findById(userId).get();
-        Customer tProfile = customerRepository.findById(customerId).get();
+        // Customer tProfile = customerRepository.findById(customerId).get();
 
         userHelper.setFirstName(custUser.getFirstName());
         userHelper.setLastName(custUser.getLastName());

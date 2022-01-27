@@ -1,13 +1,18 @@
 package software.project.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import java.util.Optional;
 
 import lombok.Data;
+import software.project.mainClasses.Customer;
 // import software.project.mainClasses.Customer;
 import software.project.mainClasses.Technician;
 import software.project.mainClasses.User;
@@ -24,6 +29,7 @@ public class TechnicianProfileService {
     
     @Autowired
     private final TechnicianRepository technicianRepository;
+    private final CustomerRepository customerRepository;
     private final UserRepository userRepo;
     // private final CustomerRepository tuteeProfileRepository;
     private final RequestRepo requestRepo;
@@ -34,9 +40,20 @@ public class TechnicianProfileService {
 
         ModelAndView mav = new ModelAndView("displayTechnician");
         Technician tProfile = user.getTechnicianProfile();
+
+        long sendId = user.getTechnicianProfile().getId();
+        Optional<List<Long>> customerIdList = requestRepo.search(sendId);
+        List<Long> t = customerIdList.get();
+        List<Customer> customerProfiles = new ArrayList<Customer>();
+
+        for (Long customerId : t) { 
+            customerProfiles.add(customerRepository.searchfor(customerId));   
+        }
+
         mav.addObject("TechnicianProfile", tProfile);
+        mav.addObject("CustomerRequests", customerProfiles);
         return mav;
-    } 
+    }
 
 
     public ModelAndView editTutorProfile(@RequestParam Long userId, @RequestParam  Long technicianId,  UserHelper userHelper){
