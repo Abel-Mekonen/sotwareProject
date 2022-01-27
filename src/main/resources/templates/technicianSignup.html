@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutor Sign Up</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/landing.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <header
+        class="row align-items-center justify-content-center shadow bg-body"
+      >
+        <div class="header_name col text-end fs-5">
+          <b><a href="/">the technicians</a></b>
+        </div>
+        <div class="header_nav col-8 text-center"></div>
+        <div class="header_signup col text-center pe-5">
+          <a href="/">
+            <button type="submit" class="btn btn-sm btn-primary">
+              Sign In
+            </button>
+          </a>
+        </div>
+      </header>
+      <div
+        class="con landing_con row align-items-center justify-content-center"
+      >
+        <section class="col-md-9 col-lg-6 col-xl-7 landing_img_con">
+          <img class="img-fluid" th:src="@{/images/landing.jpg}" alt="" />
+        </section>
+        <section
+          class="col landing_desc_con p-5 align-items-center justify-content-center"
+        >
+          <div>
+            <form
+              class="signin_con d-grid gap-2 rounded-3 p-3"
+              th:action="@{/saveTechnician}"
+              method="post"
+              th:object="${registrationForm}"
+            >
+              <h4 class="text-center mb-3">Signing up as a Tutor . . .</h4>
+              <div class="row">
+                <div class="mb-2 col">
+                  <label class="form-label" for="signup_first-name"
+                    >First Name</label
+                  >
+                  <input
+                    type="text"
+                    th:field="*{firstName}"
+                    id="signup_firs-tname"
+                    class="form-control form-control-md"
+                  />
+                  <span class ="validationError" 
+                  th:if = "${#fields.hasErrors('firstName')}"
+                  th:errors ="*{firstName}"> 
+                  first Name errors
+            </span>
+
+                </div>
+                <div class="mb-2 col">
+                  <label class="form-label" for="signup_last-name"
+                    >Last Name</label
+                  >
+                  <input
+                    type="text"
+                    th:field="*{lastName}"
+                    id="signup_last-name"
+                    class="form-control form-control-md"
+                  />
+                  <span  class="validationError" 
+                  th:if = "${#fields.hasErrors('lastName')}"
+                  th:errors ="*{lastName}"> 
+                  Last Name errors
+                  </span>
+                </div>
+              </div>
+
+             
+              <div class="mb-2">
+                <label class="form-label" for="signup_email">Email</label>
+                <input
+                  type="email"
+                  th:field="*{email}"
+                  id="signup_email"
+                  class="form-control form-control-md"
+                />
+                <span  class="validationError" 
+                th:if = "${#fields.hasErrors('email')}"
+                th:errors ="*{email}"> 
+                email errors
+                </span>
+              </div>
+              <div class="mb-2">
+                <label class="form-label" for="first-name">Phone</label>
+                <input
+                  type="tel"
+                  th:field="*{phone}"
+                  id="phone"
+                  oninput="checkPhone()"
+                  class="form-control form-control-md"
+                  placeholder="0987654321"
+                />
+                <div class="mb-2 text-danger" id="valid-phone-info"></div>
+                <span  class="validationError" 
+                th:if = "${#fields.hasErrors('phone')}"
+                th:errors ="*{phone}"> 
+                phone number errors
+          </span>
+              </div>
+              <div class="mb-2">
+                <label class="form-label" for="location">Location</label>
+                <select class="form-select" name="location" id="location">
+                  <option
+                    th:each="location:${T(software.project.mainClasses.User.Location).values()}"
+                    th:value="${location}"
+                    th:text="${location}"
+                  ></option>
+                </select>
+              </div>
+              <div class="mb-2 col">
+                <label class="form-label" for="signup_username">Username</label>
+                <input
+                  type="text"
+                  th:field="*{username}"
+                  id="signup_username"
+                  class="form-control form-control-md"
+                />
+                <span  class="validationError" 
+                th:if = "${#fields.hasErrors('username')}"
+                th:errors ="*{username}"> 
+                username errors
+                </span>
+              </div>
+              <div class="row">
+                <div class="mb-2 col">
+                  <label class="form-label" for="password">Password</label>
+                  <input
+                    type="password"
+                    th:field="*{password}"
+                    id="password"
+                    oninput="checkPasswordMatch()"
+                    class="form-control form-control-md"
+                  />
+             <span  class="validationError" 
+                  th:if = "${#fields.hasErrors('password')}"
+                  th:errors ="*{password}"> password errors
+            </span>
+                </div>
+                <div class="mb-2 col">
+                  <label class="form-label" for="confirm-password"
+                    >Confirm Password</label
+                  >
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    oninput="checkPasswordMatch()"
+                    class="form-control form-control-md"
+                  />
+                </div>
+              </div>
+              <span class="text-danger" id="password-match-info"></span>
+              <div  class="row p-3 pb-0">
+                <button
+                  type="submit"
+                  id="signup-submit"
+                  class="btn btn-primary"
+                  disabled
+                >
+                  Sign Up
+                </button>
+            </form>
+          </div>
+        </section>
+      </div>
+      <footer class="text-center p-2 align-items-center justify-content-center">
+        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      </footer>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+  </body>
+</html>

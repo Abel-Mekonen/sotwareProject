@@ -1,0 +1,36 @@
+
+main{
+  /* position: absolute; */
+}
+.landing_img_con {
+  padding: 0rem 7rem;
+}
+.landing_header {
+  font-size: 50px;
+}
+.signin_con {
+  background-color: #e1e1e1;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .landing_img_con {
+    padding: 0rem 3rem;
+  }
+}
+@media screen and (max-width: 992px){
+  .landing_disc_title_con {
+    text-align: center;
+  }
+  .landing_con{
+    padding-top: 40px;
+  }
+  .signin_con {
+    margin-bottom: 100px;
+  }
+}
+@media screen and (max-width: 768px){
+  .landing_header {
+    font-size: 35px;
+  }
+}
+

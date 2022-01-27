@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/landing.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <header class="row align-items-center ps-5 pe-5 shadow bg-body">
+        <div class="col fs-5">
+          <b><a href="/">THE TUTOR</a></b>
+        </div>
+        <div class="text-end col">
+          <div class="dropdown">
+            <button
+              class="btn btn-sm btn-primary dropdown-toggle"
+              type="button"
+              id="signup_options"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Sign Up
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="signup_options">
+              <li><a class="dropdown-item" href="/techniciansignup">As technician</a></li>
+              <li><a class="dropdown-item" href="/customersignup">As customer</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+ 
+      <div
+        class="con landing_con row align-items-center justify-content-center"
+      >
+        <section class="col-md-9 col-lg-6 col-xl-7 landing_img_con">
+          <img class="img-fluid" th:src="@{/images/landing.jpg}" alt="" />
+        </section>
+        <section
+          class="col landing_desc_con p-5 align-items-center justify-content-center"
+        >
+          <div>
+            <div class="landing_disc_title_con">
+              <h1 class="landing_header">
+                We Made Finding Tutors Easier Than Ever.
+              </h1>
+              <p class="landing_disc fs-4">
+                <b>THE TUTOR</b> is a platform where people can find tutors for
+                themselves, their kids, even for their pets
+              </p>
+            </div>
+            <form
+              class="signin_con d-grid gap-2 rounded-3 p-3"
+              method="POST"
+              th:action="@{/login}"
+            >
+              <div class="mb-2">
+                <label class="form-label" for="username">Username</label>
+                <input
+                  class="form-control form-control-md"
+                  type="text"
+                  id="username"
+                  name="username"
+                />
+              </div>
+              <div class="mb-2">
+                <label class="form-label" for="password">Password</label>
+                <input
+                  class="form-control form-control-md"
+                  type="password"
+                  id="password"
+                  name="password"
+                />
+              </div>
+              <div  class="mb-2 text-danger" id="invalidCredentials" style="display:none;">
+                Invalid credentials!
+              </div>
+              <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+          </div>
+        </section>
+      </div>
+      <footer class="text-center p-2 align-items-center justify-content-center">
+        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      </footer>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+  </body>
+</html>

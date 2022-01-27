@@ -1,0 +1,54 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap"); */
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Outfit", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+body {
+  overflow-x: hidden;
+}
+html {
+  background-color: #f3f3f3;
+}
+header {
+  height: 50px;
+}
+.con {
+  min-height: 90vh;
+}
+.in-account_con {
+  max-width: 500px;
+  margin-bottom: 0;
+  background-color: rgb(230, 230, 230);
+  padding-bottom: 35px;
+}
+.cards {
+  margin-left: 12.5%;
+  background-color: #e1e1e1;
+}
+footer {
+  background-color: #e1e1e1;
+}
+.footer_nav {
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .header_nav {
+    display: none;
+  }
+  .footer_nav {
+    display: block;
+  }
+}
+.validationError{
+  color: #dc3545;
+  margin-top: 10px;
+  display: block;
+}
+#valid-phone-info{
+  margin-top: 10px;
+}
