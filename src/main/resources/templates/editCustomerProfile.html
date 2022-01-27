@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit profile</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/profile.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <header class="row align-items-center ps-5 pe-5 shadow bg-body">
+        <div class="col fs-5">
+          <b><a href="/">THE tech</a></b>
+        </div>
+        <div class="col text-end">
+          <form th:object="${TutorProfileModel}" class="col" th:action="@{/logout}" method="post">
+            <div class="dropdown">
+              <a
+                href="#"
+                role="button"
+                class="dropdown-toggle"
+                id="signup_options"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  th:src="@{/images/default_avatar.png}"
+                  class="rounded-circle"
+                  data-bs-toggle="tooltip"
+                  title="Logged in as Tutor"
+                  alt="Avatar"
+                  height="35"
+                />
+              </a>
+              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                <li>
+                  <form action="/logout" method="post">
+                    <button type="submit" class="btn-sm btn w-100">
+                      Log out
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </header>
+      <div class="con edit-profile_con row justify-content-center">
+        <section class="in-account_con edit-profile_details pt-5">
+          <form
+            th:action="@{/saveprofile}"
+            th:object="${customerProfile}"
+            method="POST"
+          > 
+            <h4 class="text-center mb-3">Edit Your Profile Here</h4>
+            <div class="row">
+              <div class="mb-2 col">
+                <label class="form-label" for="signup_first-name"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  th:field="*{firstName}"
+                  id="signup_firs-tname"
+                  class="form-control form-control-md"
+                />
+              </div>
+              <div class="mb-2 col">
+                <label class="form-label" for="signup_last-name"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  th:field="*{lastName}"
+                  id="signup_last-name"
+                  class="form-control form-control-md"
+                />
+              </div>
+            </div>
+           
+            <div class="mb-2">
+              <label class="form-label" for="signup_email">Email</label>
+              <input
+                type="email"
+                th:field="*{email}"
+                id="signup_email"
+                class="form-control form-control-md"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label" for="phone">Phone</label>
+              <input
+                type="tel"
+                th:field="*{phone}"
+                id="phone"
+                  oninput="checkPhone()"
+                  class="form-control form-control-md"
+                  placeholder="0987654321"
+                />
+                <div class="mb-2 text-danger" id="valid-phone-info"></div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label" for="Location">Location</label>
+              <select name="location" class="form-select">
+                <option
+                  th:each="location:${T(software.project.mainClasses.User.Location).values()}"
+                  th:value="${location}"
+                  th:text="${location}"
+                ></option>
+              </select>
+            </div>
+   
+  
+            <div class="mb-2 col">
+              <label class="form-label" for="signup_username">Username</label>
+              <input
+                type="text"
+                th:field="*{username}"
+                id="signup_username"
+                class="form-control form-control-md"
+              />
+            </div>
+            <div class="row">
+              <div class="mb-2 col">
+                <label class="form-label" for="password">Password</label>
+                <input
+                  type="password"
+                  th:field="*{password}"
+                  id="password"
+                  oninput="checkPasswordMatch()"
+                  class="form-control form-control-md"
+                />
+              </div>
+              <div class="mb-2 col">
+                <label class="form-label" for="confirm-password"
+                  >Confirm Password</label
+                >
+                <input
+                  type="password"
+                  id="confirm-password"
+                  oninput="checkPasswordMatch()"
+                  class="form-control form-control-md"
+                />
+              </div>
+            </div>
+            <span class="text-danger" id="password-match-info"></span>
+            <div  class="row p-3 pb-0">
+              <button
+                type="submit"
+                id="signup-submit"
+                class="btn btn-primary"
+                disabled
+              >
+                Save
+              </button>
+          </form>
+        </section>
+      </div>
+      <footer class="text-center p-2 align-items-center justify-content-center">
+        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      </footer>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+  </body>
+</html>

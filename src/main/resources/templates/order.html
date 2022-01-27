@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head th:object="${TuteeProfileModel}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/profile.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <header class="row align-items-center ps-5 pe-5 shadow bg-body">
+        <div class="col fs-5">
+          <b><a href="/">THE TUTOR</a></b>
+        </div>
+            </a>
+              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                <li>
+                  <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn-sm btn w-100">
+                      Log out
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </header>
+
+
+
+
+
+<div class="col">
+    <h4 class="text-center mt-4 mb-3">fix your device</h4>
+    <form
+      class="search_form row gap-2 w-75 mb-3"
+      th:action="@{/order/ListOfTechnician}"
+      method="post"
+      th:object="${Query}"
+    >
+      <select
+        name="device"
+        th:field="*{device}"
+        class="col form-select filter_select">
+      <option
+      th:each="device:${T(software.project.mainClasses.Technician.Device).values()}"
+      th:value="${device}"
+      th:text="${device}"
+        ></option>
+
+      </select>
+      <button type="submit" class="col btn btn-primary">Filter</button>
+    </form>
+
+    <div
+    th:block
+    th:each="technician: ${technicians}"
+    class="cards w-75 mb-4 p-3 row align-items-center justify-content-center"
+  >
+    <div class="col-md-9 col-lg-4 text-center">
+      <img
+        th:src="@{/images/default_avatar.png}"
+        class="rounded-circle img-fluid"
+        alt="Avatar"
+      />
+    </div>
+    <div class="col mw-25">
+      <h6 class="">
+        <b>
+          <span th:text="${technician.getUser().getFirstName()}"></span>
+          <span th:text="${technician.getUser().getLastName()}"></span>
+        </b>
+      </h6>
+      <p class="card-text" th:text="${technician.description}">
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s.
+      </p>
+      <p>
+        <b>Location</b>
+        <i th:text="${technician.getUser().getLocation()}"
+          >Arada | A/A | Ethiopia</i
+        >
+      </p>
+      <div class="">
+        <p>
+          <b>device type</b>
+          <i th:text="${technician.device}">
+          </i>
+        </p>
+        
+      </div>
+      <form
+        th:action="@{${'/send-request/' + technician?.id}}"
+        method="post"
+      >
+        <button type="submit" class="col btn btn-sm btn-primary">
+          Send Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+    <footer class="text-center p-2 align-items-center justify-content-center fixed-bottom">
+        <div class="footer_nav row">
+          <a href="/">Feed</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/">Saved</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/">Other</a>
+          <br />
+          <br />
+        </div>
+        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      </footer>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+  </body>
+</html>

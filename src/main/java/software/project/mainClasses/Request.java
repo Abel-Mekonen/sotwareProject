@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import ch.qos.logback.core.status.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +19,7 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    // @OneToMany
     private Long customer;
-    // @OneToMany
     private  Long techinician;
 
     private Status status;
@@ -30,12 +27,12 @@ public class Request {
     public static enum Status {
         PENDING,
         ACCEPTED,
+        DECLINE,
         DONE;
         
         private Status() {
 
         }
     }
-
 
 }
