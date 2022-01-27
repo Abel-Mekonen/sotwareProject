@@ -40,7 +40,7 @@ public class TechnicianProfileController {
     }
     
     
-    @PostMapping("/saveprofile")
+    @PostMapping("/savetechnicianprofile")
     public String saveTutor(@AuthenticationPrincipal User user, @ModelAttribute UserHelper userHelper){
         return technicianProfileService.saveTutor(user, userHelper);
     }

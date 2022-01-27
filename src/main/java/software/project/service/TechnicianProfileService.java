@@ -25,7 +25,7 @@ public class TechnicianProfileService {
     @Autowired
     private final TechnicianRepository profileRepository;
     private final UserRepository userRepo;
-    private final CustomerRepository tuteeProfileRepository;
+    // private final CustomerRepository tuteeProfileRepository;
     private final RequestRepo requestRepo;
     private final PasswordEncoder encoder;
 
