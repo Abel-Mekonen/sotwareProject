@@ -70,17 +70,17 @@
             <p><b>Phone</b> <i th:text="*{user.phone}">0976348700</i></p>
             <p><b>Username</b> <i th:text="*{user.username}">username</i></p>
           </div>
-          <!-- <div class="row">
+          <div class="row">
             <a
               class="col"
-              th:href="@{/editTuteeProfile(userId=*{user.Id},tuteeId=${TuteeProfileModel.id})}"
+              th:href="@{/editCustomerProfile(userId=*{user.Id},customerId=${CustomerProfile.id})}"
             >
               <button class="btn w-100 btn-sm btn-primary">Edit profile</button>
             </a>
-            <form class="col" th:action="@{'/deleteTuteeAccount/' + *{user.id}}" method="post">
+            <form class="col" th:action="@{'/deleteCustomerAccount/' + *{user.id}}" method="post">
               <input class="btn w-100 btn-sm btn-primary" type="submit" value="Delete Account">
             </form>
-          </div> -->
+          </div>
         </div>
 
       

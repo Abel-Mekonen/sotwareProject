@@ -52,7 +52,7 @@
         <section class="in-account_con edit-profile_details pt-5">
           <form
             th:action="@{/saveprofile}"
-            th:object="${technicianProfile}"
+            th:object="${customerProfile}"
             method="POST"
           > 
             <h4 class="text-center mb-3">Edit Your Profile Here</h4>
@@ -80,15 +80,7 @@
                 />
               </div>
             </div>
-            <div class="mb-2">
-              <label for="bio" class="form-label">Bio</label>
-              <textarea
-                class="form-control"
-                th:field="*{description}"
-                id="bio"
-                rows="3"
-              ></textarea>
-            </div>
+           
             <div class="mb-2">
               <label class="form-label" for="signup_email">Email</label>
               <input
@@ -121,16 +113,7 @@
               </select>
             </div>
    
-            <div class="mb-2">
-              <label class="form-label" for="Expertise">Device type</label>
-              <select class="form-select" name="course" id="Expertise">
-                <option
-                  th:each="device:${T(software.project.mainClasses.Technician.Device).values()}"
-                  th:value="${device}"
-                  th:text="${device}"
-                ></option>
-              </select>
-            </div>
+  
             <div class="mb-2 col">
               <label class="form-label" for="signup_username">Username</label>
               <input

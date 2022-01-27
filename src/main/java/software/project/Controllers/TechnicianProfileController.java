@@ -55,5 +55,5 @@ public class TechnicianProfileController {
         return new ModelAndView("deleteTechnicianAccount", "userId", id);
     }
     
-    
+
 }
