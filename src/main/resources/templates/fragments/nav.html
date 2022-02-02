@@ -1,0 +1,60 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/landing.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+  </head>
+<body>
+<th:block th:fragment="navbar">
+    <header class="row align-items-center ps-5 pe-5 shadow bg-body">
+        <div class="col fs-5">
+          <b><a href="/adminDashBoard">BTHY Admin Dashboard</a></b>
+        </div>
+        <div class="col text-end">
+          <form
+            th:object="${TutorProfileModel}"
+            class="col"
+            th:action="@{/logout}"
+            method="post"
+          >
+            <div class="dropdown">
+              <a
+                href="#"
+                role="button"
+                class="dropdown-toggle"
+                id="signup_options"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  th:src="@{/images/default_avatar.png}"
+                  class="rounded-circle"
+                  data-bs-toggle="tooltip"
+                  title="Logged in as Admin"
+                  alt="Avatar"
+                  height="35"
+                />
+              </a>
+              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                <li>
+                  <form action="/logout" method="post">
+                    <button type="submit" class="btn-sm btn w-100">
+                      Log out
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </header>
+</th:block>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+</body>
+
+</html>

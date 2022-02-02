@@ -1,0 +1,40 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/landing.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+  </head>
+<body>
+    <th:block th:replace="fragments/nav.html :: navbar"></th:block>
+    <main style="margin-top: max(5vh, 50px); margin-bottom: max(5vh, 20px) " class="Contact mx-auto w-50">
+        <h1><strong style="color:rgb(17, 116, 103);">Send us Feedback</strong></h1>
+        <div th:if="${error}" class = "alert alert-danger text-center">
+            [[${error}]]
+        </div>
+        <div th:if="${message}" class = "alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div th:if="${success}" class = "alert alert-success text-center">
+            [[${success}]]
+        </div>
+
+        <form method ="post" th:action="@{/feedback}" th:object="${feedback}">
+            <input type="text" hidden th:field="*{feedbackId}">
+
+            <label class="form-label" for="subject">Subject</label>
+            <input type="text" id = "subject" class="form-control" th:field="*{subject}" >
+
+            <label class="form-label" for="message">Message</label>
+            <textarea type="text" id = "message" class="form-control" th:field="*{content}" rows="7"> </textarea>
+
+            <button class="w-100 btn btn-lg btn-primary my-2" type="submit">Send</button>
+        </form>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/common.js}"></script>
+    </main>
+</body>
+</html>

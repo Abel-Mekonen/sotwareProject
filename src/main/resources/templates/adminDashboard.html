@@ -1,0 +1,107 @@
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/landing.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+</head>
+      <body>
+        <main>
+          <header class="row align-items-center ps-5 pe-5 shadow bg-body">
+            <div class="col fs-5">
+              <b><a href="">THE TUTOR</a></b>
+            </div>
+            <div class="col text-end">
+              <form
+                th:object="${TutorProfileModel}"
+                class="col"
+                th:action="@{/logout}"
+                method="post"
+              >
+                <div class="dropdown">
+                  <a
+                    href="#"
+                    role="button"
+                    class="dropdown-toggle"
+                    id="signup_options"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      th:src="@{/images/default_avatar.png}"
+                      class="rounded-circle"
+                      data-bs-toggle="tooltip"
+                      title="Logged in as Admin"
+                      alt="Avatar"
+                      height="35"
+                    />
+                  </a>
+                  <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                    <li>
+                      <form action="/logout" method="post">
+                        <button type="submit" class="btn-sm btn w-100">
+                          Log out
+                        </button>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+              </form>
+            </div>
+          </header>
+          <section class="p-3">
+          <hr>
+          <form class="row ps-3 pe-3">
+            <a th:href="@{/adminDashBoard/users/addUsers}" class="btn btn-primary col-auto">Add User or Admin</a>
+            <div class="col"></div>
+            <!-- <div class="col"></div>
+              <input type="text" class="form-control col ms-2 me-2">
+              <button  class="form-control col btn btn-primary ps-0 pe-0" type="submit">Search</button> -->
+            </form>
+            <hr>
+            <table class="table table-striped" id="customer-table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>  
+                        <th>Gender</th> 
+                        <th>Role</th> 
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="border-0">
+
+                    <tr th:each="user: ${ListOfUsers}">
+                        <td th:text = "${user.firstName}"></td>
+                        <td th:text = "${user.lastName}"></td>
+                        <td th:text = "${user.username}"></td>
+                        <td th:text = "${user.email}"></td>
+                        <td th:text = "${user.phone}"></td>
+                        <td th:text = "${user.role}"></td>
+                        <td>
+                            <a th:href = @{/adminDashBoard/users/updateUsers(userId=${user.id})} class="btn btn-sm border border-primary">Update</a>
+                            <a th:href = @{/adminDashBoard/users/deleteUsers(userId=${user.id})} class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </section>
+            <footer class="text-center p-2 align-items-center justify-content-center fixed-bottom">
+              &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+            </footer>
+          </main>
+          <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+          <script th:src="@{/js/common.js}"></script>
+        </body>
+      </html>
+
+
+
+
+
