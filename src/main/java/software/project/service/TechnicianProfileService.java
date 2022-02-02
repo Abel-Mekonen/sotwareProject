@@ -51,15 +51,7 @@ public class TechnicianProfileService {
 
         List<RequestHelper> rHelpers = new ArrayList<RequestHelper>();
 
-        // for (Request requestsRequest : requestLists) {
-            
-        //     ReqHelp.setCustomer(customerRepository.findById(requestsRequest.getCustomer()));
-        //     // ReqHelp.setCustomer();
-        //     ReqHelp.setReq(requestsRequest);
-        //     ReqHelp.setStatus(requestsRequest.getStatus());
-        //     rHelpers.add(ReqHelp);
-        // }
-
+       
         for (Request requests : requestLists) { 
             RequestHelper ReqHelp = new RequestHelper();
             customerRepository.findById(requests.getCustomer()).ifPresent(custom -> {

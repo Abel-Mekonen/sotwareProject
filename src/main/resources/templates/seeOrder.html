@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head th:object="${TuteeProfileModel}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/profile.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <header class="row align-items-center ps-5 pe-5 shadow bg-body">
+        <div class="col fs-5">
+          <b><a href="/">THE TUTOR</a></b>
+        </div>
+            </a>
+              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                <li>
+                  <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn-sm btn w-100">
+                      Log out
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </header>
+
+
+
+
+
+
+
+      <div class="col">
+        <h4 class="text-center mt-4 mb-3">Requests sent</h4>
+        <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-75 mb-4">
+          <h6 class="card-header">
+            <b>From</b>
+            <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
+            <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
+          </h6>
+          <div class="card-body">
+            <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+            <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+            <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
+            <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
+            <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- <div th:block th:each="statusOfTheRequest: ${StatusOfTheRequest}" class="card cards w-75 mb-4">
+        <p><b>status</b> <i th:text = "${statusOfTheRequest}"></i></p>
+      </div> -->
+    </div>
+
+
+
+
+
+
+
+
+
+    <footer class="text-center p-2 align-items-center justify-content-center fixed-bottom">
+        <div class="footer_nav row">
+          <a href="/">Feed</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/">Saved</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="/">Other</a>
+          <br />
+          <br />
+        </div>
+        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      </footer>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+  </body>
+</html>
