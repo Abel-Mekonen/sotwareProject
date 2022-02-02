@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
+
 import lombok.Data;
 import software.project.mainClasses.Customer;
 // import software.project.mainClasses.Customer;
 import software.project.mainClasses.Technician;
 import software.project.mainClasses.User;
+import software.project.mainClasses.Request;
+
 import software.project.mainClasses.UserHelper;
 import software.project.repository.CustomerRepository;
 import software.project.repository.TechnicianRepository;
@@ -31,7 +34,6 @@ public class TechnicianProfileService {
     private final TechnicianRepository technicianRepository;
     private final CustomerRepository customerRepository;
     private final UserRepository userRepo;
-    // private final CustomerRepository tuteeProfileRepository;
     private final RequestRepo requestRepo;
     private final PasswordEncoder encoder;
 
@@ -40,23 +42,43 @@ public class TechnicianProfileService {
 
         ModelAndView mav = new ModelAndView("displayTechnician");
         Technician tProfile = user.getTechnicianProfile();
+        List<Customer> customerProfiles = new ArrayList<Customer>();
+        List<Request.Status> statusContainer = new ArrayList<Request.Status>();
+
 
         long sendId = user.getTechnicianProfile().getId();
-        Optional<List<Long>> customerIdList = requestRepo.search(sendId);
-        List<Long> t = customerIdList.get();
-        List<Customer> customerProfiles = new ArrayList<Customer>();
+        List<Request>  requestLists = requestRepo.findByTechinician(sendId);
 
-        for (Long customerId : t) { 
-            customerProfiles.add(customerRepository.searchfor(customerId));   
+        for (Request requests : requestLists) { 
+            customerProfiles.add(customerRepository.searchfor(requests.getCustomer()));
+            // customerProfiles.add(requests.getStatus());
+            statusContainer.add(requests.getStatus());
+            // statusContainer.add((Request) requestRepo.findByCustomer(customerId));
         }
+
+        // List<Long> t = requestLists;
+
+        // List<Long> t = customerIdList.get();
+
+        // List<Request> statusContainer = new ArrayList<Request>();
+        
+
+        // for (Long customerId : t) { 
+        //     customerProfiles.add(customerRepository.searchfor(customerId));   
+        //     // statusContainer.add((Request) requestRepo.findByCustomer(customerId));
+            
+        // }
+
 
         mav.addObject("TechnicianProfile", tProfile);
         mav.addObject("CustomerRequests", customerProfiles);
+        mav.addObject("StatusOfTheRequest", statusContainer);
         return mav;
+
     }
 
 
-    public ModelAndView editTutorProfile(@RequestParam Long userId, @RequestParam  Long technicianId,  UserHelper userHelper){
+    public ModelAndView editTechnicianProfile(@RequestParam Long userId, @RequestParam  Long technicianId,  UserHelper userHelper){
         ModelAndView mav = new ModelAndView("editTechnicianProfile");
         User techUser = userRepo.findById(userId).get();
         Technician tProfile = technicianRepository.findById(technicianId).get();

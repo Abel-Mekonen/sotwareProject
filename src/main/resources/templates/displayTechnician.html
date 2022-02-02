@@ -87,10 +87,10 @@
         </div>
         <div class="col">
           <h4 class="text-center mt-4 mb-3">Requests Received</h4>
-          <div  th:block th:each="customer: ${CustomerRequests}" class="card cards w-75 mb-4">
+          <div  th:block th:each="customer : ${CustomerRequests}"  class="card cards w-75 mb-4">
             <h6 class="card-header">
               <b>From</b>
-              <span th:text = "${customer.getUser().getFirstName()}"></span>
+              <span th:text = "${customerStat.index} + ': ' +  ${customer.getUser().getFirstName()}"></span>
               <span th:text = "${customer.getUser().getLastName()}"></span>
             </h6>
             <div class="card-body">
@@ -101,6 +101,10 @@
               <div class="card-footer text-muted">Monday, 17 January 2022</div>
             </div>
           </div>
+        </div>
+
+        <div th:block th:each="statusOfTheRequest: ${StatusOfTheRequest}" class="card cards w-75 mb-4">
+          <p><b>status</b> <i th:text = "${statusOfTheRequest}"></i></p>
         </div>
       </div>
       <footer class="text-center p-2 align-items-center justify-content-center">
