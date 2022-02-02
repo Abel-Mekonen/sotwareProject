@@ -23,9 +23,7 @@ public class Request {
     private Long id;
     private Long customer;
     private  Long techinician;
-
     private Status status;
-
     public static enum Status {
         PENDING,
         ACCEPTED,
@@ -37,6 +35,10 @@ public class Request {
         }
     }
     private Date sentDate = new Date();
+
+    public void getstat(){
+        this.status.name();
+    }
 
 //     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 // System.out.println(formatter.format(date));

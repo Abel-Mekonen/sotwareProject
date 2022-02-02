@@ -19,6 +19,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import software.project.mainClasses.User;
 import software.project.mainClasses.UserHelper;
+import software.project.mainClasses.Request.Status;
+import software.project.repository.RequestRepo;
 import software.project.service.TechnicianProfileService;
 
 @Data
@@ -28,11 +30,28 @@ public class TechnicianProfileController {
     @Autowired
     private final TechnicianProfileService technicianProfileService;
 
+    @Autowired
+    private final RequestRepo reqRepo;
+
     @GetMapping("/displayTechnicianProfile")
     public ModelAndView viewTechnicianProfile(@AuthenticationPrincipal User user) { 
         return technicianProfileService.viewTechnicianProfile(user);
     }
 
+    @PostMapping("/displayTechnicianProfile/{id}")
+    public String viewTechnicianProfile(@AuthenticationPrincipal User user, @PathVariable long id, @RequestParam Status status) { 
+        try {
+            reqRepo.findById(id).ifPresent(req -> {
+                req.setStatus(status);
+                reqRepo.save(req);
+            });
+            return "redirect:/displayTechnicianProfile?success";
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        return "redirect:/displayTechnicianProfile?error";
+
+    }
 
     @GetMapping("/editTechnicianProfile")
     public ModelAndView editTechnicianProfile(@RequestParam Long userId, @RequestParam Long technicianId, UserHelper userHelper ){ 

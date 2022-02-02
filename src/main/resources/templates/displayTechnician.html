@@ -87,25 +87,72 @@
         </div>
         <div class="col">
           <h4 class="text-center mt-4 mb-3">Requests Received</h4>
-          <div  th:block th:each="customer : ${CustomerRequests}"  class="card cards w-75 mb-4">
+          <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-75 mb-4">
             <h6 class="card-header">
               <b>From</b>
-              <span th:text = "${customerStat.index} + ': ' +  ${customer.getUser().getFirstName()}"></span>
-              <span th:text = "${customer.getUser().getLastName()}"></span>
+              <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getCustomer.getUser().getFirstName()}"></span>
+              <span th:text = "${rHelpers.getCustomer.getUser().getLastName()}"></span>
             </h6>
             <div class="card-body">
-              <p><b>Location</b> <i th:text = "${customer.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
-              <p><b>Email</b> <i  th:text = "${customer.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
-              <p><b>Phone</b> <i th:text = "${customer.getUser().getPhone()}">0976348700</i></p>
-              <p><b>Phone</b> <i th:text = "${customer.getUser().getPhone()}">0976348700</i></p>
+              <p><b>Location</b> <i th:text = "${rHelpers.getCustomer.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+              <p><b>Email</b> <i  th:text = "${rHelpers.getCustomer.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+              <p><b>Phone</b> <i th:text = "${rHelpers.getCustomer.getUser().getPhone()}">0976348700</i></p>
+              <p><b>Phone</b> <i th:text = "${rHelpers.getCustomer.getUser().getPhone()}">0976348700</i></p>
+              <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
+              <!-- <div class="btn-group dropright">
+                <button type="button" class="btn btn-secondary" aria-haspopup="true" aria-expanded="false">
+                  Status: <span th:text = "${rHelpers.getStatus()}" >Status</span>
+                </button>
+                <div class="dropdown-menu">
+                  dropdown
+                </div>
+              </div> -->
+
+
+              <div th:switch="${rHelpers.getStatus().name()}">
+                <button type="button" th:case="DONE" class="btn btn-success" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
+                <button type="button" th:case="PENDING" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
+                <button type="button" th:case="DECLINE" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
+                <button type="button" th:case="ACCEPTED" class="btn btn-info" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>(click to edit)
+           </div>
+
+              <div class="modal fade modal-centered" th:id="'exampleModal' + ${rHelpers.getReq().getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <form th:action = "@{/displayTechnicianProfile/{id}(id = ${rHelpers.getReq().getId()})}" method = "post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                          <select class="form-select" name="status" id="status">
+                            <option
+                              th:each="status:${T(software.project.mainClasses.Request.Status).values()}"
+                              th:value="${status}"
+                              th:text="${status}"
+                            ></option>
+                          </select>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Send message</button>
+                        </div>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+
+
               <div class="card-footer text-muted">Monday, 17 January 2022</div>
             </div>
           </div>
         </div>
 
-        <div th:block th:each="statusOfTheRequest: ${StatusOfTheRequest}" class="card cards w-75 mb-4">
+        <!-- <div th:block th:each="statusOfTheRequest: ${StatusOfTheRequest}" class="card cards w-75 mb-4">
           <p><b>status</b> <i th:text = "${statusOfTheRequest}"></i></p>
-        </div>
+        </div> -->
       </div>
       <footer class="text-center p-2 align-items-center justify-content-center">
         <div class="footer_nav row">

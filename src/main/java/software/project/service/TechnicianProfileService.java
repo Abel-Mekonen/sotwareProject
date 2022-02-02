@@ -18,7 +18,7 @@ import software.project.mainClasses.Customer;
 import software.project.mainClasses.Technician;
 import software.project.mainClasses.User;
 import software.project.mainClasses.Request;
-
+import software.project.mainClasses.RequestHelper;
 import software.project.mainClasses.UserHelper;
 import software.project.repository.CustomerRepository;
 import software.project.repository.TechnicianRepository;
@@ -42,37 +42,42 @@ public class TechnicianProfileService {
 
         ModelAndView mav = new ModelAndView("displayTechnician");
         Technician tProfile = user.getTechnicianProfile();
-        List<Customer> customerProfiles = new ArrayList<Customer>();
-        List<Request.Status> statusContainer = new ArrayList<Request.Status>();
-
+        // List<Customer> customerProfiles = new ArrayList<Customer>();
+        // List<Request.Status> statusContainer = new ArrayList<Request.Status>();
+        // RequestHelper requestHelper = new RequestHelper();
 
         long sendId = user.getTechnicianProfile().getId();
         List<Request>  requestLists = requestRepo.findByTechinician(sendId);
 
-        for (Request requests : requestLists) { 
-            customerProfiles.add(customerRepository.searchfor(requests.getCustomer()));
-            // customerProfiles.add(requests.getStatus());
-            statusContainer.add(requests.getStatus());
-            // statusContainer.add((Request) requestRepo.findByCustomer(customerId));
-        }
+        List<RequestHelper> rHelpers = new ArrayList<RequestHelper>();
 
-        // List<Long> t = requestLists;
-
-        // List<Long> t = customerIdList.get();
-
-        // List<Request> statusContainer = new ArrayList<Request>();
-        
-
-        // for (Long customerId : t) { 
-        //     customerProfiles.add(customerRepository.searchfor(customerId));   
-        //     // statusContainer.add((Request) requestRepo.findByCustomer(customerId));
+        // for (Request requestsRequest : requestLists) {
             
+        //     ReqHelp.setCustomer(customerRepository.findById(requestsRequest.getCustomer()));
+        //     // ReqHelp.setCustomer();
+        //     ReqHelp.setReq(requestsRequest);
+        //     ReqHelp.setStatus(requestsRequest.getStatus());
+        //     rHelpers.add(ReqHelp);
         // }
+
+        for (Request requests : requestLists) { 
+            RequestHelper ReqHelp = new RequestHelper();
+            customerRepository.findById(requests.getCustomer()).ifPresent(custom -> {
+                ReqHelp.setCustomer(custom);
+                
+            });
+            
+            ReqHelp.setReq(requests);
+            ReqHelp.setStatus(requests.getStatus());
+            ReqHelp.setUser(user);
+            ReqHelp.setTech(user.getTechnicianProfile());
+            rHelpers.add(ReqHelp);
+        }
 
 
         mav.addObject("TechnicianProfile", tProfile);
-        mav.addObject("CustomerRequests", customerProfiles);
-        mav.addObject("StatusOfTheRequest", statusContainer);
+        mav.addObject("helpList", rHelpers);
+
         return mav;
 
     }

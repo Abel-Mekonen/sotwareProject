@@ -21,6 +21,6 @@ public interface RequestRepo extends CrudRepository<Request, Long>{
     List<Request> findByCustomer(Long customer);
 
 
-    @Query(value = "select sent_date from request where techinician = :technicianId", nativeQuery = true)
-    Optional<List<Long>> searchdate(@Param("technicianId") Long technicianId);
+    // @Query(value = "select sent_date from request where techinician = :technicianId", nativeQuery = true)
+    // Optional<List<Long>> searchdate(@Param("technicianId") Long technicianId);
 }
