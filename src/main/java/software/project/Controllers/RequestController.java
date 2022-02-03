@@ -70,12 +70,12 @@ public class RequestController {
         List<Request>  requestLists = requestRepo.findByCustomer(sendId);
         
         List<RequestHelper> rHelpers = new ArrayList<RequestHelper>();
+        
 
         for (Request requests : requestLists) { 
             RequestHelper ReqHelp = new RequestHelper();
             technicianRepository.findById(requests.getTechinician()).ifPresent(tech -> {
-                ReqHelp.setTech(tech);
-                
+                ReqHelp.setTech(tech);        
             });
             
             ReqHelp.setReq(requests);

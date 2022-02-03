@@ -47,7 +47,7 @@ public class TechnicianProfileController {
             });
             return "redirect:/displayTechnicianProfile?success";
         } catch (Exception e) {
-            //TODO: handle exception
+
         }
         return "redirect:/displayTechnicianProfile?error";
 
