@@ -7,9 +7,9 @@
     <title>Payment</title>
 </head>
 <body>
-    <form th:methode ="@{/payment}" action="post" th:object="${payment}">
+    <form th:method ="post" th:action="@{/payment/{id}(id = ${id})}"  th:object="${payment}">
         <input type="text" hidden th:field="*{paymentId}">
-        <input type="number" th:field="*{price}" >
+        <input type="number" th:field="*{price}">
         <select name="paymentStatus" id="paymentStatus">
             <option value="1">Paid</option>
             <option value="">UnPaid</option>
@@ -18,8 +18,9 @@
             <option value="WIRE">Wire transfer</option>
             <option value="MOBILE_BANKING">Mobile Banking</option>
         </select>
-        <textarea type="text" th:field="*{accountInformation}" row = "8" column = "10">
-        <input type="date" hidden th:field="*{sentDate}">
+        <textarea type="text" th:field="*{accountInformation}" row = "8" column = "10"> </textarea>
+        <!-- <input type="date" hidden th:field="*{sentDate}"> -->
+        <input type="submit" value="Send Payment">
     </form>
 </body>
 </html>

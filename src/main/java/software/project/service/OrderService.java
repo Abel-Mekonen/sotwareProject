@@ -31,28 +31,27 @@ public class OrderService {
     private final RequestRepo requestRepo;
 
     public ModelAndView search(@AuthenticationPrincipal User user, @ModelAttribute SearchTechnician searchTechnician) {
-        
 
         ModelAndView model = new ModelAndView("order");
 
-        List<Technician> technicians = technicianRepository.searchByDevice(searchTechnician.getDevice()); 
-
+        List<Technician> technicians = technicianRepository.searchByDevice(searchTechnician.getDevice());
 
         model.addObject("technicians", technicians);
         model.addObject("Query", searchTechnician);
+        model.addObject("tech", true);
         return model;
-        
+
     }
 
     public String sendRequest(@PathVariable String id, @AuthenticationPrincipal User user) {
-        
+
         Technician currentTechnician = technicianRepository.findById(Long.parseLong(id)).get();
         Request rq = new Request();
         Customer custProfile = user.getCustomerProfile();
         rq.setStatus(Status.PENDING);
         rq.setCustomer(custProfile.getId());
         rq.setTechinician(currentTechnician.getId());
-        requestRepo.save(rq);    
+        requestRepo.save(rq);
         return "redirect:/order/requestSuccess";
 
     }

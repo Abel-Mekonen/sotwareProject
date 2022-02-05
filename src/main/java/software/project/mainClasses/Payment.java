@@ -1,5 +1,7 @@
 package software.project.mainClasses;
 
+import javax.persistence.CascadeType;
+
 // import java.sql.Date;
 // import java.time.Instant;
 
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment{
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long paymentId;
@@ -35,6 +38,9 @@ public class Payment{
 
     @ManyToOne
     private User payer;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Request request;
 
     // @ManyToOne
     // private Device device;

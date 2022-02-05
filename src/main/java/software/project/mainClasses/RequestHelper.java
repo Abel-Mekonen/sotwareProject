@@ -23,6 +23,7 @@ public class RequestHelper {
     private Request req;
     private User user;
     private Status status;
+    private Payment payment;
 
 
 }
