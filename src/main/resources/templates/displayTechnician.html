@@ -115,7 +115,6 @@
                 <button type="button" th:case="DECLINE" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
                 <button type="button" th:case="ACCEPTED" class="btn btn-info" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>(click to edit)
            </div>
-
               <div class="modal fade modal-centered" th:id="'exampleModal' + ${rHelpers.getReq().getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
