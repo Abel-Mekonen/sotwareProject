@@ -100,14 +100,7 @@ public class User implements UserDetails {
         }
     }
 
-    // public static enum Gender {
-    //     MALE,
-    //     FEMALE;
-
-    //     private Gender() {
-
-    //     }
-    // }
+  
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -51,6 +51,7 @@ public class UserService {
         var profile = new Technician();
         profile.setUser(user);
         technicianRepository.save(profile);
+        
         String uploadDir = "user-photos/" + savedUser.getId();
         try {
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);

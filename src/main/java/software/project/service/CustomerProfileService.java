@@ -1,6 +1,9 @@
 package software.project.service;
 
 import java.io.IOException;
+import java.util.Optional;
+
+import javax.validation.constraints.Null;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,6 +46,7 @@ public class CustomerProfileService {
         ModelAndView mav = new ModelAndView("editCustomerProfile");
         User custUser = userRepo.findById(userId).get();
         // Customer tProfile = customerRepository.findById(customerId).get();
+        
 
         userHelper.setFirstName(custUser.getFirstName());
         userHelper.setLastName(custUser.getLastName());
@@ -66,6 +70,11 @@ public class CustomerProfileService {
         
         String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
         userHelper.setPhotos(fileName);
+        // Optional<User> pic = userRepo.findById(user.getId());
+        // if (pic==null){
+        //     user.setPhotos("");
+         
+        // }
 
         user.setFirstName(userHelper.getFirstName());
         user.setLastName(userHelper.getLastName());

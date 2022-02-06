@@ -28,13 +28,13 @@
                 >
                 
                   <img
-                    th:src="@{/images/default_avatar.png}"
-                    class="rounded-circle"
+                    th:src="@{${CurrentUser.getPhotosImagePath}}"                    class="rounded-circle"
                     data-bs-toggle="tooltip"
                     th:title="|Logged in as *{user.firstName} *{user.lastName} (*{user.role})|"
                     alt="Avatar"
                     height="35"
                   />
+               
                 </a>
                 <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
                   <li>
@@ -68,11 +68,10 @@
             class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
              th:object="${CurrentUser}"
            >
-   
+
               <p>
-              <img style="width: 80px; height: 100px;" class="rounded-circle" th:src="@{${CurrentUser.photosImagePath}}" />
-              </p>
-   
+                <img style="width: 80px; height: 100px;" class="rounded-circle" th:src="@{${CurrentUser.photosImagePath}}" />
+                </p>
            </div>
             <p>
               <b>Location</b>
@@ -110,14 +109,7 @@
               <p><b>Phone</b> <i th:text = "${rHelpers.getCustomer.getUser().getPhone()}">0976348700</i></p>
               <p><b>Phone</b> <i th:text = "${rHelpers.getCustomer.getUser().getPhone()}">0976348700</i></p>
               <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
-              <!-- <div class="btn-group dropright">
-                <button type="button" class="btn btn-secondary" aria-haspopup="true" aria-expanded="false">
-                  Status: <span th:text = "${rHelpers.getStatus()}" >Status</span>
-                </button>
-                <div class="dropdown-menu">
-                  dropdown
-                </div>
-              </div> -->
+         
 
 
               <div th:switch="${rHelpers.getStatus().name()}">
