@@ -1,15 +1,19 @@
 package software.project.service;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.Data;
 // import lombok.NoArgsConstructor;
 import software.project.mainClasses.Customer;
+import software.project.mainClasses.FileUploadUtil;
 import software.project.mainClasses.User;
 import software.project.mainClasses.UserHelper;
 import software.project.repository.CustomerRepository;
@@ -57,17 +61,30 @@ public class CustomerProfileService {
         return mav;
     }
 
-    public String saveCustomer(@AuthenticationPrincipal User user, UserHelper userHelper){
+    public String saveCustomer(@AuthenticationPrincipal User user, UserHelper userHelper,  MultipartFile multipartFile){
         var profile = user.getCustomerProfile();
         
+        String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        userHelper.setPhotos(fileName);
+
         user.setFirstName(userHelper.getFirstName());
         user.setLastName(userHelper.getLastName());
+        user.setPhotos(userHelper.getPhotos());
         user.setEmail(userHelper.getEmail());
         user.setUsername(userHelper.getUsername());
         user.setPhone(userHelper.getPhone());
         user.setLocation(userHelper.getLocation());
         user.setPassword(encoder.encode(userHelper.getPassword()));
-        userRepo.save(user);
+
+        User savedUser = userRepo.save(user);
+
+        String uploadDir = "user-photos/" + savedUser.getId();
+        try {
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         customerRepository.save(profile);
         return "redirect:/displayCustomerProfile";
     }
@@ -76,7 +93,5 @@ public class CustomerProfileService {
         userRepo.deleteById(customerId);
         return "redirect:/login";
     }
-
-
 
 }

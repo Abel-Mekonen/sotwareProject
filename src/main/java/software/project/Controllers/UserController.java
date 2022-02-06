@@ -54,7 +54,6 @@ public class UserController {
         if (errors.hasErrors()){
             return "customerSignup";
         }
-    
         return userService.saveCustomer(registrationForm, multipartFile);
     }
 }

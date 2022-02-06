@@ -1,5 +1,6 @@
 package software.project.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,15 +9,16 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 // import java.util.Optional;
-
 
 import lombok.Data;
 // import software.project.mainClasses.Customer;
 // import software.project.mainClasses.Customer;
 import software.project.mainClasses.Technician;
 import software.project.mainClasses.User;
+import software.project.mainClasses.FileUploadUtil;
 import software.project.mainClasses.Request;
 import software.project.mainClasses.RequestHelper;
 import software.project.mainClasses.UserHelper;
@@ -69,7 +71,7 @@ public class TechnicianProfileService {
         mav.addObject("TechnicianProfile", tProfile);
         mav.addObject("helpList", rHelpers);
         mav.addObject("CurrentUser", user);
-
+    
 
         return mav;
 
@@ -81,38 +83,49 @@ public class TechnicianProfileService {
         User techUser = userRepo.findById(userId).get();
         Technician tProfile = technicianRepository.findById(technicianId).get();
 
+
+        userHelper.setPhotos(techUser.getPhotos());
         userHelper.setFirstName(techUser.getFirstName());
         userHelper.setLastName(techUser.getLastName());
         userHelper.setEmail(techUser.getEmail());
-        // userHelper.setGender(techUser.getGender());
         userHelper.setLocation(techUser.getLocation());
         userHelper.setPhone(techUser.getPhone());
         userHelper.setUsername(techUser.getUsername());
         userHelper.setDevice(tProfile.getDevice());
-        // userHelper.setLevel(tProfile.getLevel());
         userHelper.setDescription(tProfile.getDescription());
         userHelper.setPassword(techUser.getPassword());
 
-    
         mav.addObject("technicianProfile", userHelper);
         return mav;
     }
 
-    public String saveTutor(@AuthenticationPrincipal User user, UserHelper userHelper){
+    public String saveTutor(@AuthenticationPrincipal User user, UserHelper userHelper,  MultipartFile multipartFile){
         var profile = user.getTechnicianProfile();
-        // var profile = new Technician();
-        // profile.setCourse(userHelper.getCourse());
+
+        String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        userHelper.setPhotos(fileName);
+
         profile.setDescription(userHelper.getDescription());
         profile.setDevice(userHelper.getDevice());
+        user.setPhotos(userHelper.getPhotos());
         user.setFirstName(userHelper.getFirstName());
         user.setLastName(userHelper.getLastName());
         user.setEmail(userHelper.getEmail());
         user.setUsername(userHelper.getUsername());
         user.setPhone(userHelper.getPhone());
         user.setLocation(userHelper.getLocation());
-        user.setPassword(encoder.encode(userHelper.getPassword()));
+        user.setPassword(encoder.encode(userHelper.getPassword())); 
+        
+        User savedUser = userRepo.save(user);
 
-        userRepo.save(user);
+
+        String uploadDir = "user-photos/" + savedUser.getId();
+        try {
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         technicianRepository.save(profile);
 
         return "redirect:/displayTechnicianProfile";
