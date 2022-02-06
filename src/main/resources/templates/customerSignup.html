@@ -38,6 +38,7 @@
               class="signin_con d-grid gap-2 rounded-3 p-3"
               th:action="@{/savecustomer}"
               method="post"
+              enctype="multipart/form-data"
               th:object="${registrationForm}"
             >
               <h4 class="text-center mb-3">Signing up as a customer . . .</h4>
@@ -107,6 +108,12 @@
                 phone number errors
           </span>
               </div>
+              <div>
+     
+                <label>Photos: </label>
+                <input type="file" name="image" accept="image/png, image/jpeg" />
+                 
+                </div>
               <div class="mb-2">
                 <label class="form-label" for="location">Location</label>
                 <select class="form-select" name="location" id="location">

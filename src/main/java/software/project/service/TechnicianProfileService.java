@@ -9,11 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.Optional;
+// import java.util.Optional;
 
 
 import lombok.Data;
-import software.project.mainClasses.Customer;
+// import software.project.mainClasses.Customer;
 // import software.project.mainClasses.Customer;
 import software.project.mainClasses.Technician;
 import software.project.mainClasses.User;
@@ -66,9 +66,10 @@ public class TechnicianProfileService {
             rHelpers.add(ReqHelp);
         }
 
-
         mav.addObject("TechnicianProfile", tProfile);
         mav.addObject("helpList", rHelpers);
+        mav.addObject("CurrentUser", user);
+
 
         return mav;
 

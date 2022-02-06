@@ -45,21 +45,37 @@
                 </li>
               </ul>
             </div>
-          </form>
+          </form>  
         </div>
       </header>
       <div class="con profile_con row">
+
+      
+      
         <div
           class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
           th:object="${CustomerProfile}"
         >
-
           <h4>
             <span th:text="*{user.firstName}"></span>
             <span th:text="*{user.lastName}"></span>
             (<span th:text="*{user.role}"></span>)
           </h4>
           <div class="text-start">
+
+              <div
+         class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
+          th:object="${CurrentUser}"
+        >
+
+           <p>
+           <img style="width: 40px; height: 40px;" th:src="@{${CurrentUser.photosImagePath}}" />
+           </p>
+
+        </div>
+            <!-- <p>
+              <img th:src="@{'/user-photos/' + *{user.id}} +'/'+ *{user.photos}" />
+            </p> -->
             <p>
               <b>Location</b>
               <i th:text="*{user.location}">Arada | A/A | Ethiopia</i>

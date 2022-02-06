@@ -26,6 +26,7 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
+                
                   <img
                     th:src="@{/images/default_avatar.png}"
                     class="rounded-circle"
@@ -63,6 +64,16 @@
             (<span th:text="*{user.role}"></span>)
           </h4>
           <div class="text-start">
+            <div
+            class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
+             th:object="${CurrentUser}"
+           >
+   
+              <p>
+              <img style="width: 80px; height: 100px;" class="rounded-circle" th:src="@{${CurrentUser.photosImagePath}}" />
+              </p>
+   
+           </div>
             <p>
               <b>Location</b>
               <i th:text="*{user.location}">Arada | A/A | Ethiopia</i>

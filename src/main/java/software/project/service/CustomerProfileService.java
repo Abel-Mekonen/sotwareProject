@@ -30,6 +30,8 @@ public class CustomerProfileService {
         Customer cProfile = user.getCustomerProfile();
 
         mav.addObject("CustomerProfile", cProfile);
+        mav.addObject("CurrentUser", user);
+
         return mav;
     } 
     
@@ -57,8 +59,6 @@ public class CustomerProfileService {
 
     public String saveCustomer(@AuthenticationPrincipal User user, UserHelper userHelper){
         var profile = user.getCustomerProfile();
-
-        // profile.setCourse(userHelper.getCourse());
         
         user.setFirstName(userHelper.getFirstName());
         user.setLastName(userHelper.getLastName());

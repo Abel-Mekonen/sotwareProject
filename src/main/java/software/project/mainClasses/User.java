@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -55,6 +56,9 @@ public class User implements UserDetails {
     @Enumerated()
     private Role role;
 
+
+    @Column(nullable = true, length = 64)
+    private String photos;
     // @Column(nullable = true)
     // private Gender gender;
 
@@ -66,6 +70,13 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer customerProfile;
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (photos == null || id == null) return null;
+         
+        return "/user-photos/" + id + "/" + photos;
+    }
 
     public static enum Role {
         CUSTOMER,
