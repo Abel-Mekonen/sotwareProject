@@ -57,6 +57,8 @@ public class UserHelper {
 
     private String description;
 
+    private String photos;
+
 
     private Role role;
 
@@ -72,6 +74,7 @@ public class UserHelper {
         user.setPassword(password);
         user.setLocation(location);
         user.setRole(role);
+        user.setPhotos(photos);
         return user;
     }
 

@@ -1,6 +1,8 @@
 package software.project.Controllers;
 
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -31,17 +34,14 @@ public class CustomerProfileController {
         return customerProfileService.viewCustomerProfile(user);
     }
 
-    
-
     @GetMapping("/editCustomerProfile")
     public ModelAndView editCustomerProfile(@RequestParam Long userId, @RequestParam Long customerId, UserHelper userHelper ){ 
         return customerProfileService.editCustomerProfile(userId, customerId, userHelper);
     }
-    
-    
+
     @PostMapping("/saveprofile")
-    public String saveCustomer(@AuthenticationPrincipal User user, @ModelAttribute UserHelper userHelper){
-        return customerProfileService.saveCustomer(user, userHelper);
+    public String saveCustomer(@AuthenticationPrincipal User user, @ModelAttribute UserHelper userHelper, @RequestParam("image") MultipartFile multipartFile) throws IOException{
+        return customerProfileService.saveCustomer(user, userHelper, multipartFile );
     }
 
     @PostMapping("/deleteCustomer")

@@ -3,6 +3,8 @@ package software.project.Controllers;
 
 
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -60,8 +63,8 @@ public class TechnicianProfileController {
     
     
     @PostMapping("/savetechnicianprofile")
-    public String saveTutor(@AuthenticationPrincipal User user, @ModelAttribute UserHelper userHelper){
-        return technicianProfileService.saveTutor(user, userHelper);
+    public String saveTutor(@AuthenticationPrincipal User user, @ModelAttribute UserHelper userHelper, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        return technicianProfileService.saveTutor(user, userHelper, multipartFile);
     }
 
     @PostMapping("/deleteTechnician")

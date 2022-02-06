@@ -53,6 +53,7 @@
           <form
             th:action="@{/saveprofile}"
             th:object="${customerProfile}"
+            enctype="multipart/form-data"
             method="POST"
           > 
             <h4 class="text-center mb-3">Edit Your Profile Here</h4>
@@ -102,6 +103,12 @@
                 />
                 <div class="mb-2 text-danger" id="valid-phone-info"></div>
             </div>
+
+            <div>    
+              <label>Photos:</label>
+              <input type="file" name="image" accept="image/png, image/jpeg" />       
+            </div>
+
             <div class="mb-2">
               <label class="form-label" for="Location">Location</label>
               <select name="location" class="form-select">

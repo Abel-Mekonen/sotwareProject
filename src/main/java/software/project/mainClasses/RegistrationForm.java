@@ -35,6 +35,7 @@ public class RegistrationForm {
     @UniqueEmail  
     private String email;
 
+    private String photos;
 
 
     @NotBlank(message="phone number is required")  
@@ -58,6 +59,7 @@ public class RegistrationForm {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPhone(phone);
+        user.setPhotos(photos);
         user.setPassword(encoder.encode(password));
         // user.setGender(gender);
         user.setLocation(location);
