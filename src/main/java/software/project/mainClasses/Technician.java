@@ -1,6 +1,5 @@
 package software.project.mainClasses;
 
-
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -36,27 +35,21 @@ public class Technician {
     @Column(nullable = true)
     private Device device;
 
-
     @Column(nullable = true)
     private String organizationName;
 
     @Column(nullable = true)
     private String description;
 
-
-    public static enum Device{
+    public static enum Device {
         LAPTOP,
         MOBILE,
         PRINTER,
         TELEVISION;
+
         private Device() {
 
         }
     }
 
 }
-
-    
-    
-
-    

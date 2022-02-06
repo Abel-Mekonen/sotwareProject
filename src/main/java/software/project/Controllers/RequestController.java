@@ -2,6 +2,7 @@ package software.project.Controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,10 +19,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import software.project.mainClasses.RequestHelper;
 import software.project.mainClasses.SearchTechnician;
+import software.project.mainClasses.Technician;
 import software.project.mainClasses.Payment;
 import software.project.mainClasses.Request;
 // import software.project.mainClasses.SearchTutor;
 import software.project.mainClasses.User;
+import software.project.mainClasses.Technician.Device;
 import software.project.repository.CustomerRepository;
 import software.project.repository.PaymentRepository;
 import software.project.repository.RequestRepo;
@@ -61,9 +65,48 @@ public class RequestController {
         return orderService.search(user, searchTechnician);
     }
 
-    @PostMapping("/send-request/{id}")
-    public String sendRequest(@PathVariable String id, @AuthenticationPrincipal User user) {
-        return orderService.sendRequest(id, user);
+    @GetMapping(path = "/Technicians")
+    public ModelAndView TechniciansList(@AuthenticationPrincipal User user) {
+        Optional<Boolean> listOnly = Optional.of(true);
+        return searchTechnicianByKeyword(user, "", "", listOnly);
+    }
+
+    @GetMapping(path = "/order/ListOfTechnician")
+    public ModelAndView searchTechnicianByKeyword(@AuthenticationPrincipal User user,
+            @RequestParam(required = false, name = "device", defaultValue = "") String device,
+            @RequestParam(required = false, name = "search", defaultValue = "") String search,
+            Optional<Boolean> listOnly) {
+
+        ModelAndView model = new ModelAndView("order");
+        Device dev = Device.LAPTOP;
+        for (Device devi : Device.values()) {
+            if (devi.name().compareTo(device) == 0) {
+                dev = devi;
+                break;
+            }
+        }
+        List<Technician> technicians = technicianRepository
+                .searchByDeviceAndUserFirstNameContainingOrDeviceAndUserLastNameContaining(dev, search, dev, search);
+        List<Technician> techs = technicianRepository
+                .searchByDeviceAndUserLocationAndUserFirstNameContainingOrDeviceAndUserLocationAndUserLastNameContaining(
+                        dev, user.getLocation(), search, dev, user.getLocation(), search);
+
+        technicians.removeAll(techs);
+        model.addObject("technicians", technicians);
+        model.addObject("techs", techs);
+        model.addObject("Query", device);
+        model.addObject("tech", true);
+        listOnly.ifPresent(
+                lo -> {
+                    model.setViewName("techniciansList");
+                });
+        return model;
+    }
+
+    @GetMapping("/send-request")
+    public String sendRequest(@RequestParam("id") String id, @RequestParam("Deviceid") Device device,
+            @AuthenticationPrincipal User user) {
+        return orderService.sendRequest(id, device, user);
     }
 
     @GetMapping("/order/requestSuccess")
@@ -76,8 +119,9 @@ public class RequestController {
         ModelAndView mView = new ModelAndView("seeOrder");
 
         long sendId = user.getCustomerProfile().getId();
-        List<Request> requestLists = requestRepo.findByCustomer(sendId);
+        List<Request> requestLists = requestRepo.findByCustomerOrderBySentDateDesc(sendId);
 
+        System.out.print(requestLists);
         List<RequestHelper> doneHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> pendingHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> declinedHelpers = new ArrayList<RequestHelper>();

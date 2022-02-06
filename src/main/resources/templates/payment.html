@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
+<head th:object="${TuteeProfileModel}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/profile.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
 </head>
-<body>
+<main style="margin-top: max(5vh, 50px); margin-bottom: max(5vh, 20px) " class="Contact mx-auto w-50">
+    <div th:if="${error}" class = "alert alert-danger text-center">
+        [[${error}]]
+    </div>
+    <div th:if="${message}" class = "alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <div th:if="${success}" class = "alert alert-success text-center">
+        [[${success}]]
+    </div>
+    <h1><strong style="color:rgb(17, 116, 103);">process payment</strong></h1>
     <form th:method ="post" th:action="@{/payment/{id}(id = ${id})}"  th:object="${payment}">
         <input type="text" hidden th:field="*{paymentId}">
-        <input type="number" th:field="*{price}">
-        <select name="paymentStatus" id="paymentStatus">
-            <option value="1">Paid</option>
-            <option value="">UnPaid</option>
-        </select>
-        <select name="PaymentTypes" id="PaymentTypes">
-            <option value="WIRE">Wire transfer</option>
+        payment price
+        <input type="number" class="form-control" th:field="*{price}">
+        <input name="paymentStatus" hidden id="paymentStatus" value="1"/>
+        <br> Payment Type
+        <select name="PaymentTypes" class="form-control" id="PaymentTypes">
+            <option value="WIRE" >Wire transfer</option>
             <option value="MOBILE_BANKING">Mobile Banking</option>
         </select>
-        <textarea type="text" th:field="*{accountInformation}" row = "8" column = "10"> </textarea>
+        <br> Payment Information
+        <textarea type="text" th:field="*{accountInformation}" class="form-control" rows = "8"> </textarea>
         <!-- <input type="date" hidden th:field="*{sentDate}"> -->
-        <input type="submit" value="Send Payment">
+        <button class="w-50 btn btn-md btn-primary my-2" type="submit">Pay</button>
     </form>
+</main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
 </body>
 </html>

@@ -17,6 +17,7 @@ import software.project.mainClasses.SearchTechnician;
 import software.project.mainClasses.Technician;
 import software.project.mainClasses.User;
 import software.project.mainClasses.Request.Status;
+import software.project.mainClasses.Technician.Device;
 import software.project.repository.RequestRepo;
 import software.project.repository.TechnicianRepository;
 
@@ -35,15 +36,20 @@ public class OrderService {
         ModelAndView model = new ModelAndView("order");
 
         List<Technician> technicians = technicianRepository.searchByDevice(searchTechnician.getDevice());
+        List<Technician> techs = technicianRepository.searchByDeviceAndUserLocation(searchTechnician.getDevice(),
+                user.getLocation());
 
+        technicians.removeAll(techs);
         model.addObject("technicians", technicians);
+        model.addObject("techs", techs);
         model.addObject("Query", searchTechnician);
         model.addObject("tech", true);
         return model;
 
     }
 
-    public String sendRequest(@PathVariable String id, @AuthenticationPrincipal User user) {
+    public String sendRequest(@PathVariable String id, Device device,
+            @AuthenticationPrincipal User user) {
 
         Technician currentTechnician = technicianRepository.findById(Long.parseLong(id)).get();
         Request rq = new Request();
@@ -51,6 +57,7 @@ public class OrderService {
         rq.setStatus(Status.PENDING);
         rq.setCustomer(custProfile.getId());
         rq.setTechinician(currentTechnician.getId());
+        rq.setDevice(device);
         requestRepo.save(rq);
         return "redirect:/order/requestSuccess";
 

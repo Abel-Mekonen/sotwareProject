@@ -117,10 +117,10 @@
            </div>
 
               <div class="modal fade modal-centered" th:id="'exampleModal' + ${rHelpers.getReq().getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Edit Status From: [[${rHelpers.getCustomer.getUser().getFirstName()}]] [[${rHelpers.getCustomer.getUser().getLastName()}]]</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                       <form th:action = "@{/displayTechnicianProfile/{id}(id = ${rHelpers.getReq().getId()})}" method = "post">
@@ -136,7 +136,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary">Send message</button>
+                          <button type="submit" class="btn btn-primary">Chage Status</button>
                         </div>
                     </div>
                   </form>

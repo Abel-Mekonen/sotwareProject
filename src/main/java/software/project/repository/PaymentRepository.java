@@ -12,4 +12,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     @Query(value = "select * from payment where request_id = :id", nativeQuery = true)
     Optional<Payment> findRequest(long id);
+
+    List<Payment> findByPayerIdOrderBySentDateDesc(long id);
 }

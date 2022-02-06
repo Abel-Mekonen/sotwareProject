@@ -1,5 +1,7 @@
 package software.project.mainClasses;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 
 // import java.sql.Date;
@@ -39,8 +41,13 @@ public class Payment {
     @ManyToOne
     private User payer;
 
+    @ManyToOne
+    private Technician tech;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Request request;
+
+    private Date sentDate = new Date();
 
     // @ManyToOne
     // private Device device;
