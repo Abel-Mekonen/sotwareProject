@@ -41,6 +41,10 @@ public class Technician {
     @Column(nullable = true)
     private String description;
 
+    
+    @Column(name = "approved",nullable = true)
+    private boolean approved;
+
     public static enum Device {
         LAPTOP,
         MOBILE,
