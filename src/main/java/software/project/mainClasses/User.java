@@ -63,6 +63,8 @@ public class User implements UserDetails {
     // @Column(nullable = true)
     // private Gender gender;
 
+
+
     @Column(nullable = true)
     private Location location;
 

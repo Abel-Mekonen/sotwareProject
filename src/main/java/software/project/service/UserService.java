@@ -56,7 +56,9 @@ public class UserService {
         user = registrationForm.toUser(passwordEncoder);
         user.setRole(Role.TECHNICIAN);
         User savedUser = userRepo.save(user);
+
         var profile = new Technician();
+        profile.setApproved(false);
         profile.setUser(user);
         technicianRepository.save(profile);
 
