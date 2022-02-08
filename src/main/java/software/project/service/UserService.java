@@ -2,11 +2,14 @@ package software.project.service;
 
 import java.io.IOException;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.thymeleaf.context.Context;
 import org.springframework.util.StringUtils;
 
 import software.project.mainClasses.ConfrimEmail;
@@ -70,10 +73,21 @@ public class UserService {
 
         String link = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/confirmEmail?id="
                 + mail.getEmailconfirm();
+        String contact = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/contactus";
         String confirmEmailText = "<h1>BTHY Electronic Maintenance</h1><br> <p> thanks for reqistering to bthy system </p><br> please click the following link to <a>"
-                + link + "</a>"; 
+                + link + "</a>";
         sender.sendSimpleMessage(registrationForm.getEmail(), "BTHY Electronics Email Confirmation Link",
                 confirmEmailText);
+        Context cont = new Context();
+        cont.setVariable("confirmLink", link);
+        cont.setVariable("contactUs", contact);
+        try {
+            sender.sendHtmlMail(registrationForm.getEmail(), "BTHY Electronics Email Confirmation Link",
+                    "confirmEmailTemplate", cont);
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         emailRepo.save(mail);
         return "redirect:/login";
     }
