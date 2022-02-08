@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SearchTechnician {
     private Device device;
+
 }

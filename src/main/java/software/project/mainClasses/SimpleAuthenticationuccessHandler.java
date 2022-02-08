@@ -17,43 +17,42 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimpleAuthenticationuccessHandler implements AuthenticationSuccessHandler {
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+		// public Collection<? extends GrantedAuthority> getAuthorities()
 
-
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws IOException, ServletException {
-                // public Collection<? extends GrantedAuthority> getAuthorities()
-Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		authorities.forEach(authority -> {
-			if(authority.getAuthority().equals("ROLE_TECHNICIAN")) {
+			if (authority.getAuthority().equals("ROLE_TECHNICIAN")) {
 				try {
 					redirectStrategy.sendRedirect(request, response, "/displayTechnicianProfile");
 				} catch (Exception e) {
 
-                    e.printStackTrace();
+					e.printStackTrace();
 				}
-			} else if(authority.getAuthority().equals("ROLE_CUSTOMER")) {
+			} else if (authority.getAuthority().equals("ROLE_CUSTOMER")) {
 				try {
 					redirectStrategy.sendRedirect(request, response, "/displayCustomerProfile");
 				} catch (Exception e) {
 
-                    e.printStackTrace();
+					e.printStackTrace();
 				}
-                
-			}else if(authority.getAuthority().equals("ROLE_ADMIN")) {
-                try {
+
+			} else if (authority.getAuthority().equals("ROLE_ADMIN")) {
+				try {
 					redirectStrategy.sendRedirect(request, response, "/adminDashBoard");
 				} catch (Exception e) {
 
-                    e.printStackTrace();
+					e.printStackTrace();
 				}
-            }else {
-	            throw new IllegalStateException();
-	        }
+			} else {
+				throw new IllegalStateException();
+			}
 		});
 
-    }
-    
+	}
+
 }

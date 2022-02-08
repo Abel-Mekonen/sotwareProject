@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:object="${TuteeProfileModel}">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+  <link th:href="@{/css/profile.css}" rel="stylesheet" />
+  <link th:href="@{/css/common.css}" rel="stylesheet" />
+
+  <!-- Font Awesome Icon Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <section>
+        
+        <div align = "center">
+            <h1><strong style="color:rgb(17, 116, 103);">Resend an Email</strong></h1>
+        </div>
+        <form th:action="@{/resendEmail}" method="post">
+            <div th:if="${error}" class = "alert alert-danger text-center">
+                [[${error}]]
+            </div>
+            <div th:if="${message}" class = "alert alert-success text-center">
+                [[${message}]]
+            </div>
+            <div th:if="${success}" class = "alert alert-success text-center">
+                [[${success}]]
+            </div>
+            your email address: [[${mail}]]<br>
+            <input type="text" name="mail" th:value="${mail}" hidden>
+            <input type="submit" value="Resend Code" class="btn btn-primary">
+        </form>
+        <a th:href="@{/login}" role="button" class="btn btn-primary"> &lt;Back to login </a>
+        <a th:href="@{/login}"> Not my email account </a>
+    </section>
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+</body>
+</html>

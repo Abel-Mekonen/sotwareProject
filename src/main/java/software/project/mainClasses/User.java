@@ -26,36 +26,37 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity(name = "user")
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor 
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message="first name is required")  
+    @NotBlank(message = "first name is required")
     private String firstName;
 
-    @NotBlank(message="first name is required")  
+    @NotBlank(message = "first name is required")
     private String lastName;
 
-    @NotBlank(message="first name is required")
-      
+    @NotBlank(message = "first name is required")
+
     private String username;
 
-    @NotBlank(message="first name is required")  
+    @NotBlank(message = "first name is required")
     private String email;
 
-    @NotBlank(message="first name is required")  
+    @NotBlank(message = "first name is required")
     private String phone;
 
-    @NotBlank(message="first name is required")  
+    @NotBlank(message = "first name is required")
     private String password;
 
     @Column(nullable = true)
     @Enumerated()
     private Role role;
 
+    private boolean mailConfrimed = false;
 
     @Column(nullable = true, length = 64)
     private String photos;
@@ -73,8 +74,9 @@ public class User implements UserDetails {
 
     @Transient
     public String getPhotosImagePath() {
-        if (photos == null || id == null) return null;
-         
+        if (photos == null || id == null)
+            return null;
+
         return "/user-photos/" + id + "/" + photos;
     }
 
@@ -84,7 +86,7 @@ public class User implements UserDetails {
         ADMIN;
 
         private Role() {
-        
+
         }
     }
 
@@ -99,8 +101,6 @@ public class User implements UserDetails {
 
         }
     }
-
-  
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

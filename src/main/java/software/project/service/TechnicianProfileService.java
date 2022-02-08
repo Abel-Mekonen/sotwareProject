@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,7 @@ import software.project.repository.RequestRepo;
 
 @Service
 public class TechnicianProfileService {
-    
+
     @Autowired
     private final TechnicianRepository technicianRepository;
     private final CustomerRepository customerRepository;
@@ -39,28 +40,34 @@ public class TechnicianProfileService {
     private final RequestRepo requestRepo;
     private final PasswordEncoder encoder;
 
-    
     public ModelAndView viewTechnicianProfile(@AuthenticationPrincipal User user) {
 
         ModelAndView mav = new ModelAndView("displayTechnician");
         Technician tProfile = user.getTechnicianProfile();
+        if (!user.isMailConfrimed()) {
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+            mav.addObject("mail", user.getEmail());
+            mav.addObject("error", "your email address" + user.getEmail()
+                    + " is not confrimed,\n please check your email or resend to confirm");
+            mav.setViewName("resendEmail");
+            return mav;
+        }
         // List<Customer> customerProfiles = new ArrayList<Customer>();
         // List<Request.Status> statusContainer = new ArrayList<Request.Status>();
         // RequestHelper requestHelper = new RequestHelper();
 
         long sendId = user.getTechnicianProfile().getId();
-        List<Request>  requestLists = requestRepo.findByTechinician(sendId);
+        List<Request> requestLists = requestRepo.findByTechinician(sendId);
 
         List<RequestHelper> rHelpers = new ArrayList<RequestHelper>();
 
-       
-        for (Request requests : requestLists) { 
+        for (Request requests : requestLists) {
             RequestHelper ReqHelp = new RequestHelper();
             customerRepository.findById(requests.getCustomer()).ifPresent(custom -> {
                 ReqHelp.setCustomer(custom);
-                
+
             });
-            
+
             ReqHelp.setReq(requests);
             ReqHelp.setStatus(requests.getStatus());
             ReqHelp.setUser(user);
@@ -71,18 +78,16 @@ public class TechnicianProfileService {
         mav.addObject("TechnicianProfile", tProfile);
         mav.addObject("helpList", rHelpers);
         mav.addObject("CurrentUser", user);
-    
 
         return mav;
 
     }
 
-
-    public ModelAndView editTechnicianProfile(@RequestParam Long userId, @RequestParam  Long technicianId,  UserHelper userHelper){
+    public ModelAndView editTechnicianProfile(@RequestParam Long userId, @RequestParam Long technicianId,
+            UserHelper userHelper) {
         ModelAndView mav = new ModelAndView("editTechnicianProfile");
         User techUser = userRepo.findById(userId).get();
         Technician tProfile = technicianRepository.findById(technicianId).get();
-
 
         userHelper.setPhotos(techUser.getPhotos());
         userHelper.setFirstName(techUser.getFirstName());
@@ -99,7 +104,7 @@ public class TechnicianProfileService {
         return mav;
     }
 
-    public String saveTutor(@AuthenticationPrincipal User user, UserHelper userHelper,  MultipartFile multipartFile){
+    public String saveTutor(@AuthenticationPrincipal User user, UserHelper userHelper, MultipartFile multipartFile) {
         var profile = user.getTechnicianProfile();
 
         String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -114,10 +119,9 @@ public class TechnicianProfileService {
         user.setUsername(userHelper.getUsername());
         user.setPhone(userHelper.getPhone());
         user.setLocation(userHelper.getLocation());
-        user.setPassword(encoder.encode(userHelper.getPassword())); 
-        
-        User savedUser = userRepo.save(user);
+        user.setPassword(encoder.encode(userHelper.getPassword()));
 
+        User savedUser = userRepo.save(user);
 
         String uploadDir = "user-photos/" + savedUser.getId();
         try {

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head th:object="${TuteeProfileModel}">
@@ -140,13 +139,14 @@
     <div class="col-6" align="center" th:each=" device : ${T(software.project.mainClasses.Technician.Device).values()}">
     <div class="card" style="width: 20rem;" >
         <div class="card-header">
-          <img th:src="@{/images/pc.jpg}" alt="" class="fiximg" style="width: 100%;">
+          <img th:src="@{'/images/' + ${device} + '.jpg'}" alt="" class="fiximg" style="width: 100%;">
         </div>
         <div class="card-body" style="width: 100%;"> 
           <a style="width: 100%;" th:href ="@{'/order/ListOfTechnician?device=' + ${device} }" role="button" class="btn btn-primary">Fix My [[${device}]] </a>
         </div>     
     </div>
-  </div></div>
+  </div>
+</div>
     </div>
 
     <div th:unless="${ord}" align="center" style="margin:2rem 0 ;">
