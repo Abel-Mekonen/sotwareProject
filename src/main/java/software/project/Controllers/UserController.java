@@ -117,7 +117,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/resetEmail")
+    @PostMapping("/resetEmail")
     public String resetMailProccessor(@RequestParam("id") long id, @RequestParam("password") String password,
             Model model, RedirectAttributes ra) {
         try {
