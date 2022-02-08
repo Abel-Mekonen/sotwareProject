@@ -17,9 +17,12 @@ import software.project.mainClasses.User;
 import software.project.mainClasses.UserHelper;
 // import software.project.mainClasses.UserHelper;
 import software.project.mainClasses.AdminAddUserForm;
+import software.project.mainClasses.Technician;
+import software.project.repository.TechnicianRepository;
 import software.project.repository.UserRepository;
 // import software.project.service.AdminDashboardService;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.*;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +35,8 @@ public class AdminDashboardController {
     private final AdminDashboardService adminDashboardService;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private TechnicianRepository technicianRepository;
 
     @GetMapping("/adminDashBoard")
     public String adminRoot(Model model) {
@@ -93,5 +98,38 @@ public class AdminDashboardController {
     @GetMapping("adminDashBoard/message/{id}")
     public String messageDetail(@PathVariable("id") long id , Model model, RedirectAttributes ra){
         return adminDashboardService.messageDetail(id, model, ra);
-    }    
+    }  
+    
+    
+    @GetMapping("adminDashBoard/ApprovedTechnician")
+    public ModelAndView approvedTechnician(){
+        return adminDashboardService.approvedTechnician();
+    }
+
+    @GetMapping("/adminDashBoard/ApprovedTechnicians")
+    public String approved(@RequestParam("id") Long id){
+
+        Optional<Technician> techs = technicianRepository.findById(id);
+        techs.ifPresent(tech ->{
+            tech.setApproved(false);
+            technicianRepository.save(tech);              
+        });
+        return "redirect:/adminDashBoard/ApprovedTechnician";
+    }
+
+    @GetMapping("adminDashBoard/notApprovedTechnician")
+    public ModelAndView unApprovedTechnician(){
+        return adminDashboardService.unApprovedTechnician();
+    }
+    @GetMapping("/adminDashBoard/notApprovedTechnicians")
+    public String notapproved(@RequestParam("id") Long id){
+
+        Optional<Technician> techs = technicianRepository.findById(id);
+        techs.ifPresent(tech ->{
+            tech.setApproved(true);
+            technicianRepository.save(tech);              
+        });
+        return "redirect:/adminDashBoard/notApprovedTechnician";
+    }
+
 }

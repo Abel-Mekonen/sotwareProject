@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+   
+</head>
+<body>
+    <header class="header">
+        <div class="logo_container">
+            <!-- <img  class="logo__image" src="./images/sus.jpg" alt="t LOGO" width="80px"> -->
+        <div>
+            <h2 class="logo_description">BTH</h2>
+            <!-- <h3 class="logo_description"> All in One<br> Electronics Maintenance </h3> -->
+           </div> 
+            
+        <div>
+            <input type="button" name="comment" value="Sign Up" class="button">
+        </div>  
+
+        </div>
+      
+        
+        <nav class="nav-bar">
+            <ul class="nav-bar__list">
+                <li class="nav-bar__item activated"><a class="nav-bar__link" href="home.html" ><i class="fas fa-home nav-bar__icon colored space" style="color: #084C61;"></i><p class="nav-bar__item--mobile  mobile--active colored">Home</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href=""><i class="fas fa-address-card nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">About</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/service.html"><i class="fas fa-window-restore nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Technicians</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link"  href="html/work.html"><i class="fas fa-briefcase nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Fix Devices</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/biography.html"><i class="far fa-address-book nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Orders</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/contact.html"><i class="fas fa-phone-volume nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Contact Us</p></a></li>
+            </ul>
+        </nav> 
+    </header>
+
+    <main>
+
+        <div
+      th:block
+      th:each="technician: ${techs}"
+      class="cards w-75 mb-4 p-3 row align-items-center justify-content-center"
+    >
+    
+      <div class="col-md-9 col-lg-4 text-center">
+        <img
+          th:src="@{/images/default_avatar.png}"
+          class="rounded-circle img-fluid"
+          alt="Avatar"
+        />
+      </div>
+      <div class="col mw-25">
+        <h6 class="">
+          <b>
+            <span th:text="${technician.getUser().getFirstName()}"></span>
+            <span th:text="${technician.getUser().getLastName()}"></span>
+          </b>
+        </h6>
+        <p class="card-text" th:text="${technician.description}">
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy
+          text ever since the 1500s.
+        </p>
+        <p>
+          <b>Location</b>
+          <i th:text="${technician.getUser().getLocation()}"
+            >Arada | A/A | Ethiopia</i
+          >
+        </p>
+        <div class="">
+          <p>
+            <b>device type</b>
+            <i th:text="${technician.device}">
+            </i>
+          </p>
+          
+        </div>
+        <div class="">
+            <p>
+              <b>approved </b>
+              <i th:text="${technician.approved}">
+              </i>
+            </p>
+            
+          </div>
+          
+        <div>
+          <h2>Star Rating</h2>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star-half-o checked"></span>
+          <span class="fa fa-star-o"></span>
+        </div>
+  
+        <a
+          th:href="@{/adminDashBoard/notApprovedTechnicians(id=${technician.id})}"
+          
+          class="btn btn-primary btn-sm"
+        > Approve
+        </a>
+      </div>
+    </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer__main">
+            <div class="address">
+                <ul class="address__list">
+                    <li class="address__item"><a class="address__link" href="#" target="_blank"><i class="fas fa-map-marker-alt address__icon"></i>Contact</a></li>
+                    <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-envelope address__icon"></i>tech_cust@gmail.com</a></li>
+                    <li class="address__item"><a class="address__link" href="#" target="_blank"><i class="fas fa-map-marker-alt address__icon"></i>Addis Ababa,Ethiopia</a></li>
+                </ul>
+            </div>
+            <div class="address">
+                <ul class="address__list">
+                    <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-mobile-alt address__icon"></i>+251985258911</a></li>
+                    <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-envelope address__icon"></i>P.o Box</a></li>
+                    <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fab fa-linkedin-in address__icon"></i>Zip Code</a></li>
+                </ul>
+            </div>
+            <div class="contact">
+                <h2>CONTACT</h2><br>
+                <h3>Get in Touch</h3>
+                <ul class="contact__list">
+                    <li class="contact__item"><a class="contact__link" href="#" aria-label="Email link" target="_blank" ><i class="far fa-envelope contact__icon"></i></a></li>
+                    <li class="contact__item"><a class="contact__link" href="#" aria-label="github link"  target="_blank" ><i class="fab fa-github contact__icon"></i></a> </li>
+                    <li class="contact__item"><a class="contact__link" href="#"  aria-label="linkedin link" target="_blank" ><i class="fab fa-linkedin-in contact__icon"></i></a></li>
+                    <li class="contact__item"><a class="contact__link" href="#"  aria-label="Telegram link" target="_blank" ><i class="fab fa-telegram-plane contact__icon"></i></a></li>
+                </ul>
+            </div>
+            
+        </div>
+        <p class="footer__paragraph">Copyright &copy;2021 All rights reserved | developed by Jebessa Dejene</p>
+    </footer>
+
+
+    
+</body>
+</html>

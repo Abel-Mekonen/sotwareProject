@@ -14,9 +14,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import software.project.mainClasses.AdminAddUserForm;
 import software.project.mainClasses.Feedback;
+import software.project.mainClasses.Technician;
 import software.project.mainClasses.User;
 import software.project.mainClasses.UserHelper;
 import software.project.repository.FeedbackRepository;
+import software.project.repository.TechnicianRepository;
 // import software.project.mainClasses.UserHelper;
 import software.project.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -29,9 +31,27 @@ public class AdminDashboardService {
     private UserRepository userRepo;
 
     @Autowired
+    private TechnicianRepository technicianRepository;
+
+    @Autowired
     private FeedbackRepository messageRepo;
 
     private final PasswordEncoder encoder;
+    public ModelAndView approvedTechnician(){
+
+        ModelAndView mav = new ModelAndView("approveTechnician");
+        List<Technician> techs = technicianRepository.searchByApproved(true);
+        mav.addObject("techs", techs);
+        return mav;
+    }
+
+    public ModelAndView unApprovedTechnician(){
+
+        ModelAndView mav = new ModelAndView("unapproveTechnician");
+        List<Technician> techs = technicianRepository.searchByApproved(false);
+        mav.addObject("techs", techs);
+        return mav;
+    }
 
     public String addUser(@ModelAttribute AdminAddUserForm adminAddUserForm) {
         return "addUserForm";
