@@ -147,6 +147,10 @@
     display: block;
   }
   
+  .nav-bar__item--mobile{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
   .nav-bar__item {
     padding: 0px 5px 0px 10px;
     margin-bottom: 2px;
