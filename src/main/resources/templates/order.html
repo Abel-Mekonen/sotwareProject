@@ -4,12 +4,18 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-  <link th:href="@{/css/profile.css}" rel="stylesheet" />
-  <link th:href="@{/css/common.css}" rel="stylesheet" />
+  <!-- <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" /> -->
+  <!-- <link th:href="@{/css/profile.css}" rel="stylesheet" /> -->
+  <!-- <link th:href="@{/css/common.css}" rel="stylesheet" /> -->
 
   <!-- Font Awesome Icon Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+  <link rel="stylesheet" href="product.css">
   <style>
   .fa{
   color:blue;
@@ -148,6 +154,14 @@
   </div>
 </div>
     </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="...">
+          <div class="card-body">
+              <div class="text-center my-4"> <a href="#" class="btn btn-primary margin-top" style="margin-top: 0em; font-size: 10px;">Fix My Devices</a> </div>
+          </div>
+      </div>
+  </div>
 
     <div th:unless="${ord}" align="center" style="margin:2rem 0 ;">
       <form th:action="@{/order/ListOfTechnician}" method="get">
