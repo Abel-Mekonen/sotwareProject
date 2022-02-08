@@ -48,11 +48,13 @@ public class SendMail {
         MimeMessage mail = javaMailSender.createMimeMessage();
         String body = templateEngine.process(templateName, context);
         MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-        try {
-            helper.setFrom(mailProperties.getProperties().get("from"), mailProperties.getProperties().get("personal"));
-        } catch (UnsupportedEncodingException e) {
-            System.out.println("error in mail service sendHtmlMail method" + e);
-        }
+        // try {
+        // helper.setFrom(mailProperties.getProperties().get("from"),
+        // mailProperties.getProperties().get("personal"));
+        // } catch (UnsupportedEncodingException e) {
+        // System.out.println("error in mail service sendHtmlMail method" + e);
+        // }
+        helper.setFrom("hbgmhb12@gmail.com");
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(body, true);

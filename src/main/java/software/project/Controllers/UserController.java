@@ -83,6 +83,9 @@ public class UserController {
 
     @PostMapping("/forgetPassword")
     public String forgetpassProccess(@RequestParam("mail") String emailconfirm, RedirectAttributes ra) {
+        System.out.println("\n\n\n");
+        System.out.println(emailconfirm);
+        System.out.println("\n\n\n");
         try {
             User user = userRepo.findByEmail(emailconfirm);
             String userEmail = user.getEmail();
@@ -117,7 +120,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/resetEmail")
+    @PostMapping("/resetEmail")
     public String resetMailProccessor(@RequestParam("id") long id, @RequestParam("password") String password,
             Model model, RedirectAttributes ra) {
         try {
