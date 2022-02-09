@@ -142,11 +142,11 @@ public class UserController {
 
     @PostMapping("/saveTechnician")
     public String saveTechnician(@Valid @ModelAttribute RegistrationForm registrationForm, Errors errors,
-            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+            @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws IOException {
         if (errors.hasErrors()) {
             return "technicianSignup";
         }
-        return userService.saveTechnician(registrationForm, multipartFile);
+        return userService.saveTechnician(registrationForm, multipartFile, ra);
     }
 
     @GetMapping("/customersignup")
@@ -156,10 +156,10 @@ public class UserController {
 
     @PostMapping("/savecustomer")
     public String saveCustomer(@Valid @ModelAttribute RegistrationForm registrationForm, Errors errors,
-            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+            @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws IOException {
         if (errors.hasErrors()) {
             return "customerSignup";
         }
-        return userService.saveCustomer(registrationForm, multipartFile);
+        return userService.saveCustomer(registrationForm, multipartFile, ra);
     }
 }

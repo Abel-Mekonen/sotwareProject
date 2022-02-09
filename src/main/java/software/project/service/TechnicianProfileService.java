@@ -55,7 +55,6 @@ public class TechnicianProfileService {
         // List<Customer> customerProfiles = new ArrayList<Customer>();
         // List<Request.Status> statusContainer = new ArrayList<Request.Status>();
         // RequestHelper requestHelper = new RequestHelper();
-
         long sendId = user.getTechnicianProfile().getId();
         List<Request> requestLists = requestRepo.findByTechinician(sendId);
 

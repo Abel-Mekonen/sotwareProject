@@ -36,7 +36,7 @@ public class CustomerProfileService {
     public String viewCustomerProfile(@AuthenticationPrincipal User user, Model model) {
 
         // ModelAndView mav = new ModelAndView("displayCustomer");
-        Customer cProfile = user.getCustomerProfile();
+        // Customer cProfile = user.getCustomerProfile();
         if (!user.isMailConfrimed()) {
             SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
             model.addAttribute("mail", user.getEmail());
@@ -44,7 +44,7 @@ public class CustomerProfileService {
                     + " is not confrimed,\n please check your email or resend to confirm");
             return "resendEmail";
         }
-        model.addAttribute("CustomerProfile", cProfile);
+        // model.addAttribute("CustomerProfile", cProfile);
         model.addAttribute("CurrentUser", user);
 
         return "displayCustomer";

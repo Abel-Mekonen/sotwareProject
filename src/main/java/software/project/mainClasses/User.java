@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity(name = "user")
 @AllArgsConstructor
-@NoArgsConstructor 
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -36,20 +36,19 @@ public class User implements UserDetails {
     @NotBlank(message = "first name is required")
     private String firstName;
 
-    @NotBlank(message = "first name is required")
+    @NotBlank(message = "last name is required")
     private String lastName;
 
-    @NotBlank(message = "first name is required")
-
+    @NotBlank(message = "username name is required")
     private String username;
 
-    @NotBlank(message = "first name is required")
+    @NotBlank(message = "email name is required")
     private String email;
 
-    @NotBlank(message = "first name is required")
+    @NotBlank(message = "Phone name is required")
     private String phone;
 
-    @NotBlank(message = "first name is required")
+    @NotBlank(message = "password name is required")
     private String password;
 
     @Column(nullable = true)
@@ -62,8 +61,6 @@ public class User implements UserDetails {
     private String photos;
     // @Column(nullable = true)
     // private Gender gender;
-
-
 
     @Column(nullable = true)
     private Location location;

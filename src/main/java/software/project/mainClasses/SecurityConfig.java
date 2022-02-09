@@ -22,38 +22,41 @@ public class SecurityConfig {
     PasswordEncoder bcryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepo) {
 
-        
         return username -> {
             User user = userRepo.findByUsername(username);
+            if (user == null)
+                user = userRepo.findByEmail(username);
+            // if (user == null)
+            // user = userRepo.findByPhone(username);
             if (user != null)
                 return user;
-        
             throw new UsernameNotFoundException("User '" + username + "' not found");
         };
     }
 
     @Autowired
-	private SimpleAuthenticationuccessHandler successHandler;
+    private SimpleAuthenticationuccessHandler successHandler;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeRequests()
                 // .antMatchers("/","/displayTuteeProfile","/editTuteeProfile").hasRole("TUTEE")
                 // .antMatchers("/displayTutorProfile","/editTutorProfile","/displayTutorProfile").hasRole("TUTOR")
-                // .antMatchers("/adminDashBoard/**").hasRole("ADMIN")       
+                // .antMatchers("/adminDashBoard/**").hasRole("ADMIN")
                 .antMatchers("/login", "/**").permitAll()
                 .and()
                 .formLogin().successHandler(successHandler)
                 .loginPage("/login")
                 .and()
                 .logout()
-                
+
                 .and()
                 .build();
     }
-    
-}
 
+}

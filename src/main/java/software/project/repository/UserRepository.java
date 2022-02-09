@@ -6,7 +6,7 @@ import software.project.mainClasses.User;
 import software.project.mainClasses.User.Role;
 // import Tutorial.mainClasses.User.Role;
 
-import org.springframework.data.jpa.repository.JpaRepository; 
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     public User findByUsername(String username);
@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     public boolean existsByEmail(String email);
 
     public User findByEmail(String emailconfirm);
+
+    // public User findByPhone(String phone);
 }

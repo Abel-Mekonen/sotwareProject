@@ -28,7 +28,7 @@
                 [[${success}]]
             </div>
             your email address: [[${mail}]]<br>
-            <input type="text" name="mail" th:value="${mail}" hidden>
+            <input type="email" name="mail" th:value="${mail}" hidden>
             <input type="submit" value="Resend Code" class="btn btn-primary">
         </form>
         <a th:href="@{/login}" role="button" class="btn btn-primary"> &lt;Back to login </a>
