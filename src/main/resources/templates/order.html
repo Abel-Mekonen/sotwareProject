@@ -4,123 +4,68 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" /> -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
   <!-- <link th:href="@{/css/profile.css}" rel="stylesheet" /> -->
   <!-- <link th:href="@{/css/common.css}" rel="stylesheet" /> -->
 
   <!-- Font Awesome Icon Library -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link th:href="@{/css/css.css}" rel="stylesheet" />
 
-  <link rel="stylesheet" href="product.css">
-  <style>
-  .fa{
-  color:blue;
-  }
-  .checked {
-    color: blue;
-  }
-.fiximg{
-  width: 100%;
-  height: 7rem;
-  margin-bottom: 1rem;
-}
-/*.card{
-  margin-bottom: 3rem;
-}*/
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-* {
-  box-sizing: border-box;
-}
-/*body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  background-color: #f7f8fc;
-  font-family: "Roboto", sans-serif;
-  color: #10182f;
-}*/
-.container {
-  display: flex;
-  width: 1040px;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-.card {
-  margin: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  width: 300px;
-}
-.card-header img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
-  min-height: 250px;
-}
-
-.tag {
-  background: #cccccc;
-  border-radius: 50px;
-  font-size: 12px;
-  margin: 0;
-  color: #fff;
-  padding: 2px 10px;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.tag-teal {
-  background-color: #47bcd4;
-}
-.tag-purple {
-  background-color: #5e76bf;
-}
-.tag-pink {
-  background-color: #cd5b9f;
-}
-
-.card-body p {
-  font-size: 13px;
-  margin: 0 0 40px;
-}
-.user {
-  display: flex;
-  margin-top: auto;
-}
-
-.user img {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-.user-info h5 {
-  margin: 0;
-}
-.user-info small {
-  color: #545d7a;
-}
-
-  </style>
+  <link th:href="@{/css/product.css}" rel="stylesheet" />
 
 </head>
 <body>
   <main>
-    <header class="row align-items-center ps-5 pe-5 shadow bg-body">
+
+
+    <header class="header">
+      <div class="logo_container">
+          <!-- <img  class="logo__image" src="./images/sus.jpg" alt="t LOGO" width="80px"> -->
+         <div>
+          <h2 class="logo_description">BTH</h2>
+          <!-- <h3 class="logo_description"> All in One<br> Electronics Maintenance </h3> -->
+         </div> 
+          
+          <ul class="menu-drop-down" style="color: white;"  aria-labelledby="signup_options">
+            <li>
+              <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn-sm btn w-100" style="color: white;">
+                    Log out
+                </button>
+              </form>
+            </li>
+          </ul>
+      </div>
+
+    
+      
+      <nav class="nav-bar">
+          <ul class="nav-bar__list">
+              <li class="nav-bar__item activated"><a class="nav-bar__link" href="home.html" ><i class="fas fa-home nav-bar__icon colored space" style="color: #084C61;"></i><p class="nav-bar__item--mobile  mobile--active colored">Home</p></a></li>
+              <li class="nav-bar__item"><a class="nav-bar__link" href=""><i class="fas fa-address-card nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">About</p></a></li>
+              <li class="nav-bar__item"><a class="nav-bar__link" href="#"><i class="fas fa-window-restore nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Technicians</p></a></li>
+              <li class="nav-bar__item"><a class="nav-bar__link"  href="#"><i class="fas fa-briefcase nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Fix Devices</p></a></li>
+              <li class="nav-bar__item"><a class="nav-bar__link" href="#"><i class="far fa-address-book nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Orders</p></a></li>
+              <li class="nav-bar__item"><a class="nav-bar__link" href="#"><i class="fas fa-phone-volume nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Contact Us</p></a></li>
+          </ul>
+      </nav> 
+  </header>
+
+
+
+
+
+
+
+
+
+
+    <!-- <header class="row align-items-center ps-5 pe-5 shadow bg-body">
       <div class="col fs-5">
         <b><a href="/">THE TUTOR</a></b>
       </div>
@@ -137,31 +82,26 @@
           </div>
         </form>
       </div>
-    </header>
+    </header> -->
 <div class="col">
   <div th:unless="${tech}"  align="center">
     <h4 class="text-center mt-4 mb-3" align="center">fix my device</h4>
-    <div class="row">
-    <div class="col-6" align="center" th:each=" device : ${T(software.project.mainClasses.Technician.Device).values()}">
-    <div class="card" style="width: 20rem;" >
-        <div class="card-header">
-          <img th:src="@{'/images/' + ${device} + '.jpg'}" alt="" class="fiximg" style="width: 100%;">
-        </div>
-        <div class="card-body" style="width: 100%;"> 
-          <a style="width: 100%;" th:href ="@{'/order/ListOfTechnician?device=' + ${device} }" role="button" class="btn btn-primary">Fix My [[${device}]] </a>
-        </div>     
-    </div>
-  </div>
-</div>
+          
+    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+            <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-3 g-5">
+              <div class="col" th:each=" device : ${T(software.project.mainClasses.Technician.Device).values()}">
+              <div class="card h-100 shadow-sm"> 
+                <img th:src="@{'/images/' + ${device} + '.jpg'}" alt="" class="card-img-top">
+                  <div class="card-body">
+                    <a style="width: 100%;" th:href ="@{'/order/ListOfTechnician?device=' + ${device} }" role="button" class="btn btn-primary">Fix My [[${device}]] </a>                  </div>
+              </div> 
+              </div>
+            </div>
+          </div>
+
     </div>
 
-    <div class="col">
-      <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="...">
-          <div class="card-body">
-              <div class="text-center my-4"> <a href="#" class="btn btn-primary margin-top" style="margin-top: 0em; font-size: 10px;">Fix My Devices</a> </div>
-          </div>
-      </div>
-  </div>
+ 
 
     <div th:unless="${ord}" align="center" style="margin:2rem 0 ;">
       <form th:action="@{/order/ListOfTechnician}" method="get">
@@ -177,7 +117,6 @@
       <div
       th:block
       th:each="technician: ${techs}"
-      class="cards w-75 mb-4 p-3 row align-items-center justify-content-center"
     >
     
       <div class="col-md-9 col-lg-4 text-center">
@@ -231,6 +170,7 @@
         </a>
       </div>
     </div>
+    
     </div>
 
     
@@ -309,19 +249,36 @@
 
 
 
-    <footer class="text-center p-2 align-items-center justify-content-center fixed-bottom">
-        <div class="footer_nav row">
-          <a href="/">Feed</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="/">Saved</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="/">Other</a>
-          <br />
-          <br />
+  <footer class="footer">
+    <div class="footer__main">
+        <div class="address">
+            <ul class="address__list">
+                <li class="address__item"><a class="address__link" href="#" target="_blank"><i class="fas fa-map-marker-alt address__icon"></i>Contact</a></li>
+                <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-envelope address__icon"></i>tech_cust@gmail.com</a></li>
+                <li class="address__item"><a class="address__link" href="#" target="_blank"><i class="fas fa-map-marker-alt address__icon"></i>Addis Ababa,Ethiopia</a></li>
+            </ul>
         </div>
-        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
-      </footer>
-    </main>
+        <div class="address">
+            <ul class="address__list">
+                <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-mobile-alt address__icon"></i>+251985258911</a></li>
+                <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-envelope address__icon"></i>P.o Box</a></li>
+                <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fab fa-linkedin-in address__icon"></i>Zip Code</a></li>
+            </ul>
+        </div>
+        <div class="contact">
+            <h2>CONTACT</h2><br>
+            <h3>Get in Touch</h3>
+            <ul class="contact__list">
+                <li class="contact__item"><a class="contact__link" href="#" aria-label="Email link" target="_blank" ><i class="far fa-envelope contact__icon"></i></a></li>
+                <li class="contact__item"><a class="contact__link" href="#" aria-label="github link"  target="_blank" ><i class="fab fa-github contact__icon"></i></a> </li>
+                <li class="contact__item"><a class="contact__link" href="#"  aria-label="linkedin link" target="_blank" ><i class="fab fa-linkedin-in contact__icon"></i></a></li>
+                <li class="contact__item"><a class="contact__link" href="#"  aria-label="Telegram link" target="_blank" ><i class="fab fa-telegram-plane contact__icon"></i></a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <p class="footer__paragraph">Copyright &copy;2021 All rights reserved | developed by Jebessa Dejene</p>
+</footer>    </main>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
     <script>

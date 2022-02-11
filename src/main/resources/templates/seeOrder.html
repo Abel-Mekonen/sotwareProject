@@ -85,13 +85,14 @@
                       
                               <input value="0" type="hidden" class="rating" data-glyphicon="0">
                       
-                              <button class="btn btn-primary" type="submit">Submit form</button>
+                              <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
                           </form>
                       </div>
                         
 
                         <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
-                          <a th:case="PENDING" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
+                          <a th:case="DONE" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
+
                         </div>
                         <div th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
                           <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]

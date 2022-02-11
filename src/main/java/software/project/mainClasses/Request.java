@@ -29,13 +29,13 @@ public class Request {
     private Status status;
 
     public static enum Status {
-        PENDING,
+        PENDING,    
         ACCEPTED,
         DECLINE,
         DONE;
 
         private Status() {
-
+        
         }
     }
 

@@ -20,6 +20,7 @@ public class AdminAddUserForm {
     private String password;
     private Role role;
     
+    
     public User toUser(PasswordEncoder encoder){
         User user = new User();
         user.setUsername(username);

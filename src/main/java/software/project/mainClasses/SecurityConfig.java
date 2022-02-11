@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import software.project.repository.UserRepository;
 
 @Configuration
+
 public class SecurityConfig {
 
     @Bean
@@ -30,8 +31,7 @@ public class SecurityConfig {
             User user = userRepo.findByUsername(username);
             if (user == null)
                 user = userRepo.findByEmail(username);
-            // if (user == null)
-            // user = userRepo.findByPhone(username);
+
             if (user != null)
                 return user;
             throw new UsernameNotFoundException("User '" + username + "' not found");

@@ -45,8 +45,9 @@ public class CustomerProfileService {
             return "resendEmail";
         }
         // model.addAttribute("CustomerProfile", cProfile);
+        Customer cProfile = user.getCustomerProfile();
+        model.addAttribute("CustomerProfile", cProfile);
         model.addAttribute("CurrentUser", user);
-
         return "displayCustomer";
     }
 
