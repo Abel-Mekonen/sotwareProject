@@ -7,11 +7,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <!-- <title th:text="*{user.firstName} +' '+ *{user.lastName} + ' (' + *{user.role} +')' ">Tutee Name</title> -->
   
-
-
-
-
-      <link th:href="@{/css/css.css}" rel="stylesheet" />
       <link th:href="@{/css/css.css}" rel="stylesheet" />
 
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
@@ -85,11 +80,11 @@
       <div class="con profile_con row">
 
         <div
-          class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
+          class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5 shadow p-3 my-4 bg-white rounded"
           th:object="${TechnicianProfile}"
         >
 
-          <h4>
+          <h4 style="color: black;">
             <span th:text="*{user.firstName}"></span>
             <span th:text="*{user.lastName}"></span>
             (<span th:text="*{user.role}"></span>)
@@ -100,9 +95,9 @@
              th:object="${CurrentUser}"
            >
 
-              <p>
-                <img style="width: 80px; height: 100px;" class="rounded-circle" th:src="@{${CurrentUser.photosImagePath}}" />
-                </p>
+              
+           <img class="rounded-circle" style="margin-right: 30px; height: 15rem; background-color: silver;" th:src="@{${CurrentUser.photosImagePath}}" />
+               
            </div>
             <p>
               <b>Location</b>
@@ -114,6 +109,7 @@
             <p><b>Phone</b> <i th:text="*{user.phone}">0976348700</i></p>
             <p><b>Username</b> <i th:text="*{user.username}">username</i></p>
           </div>
+
           <div class="row">
             <a
               class="col"
@@ -126,64 +122,89 @@
             </form>
           </div>
         </div>
-        <div class="col">
-          <h4 class="text-center mt-4 mb-3">Requests Received</h4>
-          <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-75 mb-4">
-            <h6 class="card-header">
-              <b>From</b>
-              <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getCustomer.getUser().getFirstName()}"></span>
-              <span th:text = "${rHelpers.getCustomer.getUser().getLastName()}"></span>
-            </h6>
-            <div class="card-body">
-              <p><b>Location</b> <i th:text = "${rHelpers.getCustomer.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
-              <p><b>Email</b> <i  th:text = "${rHelpers.getCustomer.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
-              <p><b>Phone</b> <i th:text = "${rHelpers.getCustomer.getUser().getPhone()}">0976348700</i></p>
-              <p><b>Phone</b> <i th:text = "${rHelpers.getCustomer.getUser().getPhone()}">0976348700</i></p>
-              <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
-         
+
+ <!--rowwwwwwwwwwwwwwwwwwwwwwwwwwooooooooooooooooooooooowwwwwwwwwwwwwwww  -->
+
+          <div class="col" style="padding-left: 100px;">
+            <h4 class="text-center mt-4 mb-3">Requests Received</h4>
+            <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-75 mb-4 row shadow p-3 mb-5 bg-white rounded">
+              <div class="row">
+                <h6 class="card-header">
+                  <b>From</b>
+                  <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getCustomer.getUser().getFirstName()}"></span>
+                  <span th:text = "${rHelpers.getCustomer.getUser().getLastName()}"></span>
+                </h6>
+  
+              </div>
+ <!--collllllllllllllllllllllll  -->
+              <div class="card-body row" >
 
 
-              <div th:switch="${rHelpers.getStatus().name()}">
-                <button type="button" th:case="DONE" class="btn btn-success" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
-                <button type="button" th:case="PENDING" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
-                <button type="button" th:case="DECLINE" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
-                <button type="button" th:case="ACCEPTED" class="btn btn-info" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>(click to edit)
-           </div>
-              <div class="modal fade modal-centered" th:id="'exampleModal' + ${rHelpers.getReq().getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Edit Status From: [[${rHelpers.getCustomer.getUser().getFirstName()}]] [[${rHelpers.getCustomer.getUser().getLastName()}]]</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- fffffffffffffffffffffffffffffffffffffffff -->
+
+                <div class="col">
+                  <img width="200" class="rounded-circle" th:src="@{${rHelpers.getCustomer.getUser().photosImagePath}}" alt="customer Photo">
+                </div>
+  
+
+<!-- fffffffffffffffffffffffffffffffffffffffff -->
+
+                <div class="col">
+                    <p><b>Location</b> <i th:text = "${rHelpers.getCustomer.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+                    <p><b>Email</b> <i  th:text = "${rHelpers.getCustomer.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+                    <p><b>Phone</b> <i th:text = "${rHelpers.getCustomer.getUser().getPhone()}">0976348700</i></p>
+                    <!-- <p><b>Phone</b> <i th:text = "${rHelpers.getCustomer.getUser().}">0976348700</i></p> -->
+                    <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
+                    
+  
+                <div th:switch="${rHelpers.getStatus().name()}">
+                  <button type="button" th:case="DONE" class="btn btn-success" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
+                  <button type="button" th:case="PENDING" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
+                  <button type="button" th:case="DECLINE" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>
+                  <button type="button" th:case="ACCEPTED" class="btn btn-info" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${rHelpers.getReq().getId()}" data-bs-whatever="@getbootstrap">Status: [[${rHelpers.getStatus()}]]</button>(click to edit)
+             </div>
+                <div class="modal fade modal-centered" th:id="'exampleModal' + ${rHelpers.getReq().getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Status From: [[${rHelpers.getCustomer.getUser().getFirstName()}]] [[${rHelpers.getCustomer.getUser().getLastName()}]]</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                        <form th:action = "@{/displayTechnicianProfile/{id}(id = ${rHelpers.getReq().getId()})}" method = "post">
+                      <div class="modal-body">
+                          <div class="mb-3">
+                            <select class="form-select" name="status" id="status">
+                              <option
+                                th:each="status:${T(software.project.mainClasses.Request.Status).values()}"
+                                th:value="${status}"
+                                th:text="${status}"
+                              ></option>
+                            </select>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Change Status</button>
+                          </div>
+                      </div>
+                    </form>
+                    <!-- <a style="margin-right:1em; font-size:1.2em;" class ="btn btn-info" href="@{/technicianValidation/{id}(id=${technician.id})}" >Accept</a>
+                     <a style="font-size:1.2em;" href="@{/technicianInvalidation/{id}(id=${technician.id})}" class ="btn btn-danger"></a> -->
+  
                     </div>
-                      <form th:action = "@{/displayTechnicianProfile/{id}(id = ${rHelpers.getReq().getId()})}" method = "post">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                          <select class="form-select" name="status" id="status">
-                            <option
-                              th:each="status:${T(software.project.mainClasses.Request.Status).values()}"
-                              th:value="${status}"
-                              th:text="${status}"
-                            ></option>
-                          </select>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary">Chage Status</button>
-                        </div>
-                    </div>
-                  </form>
-                  <a style="margin-right:1em; font-size:1.2em;" class ="btn btn-info" href="@{/technicianValidation/{id}(id=${technician.id})}" >Accept</a>
-                   <a style="font-size:1.2em;" href="@{/technicianInvalidation/{id}(id=${technician.id})}" class ="btn btn-danger"></a>
-
                   </div>
                 </div>
+                </div>
+  
+  <!-- fffffffffffffffffffffffffffffffffffffffff -->
+
+                <!-- <div class="card-footer text-muted">Monday, 17 January 2022</div> -->
               </div>
-
-
-              <div class="card-footer text-muted">Monday, 17 January 2022</div>
             </div>
+
           </div>
+
+
+
         </div>
 
         <!-- <div th:block th:each="statusOfTheRequest: ${StatusOfTheRequest}" class="card cards w-75 mb-4">

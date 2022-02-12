@@ -5,17 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title th:text="*{user.firstName} +' '+ *{user.lastName} + ' (' + *{user.role} +')' ">Tutee Name</title> -->
-    
-    
-    
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    
-    
-    
-    
-    
     <link th:href="@{/css/css.css}" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
     
@@ -84,77 +73,29 @@
 
 
 
-      <div class="con profile_con row">
+      <div class="con justify-content-center profile_con row" style="box-sizing: border-box;">
 
       
       
         <div
-          class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
+          class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5 shadow p-3 my-4 bg-white rounded "
           th:object="${CustomerProfile}"
         >
-          <h4>
+          <h4 style="color: black;">
             <span th:text="*{user.firstName}"></span>
             <span th:text="*{user.lastName}"></span>
             (<span th:text="*{user.role}"></span>)
           </h4>
           <div class="text-start">
 
+        <div
+         class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
+          th:object="${CurrentUser}"
+        >
 
+           <img class="rounded-circle" style="margin-right: 30px; height: 15rem; background-color: silver;" th:src="@{${CurrentUser.photosImagePath}}" />
 
-
-
-            <div class="container" th:object="${CurrentUser}">
-              <div class="row">
-                <div class="col-lg-3 col-sm-6">
-            
-                        <div class="card hovercard">
-                            <div class="cardheader">
-            
-                            </div>
-                            <div class="avatar">
-                              <img th:src="@{${CurrentUser.photosImagePath}}" />
-                            </div>
-                            <div class="info">
-                                <div class="title">
-                                    <a target="_blank" href="https://scripteden.com/">Script Eden</a>
-                                </div>
-                                <div class="desc">Passionate designer</div>
-                                <div class="desc">Curious developer</div>
-                                <div class="desc">Tech geek</div>
-                            </div>
-                            <div class="bottom">
-                                <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                                <a class="btn btn-danger btn-sm" rel="publisher"
-                                   href="https://plus.google.com/+ahmshahnuralam">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                                <a class="btn btn-primary btn-sm" rel="publisher"
-                                   href="https://plus.google.com/shahnuralam">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                                <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-                                    <i class="fa fa-behance"></i>
-                                </a>
-                            </div>
-                        </div>
-            
-                    </div>
-            
-              </div>
-            </div>
-
-
-            <div
-            class="col-md-6 col-lg-5 col-xl-4 profile_details text-center p-5"
-             th:object="${CurrentUser}"
-           >
-
-              <p>
-                <img style="width: 80px; height: 100px;" class="rounded-circle" th:src="@{${CurrentUser.photosImagePath}}" />
-                </p>
-           </div>
+        </div>
          
             <p>
               <b>Location</b>
@@ -177,9 +118,10 @@
               <input class="btn w-100 btn-sm btn-primary" type="submit" value="Delete Account">
             </form>
           </div>
-          <a href="/order/orderdevice">Order now </a>
+          <a href="/order/orderdevice">Order now </a><br>
+          <a href="/order/seeOrderStatus">order Status</a>
         </div>
-
+        
       
       </div>
       

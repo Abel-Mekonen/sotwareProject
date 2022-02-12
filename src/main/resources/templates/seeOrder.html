@@ -28,6 +28,8 @@
           </form>
         </div>
       </header>
+
+
       <div class="col">
         <h4 class="text-center mt-4 mb-3">Requests sent</h4>
         <div th:if="${success}" class="alert alert-success">
@@ -37,9 +39,6 @@
           [[${error}]]
         </div>
 
-          <!-- 
-                Tabs
-                  -->
 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" align="center">
           <li class="nav-item" role="presentation">
@@ -63,6 +62,8 @@
 
         <div class="tab-content" id="pills-tabContent">
 
+
+<!-- allllllllllllllllllllllllllllllllllllll -->
           <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
                   <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-75 mb-4">
                     <h6 class="card-header">
@@ -80,21 +81,21 @@
                       <p><b>Ordered Date</b> <i th:text = "${rHelpers.getReq.getDevice()}"></i></p>
                       <div class="row">
 
-                        <div class="container">
+                        <!-- <div class="container">
                           <form method="post" th:object="${rating}" class="mt-5">
-                      
+                        
                               <input value="0" type="hidden" class="rating" data-glyphicon="0">
                       
-                              <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
+                              <button class="btn btn-primary" type="submit">Submit form</button>
                           </form>
-                      </div>
+                      </div> -->
                         
 
                         <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
                           <a th:case="DONE" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
 
                         </div>
-                        <div th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                        <div class="card-footer" th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
                           <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
                           <span>through : </span> [[${rHelpers.getPayment.getPaymentTypes}]]
                         </div>
@@ -107,6 +108,7 @@
               done
 
 
+<!-- done             hdddddddddddddddddddddddhhdhdhd -->
 
               <div class="tab-pane fade show active" id="pills-done" role="tabpanel" aria-labelledby="pills-done-tab">
                 <div  th:block th:each="rHelpers : ${done}"  class="card cards w-75 mb-4">
@@ -115,26 +117,33 @@
                     <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
                     <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
                   </h6>
-                  <div class="card-body">
-                    <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
-                    <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
-                    <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
-                    <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
-                    <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
-                    <div class="row">
-
-                      <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
-                        <a th:case="PENDING" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
-                      </div>
-                      <div th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
-                        <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
-                        <span>through : </span> [[${rHelpers.getPayment.getPaymentTypes}]]
-                      </div>
+                  <div class="card-body row">
+                    <div class="col">
+                      <img width="200" class="rounded-circle"  th:src = "@{${rHelpers.getTech.getUser().photosImagePath}}">
                   </div>
+                      <div class="col">
+                        <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+                        <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+                        <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
+                        <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
+                        <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
+                        <div class="row">
+
+                          <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                            <a th:case="PENDING" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
+                          </div>
+                          <div th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                            <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
+                            <span>through : </span> [[${rHelpers.getPayment.getPaymentTypes}]]
+                          </div>
+                      </div>
+                      </div>
+
+                     
                 </div>
               </div>
             </div>
-            
+<!--pending               d          ddddddd  -->
             <div class="tab-pane fade show active" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab">
               <div  th:block th:each="rHelpers : ${pending}"  class="card cards w-75 mb-4">
                 <h6 class="card-header">
@@ -159,7 +168,7 @@
                 </div>
           </div>
 
-
+<!-- accepted ffffffffffffffffffffff -->
           <div class="tab-pane fade show active" id="pills-accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
             <div  th:block th:each="rHelpers : ${accepted}"  class="card cards w-75 mb-4">
               <h6 class="card-header">
@@ -181,7 +190,7 @@
               </div>
         </div>
 
-
+<!-- declinne     bbbbbbbbbbbbbbbbb      bbbbbbbbbbbbbbb    -->
           <div class="tab-pane fade show active" id="pills-declined" role="tabpanel" aria-labelledby="pills-declined-tab">
             <div  th:block th:each="rHelpers : ${declined}"  class="card cards w-75 mb-4">
               <h6 class="card-header">
@@ -203,10 +212,15 @@
                 </div>
 
               </div>
-        </div>
+          </div>
 
               </div>
           </div>
+
+
+
+
+          <!-- first column ends jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
          </div>
       </div>
     </div>
