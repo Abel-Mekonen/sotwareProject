@@ -4,34 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tutee Sign Up</title>
+    <title>BTH | Sign Up</title>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <link th:href="@{/css/landing.css}" rel="stylesheet" />
     <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
   </head>
   <body>
     <main>
-      <header
-        class="row align-items-center justify-content-center shadow bg-body"
-      >
-        <div class="header_name col text-end fs-5">
-          <b><a href="/">the customer</a></b>
-        </div>
-        <div class="header_nav col-8 text-center"></div>
-        <div class="header_signup col text-center pe-5">
-          <a href="/">
-            <button class="btn btn-sm btn-primary">Sign In</button>
-          </a>
+      <header class="shadow signup-nav text-light">
+        <div class="d-flex bd-highlight mb-3 " >
+          <div class="p-2 bd-highlight mx-3"><h1>BTH</h1></div>
+          <div class="ms-auto d-flex p-2 bd-highlight ">
+            <div class=" bd-highlight"><a th:href="@{/}" class="btn btn-primary btn-sm">Home</a></div>
+            <div class=" bd-highlight"><a th:href="@{/login}" class="btn btn-primary btn-sm">Sign In</a></div>
+          </div>
         </div>
       </header>
       <div
         class="con landing_con row align-items-center justify-content-center"
       >
-        <section class="col-md-9 col-lg-6 col-xl-7 landing_img_con">
-          <img class="img-fluid" th:src="@{/images/landing.jpg}" alt="" />
-        </section>
+        
         <section
-          class="col landing_desc_con p-5 align-items-center justify-content-center"
+          class="col-lg-6 shadow my-4 landing_desc_con p-5 align-items-center justify-content-center"
         >
           <div>
             <form
@@ -41,7 +37,7 @@
               enctype="multipart/form-data"
               th:object="${registrationForm}"
             >
-              <h4 class="text-center mb-3">Signing up as a customer . . .</h4>
+              <h3 class="text-center text-dark mb-3">Sign Up As Customer</h3>
               <div class="row">
                 <div class="mb-2 col">
                   <label class="form-label" for="signup_first-name"
@@ -180,8 +176,8 @@
           </div>
         </section>
       </div>
-      <footer class="text-center p-2 align-items-center justify-content-center">
-        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      <footer class="text-center text-light p-2 align-items-center justify-content-center signup-nav">
+        &copy; 2022 <b>BTH</b> | All Rights Reserved.
       </footer>
     </main>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
