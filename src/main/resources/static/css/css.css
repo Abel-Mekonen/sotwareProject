@@ -17,7 +17,9 @@
   .colored {
     color: #084C61;
   }
-  
+  .signup-nav{
+    background-color: #084C61;
+  }
   .button {
     width: 9em;
     height: 2.2em;
