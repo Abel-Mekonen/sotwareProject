@@ -29,6 +29,7 @@ import software.project.repository.CustomerRepository;
 import software.project.repository.PaymentRepository;
 import software.project.repository.RequestRepo;
 import software.project.repository.TechnicianRepository;
+import software.project.repository.UserRepository;
 import software.project.service.OrderService;
 
 @Data
@@ -46,6 +47,8 @@ public class RequestController {
     @Autowired
     private final TechnicianRepository technicianRepository;
 
+    @Autowired
+    private final UserRepository userRepository;
     @Autowired
     private final PaymentRepository paymentrepo;
 
@@ -121,12 +124,16 @@ public class RequestController {
         long sendId = user.getCustomerProfile().getId();
         List<Request> requestLists = requestRepo.findByCustomerOrderBySentDateDesc(sendId);
 
+
         System.out.print(requestLists);
         List<RequestHelper> doneHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> pendingHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> declinedHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> acceptedHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> rHelpers = new ArrayList<RequestHelper>();
+
+
+       
 
         for (Request requests : requestLists) {
             RequestHelper ReqHelp = new RequestHelper();
@@ -140,6 +147,7 @@ public class RequestController {
             ;// .ifPresent(payment -> {
              // ReqHelp.setPayment(payment);
              // });
+            
 
             ReqHelp.setReq(requests);
             ReqHelp.setStatus(requests.getStatus());
@@ -154,6 +162,9 @@ public class RequestController {
             else if (requests.getStatus().name() == "ACCEPTED")
                 acceptedHelpers.add(ReqHelp);
         }
+
+        
+        mView.addObject("CurrentUser", user);
         mView.addObject("helpList", rHelpers);
         mView.addObject("done", doneHelpers);
         mView.addObject("pending", pendingHelpers);

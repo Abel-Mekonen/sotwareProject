@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-
+    <!-- <link th:href="@{/css/common.css}" rel="stylesheet" /> -->
+    <link th:href="@{/css/landing.css}" rel="stylesheet" />
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
    
 </head>
 <body>
-    <header class="header">
+    <header class="header row align-items-center ps-5 pe-5">
         <div class="logo_container">
             <!-- <img  class="logo__image" src="./images/sus.jpg" alt="t LOGO" width="80px"> -->
         <div>
@@ -20,92 +22,79 @@
             <!-- <h3 class="logo_description"> All in One<br> Electronics Maintenance </h3> -->
            </div> 
             
-        <div>
-            <input type="button" name="comment" value="Sign Up" class="button">
-        </div>  
-
+           <div class="col text-end">
+            <form
+              th:object="${TutorProfileModel}"
+              class="col"
+              th:action="@{/logout}"
+              method="post"
+            >
+              <div class="dropdown">
+                <a
+                  href="#"
+                  role="button"
+                  class="dropdown-toggle"
+                  id="signup_options"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    th:src="@{/images/default_avatar.png}"
+                    class="rounded-circle"
+                    data-bs-toggle="tooltip"
+                    title="Logged in as Admin"
+                    alt="Avatar"
+                    height="35"
+                  />
+                </a>
+                <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                  <li>
+                    <form action="/logout" method="post">
+                      <button type="submit" class="btn-sm btn w-100">
+                        Log out
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div> 
         </div>
-      
-        
-        <nav class="nav-bar">
-            <ul class="nav-bar__list">
-                <li class="nav-bar__item activated"><a class="nav-bar__link" href="home.html" ><i class="fas fa-home nav-bar__icon colored space" style="color: #084C61;"></i><p class="nav-bar__item--mobile  mobile--active colored">Home</p></a></li>
-                <li class="nav-bar__item"><a class="nav-bar__link" href=""><i class="fas fa-address-card nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">About</p></a></li>
-                <li class="nav-bar__item"><a class="nav-bar__link" href="html/service.html"><i class="fas fa-window-restore nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Technicians</p></a></li>
-                <li class="nav-bar__item"><a class="nav-bar__link"  href="html/work.html"><i class="fas fa-briefcase nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Fix Devices</p></a></li>
-                <li class="nav-bar__item"><a class="nav-bar__link" href="html/biography.html"><i class="far fa-address-book nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Orders</p></a></li>
-                <li class="nav-bar__item"><a class="nav-bar__link" href="html/contact.html"><i class="fas fa-phone-volume nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Contact Us</p></a></li>
-            </ul>
-        </nav> 
+
     </header>
 
     <main>
-
-        <div
-      th:block
-      th:each="technician: ${techs}"
-      class="cards w-75 mb-4 p-3 row align-items-center justify-content-center"
-    >
-    
-      <div class="col-md-9 col-lg-4 text-center">
-        <img
-          th:src="@{/images/default_avatar.png}"
-          class="rounded-circle img-fluid"
-          alt="Avatar"
-        />
-      </div>
-      <div class="col mw-25">
-        <h6 class="">
-          <b>
-            <span th:text="${technician.getUser().getFirstName()}"></span>
-            <span th:text="${technician.getUser().getLastName()}"></span>
-          </b>
-        </h6>
-        <p class="card-text" th:text="${technician.description}">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy
-          text ever since the 1500s.
-        </p>
-        <p>
-          <b>Location</b>
-          <i th:text="${technician.getUser().getLocation()}"
-            >Arada | A/A | Ethiopia</i
-          >
-        </p>
-        <div class="">
-          <p>
-            <b>device type</b>
-            <i th:text="${technician.device}">
-            </i>
-          </p>
-          
-        </div>
-        <div class="">
-            <p>
-              <b>approved </b>
-              <i th:text="${technician.approved}">
-              </i>
-            </p>
-            
-          </div>
-          
-        <div>
-          <h2>Star Rating</h2>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star-half-o checked"></span>
-          <span class="fa fa-star-o"></span>
-        </div>
+        <div  th:block th:each="technician: ${techs}"  class="card cards w-50 mb-4 justify-content-center" style="box-sizing: border-box; margin-top: 2em; margin-left: 5em;">
+          <div class="card-body justify-content-center" style="box-sizing: border-box; margin-top: 3em;">
+            <div class="row">
+              <div class="col">
+                <img width="300" class="rounded-circle" th:src = "@{${technician.getUser().photosImagePath}}">
+              </div>
+              <div class="col">
+                <p><b>FullName</b><span th:text = "${technician.getUser().getLastName()} + '  :   ' +  ${technician.getUser().getFirstName()}"></span>
+                <p><b>Location</b> <i th:text = "${technician.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+                <p><b>Email</b> <i  th:text = "${technician.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+                <p><b>Phone</b> <i th:text = "${technician.getUser().getPhone()}">0976348700</i></p>
+                <p><b>Device</b> <i th:text = "${technician.device}">0976348700</i></p>
+                <p><b>approved </b><i th:text="${technician.approved}"></i></p>
   
-        <a
-          th:href="@{/adminDashBoard/notApprovedTechnicians(id=${technician.id})}"
-          
-          class="btn btn-primary btn-sm"
-        > Approve
-        </a>
-      </div>
+              </div>
+            </div> 
+            <div class="row "style="max-width: 15em; float: right; margin: right 1em;">
+              <a
+              th:href="@{/adminDashBoard/notApprovedTechnicians(id=${technician.id})}"
+              class="btn btn-primary" style="max-width: 15em; float: right;"
+            > Approve
+
+            </a>
+
+            </div>
+            </div>
+
+          </div>
     </div>
+
+
 
     </main>
 
