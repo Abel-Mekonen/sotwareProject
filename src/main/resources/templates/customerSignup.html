@@ -46,8 +46,9 @@
                   <input
                     type="text"
                     th:field="*{firstName}"
-                    id="signup_firs-tname"
+                    id="signup_first-name"
                     class="form-control form-control-md"
+                    placeholder=""
                   />
                   <span class ="validationError" 
                         th:if = "${#fields.hasErrors('firstName')}"
@@ -95,7 +96,8 @@
                   id="phone"
                   oninput="checkPhone()"
                   class="form-control form-control-md"
-                  placeholder="0987654321"
+                  placeholder=""
+              
                 />
                 <div class="mb-2 text-danger" id="valid-phone-info"></div>
                 <span  class="validationError" 

@@ -71,6 +71,9 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer customerProfile;
 
+    // @OneToOne(cascade = CascadeType.REMOVE)
+    // private ConfrimEmail confrimEmail;
+
     @Transient
     public String getPhotosImagePath() {
         if (photos == null || id == null)
@@ -78,6 +81,7 @@ public class User implements UserDetails {
 
         return "/user-photos/" + id + "/" + photos;
     }
+    
 
     public static enum Role {
         CUSTOMER,
@@ -126,5 +130,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+  
+    
 
 }
