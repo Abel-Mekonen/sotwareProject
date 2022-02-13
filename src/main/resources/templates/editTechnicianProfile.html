@@ -6,58 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit profile</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/profile.css}" rel="stylesheet" />
-    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/landing.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- <link th:href="@{/css/common.css}" rel="stylesheet" /> -->
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
   </head>
   <body>
     <main>
-      <header class="row align-items-center ps-5 pe-5 shadow bg-body">
-        <div class="col fs-5">
-          <b><a href="/">THE tech</a></b>
-        </div>
-        <div class="col text-end">
-          <form th:object="${TutorProfileModel}" class="col" th:action="@{/logout}" method="post">
-            <div class="dropdown">
-              <a
-                href="#"
-                role="button"
-                class="dropdown-toggle"
-                id="signup_options"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  th:src="@{/images/default_avatar.png}"
-                  class="rounded-circle"
-                  data-bs-toggle="tooltip"
-                  title="Logged in as Tutor"
-                  alt="Avatar"
-                  height="35"
-                />
-              </a>
-              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
-                <li>
-                  <form action="/logout" method="post">
-                    <button type="submit" class="btn-sm btn w-100">
-                      Log out
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            </div>
-          </form>
+
+      <header style="width: 100%;" class="shadow signup-nav text-light">
+        <div class="d-flex bd-highlight mb-3 " >
+          <div class="p-2 bd-highlight mx-3"><h1>BTH</h1></div>
+          <div class="ms-auto d-flex p-2 bd-highlight ">
+            <div class=" bd-highlight"><a th:href="@{/}" class="btn btn-primary btn-sm">Home</a></div>
+            <div class=" bd-highlight"><a th:href="@{/displayTechnicianProfile}" class="btn btn-primary btn-sm">profile</a></div>
+          </div>
         </div>
       </header>
+      
       <div class="con edit-profile_con row justify-content-center">
-        <section class="in-account_con edit-profile_details pt-5">
-          <form
+        <section 
+        class="col-lg-6 shadow my-4 landing_desc_con p-5 align-items-center justify-content-center"
+        >
+        
+        <form
             th:action="@{/savetechnicianprofile}"
             th:object="${technicianProfile}"
             enctype="multipart/form-data"
             method="POST"
           > 
-            <h4 class="text-center mb-3">Edit Your Profile Here</h4>
-            <div class="row">
+          <h3 class="text-center text-dark mb-3">Edit profile here</h3>
+
+          <div class="row">
               <div class="mb-2 col">
                 <label class="form-label" for="signup_first-name"
                   >First Name</label
@@ -183,8 +163,8 @@
           </form>
         </section>
       </div>
-      <footer class="text-center p-2 align-items-center justify-content-center">
-        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      <footer class="text-center text-light p-2 align-items-center justify-content-center signup-nav">
+        &copy; 2022 <b>BTH</b> | All Rights Reserved.
       </footer>
     </main>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

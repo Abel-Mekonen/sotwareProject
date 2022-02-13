@@ -20,6 +20,7 @@ import lombok.Data;
 import software.project.mainClasses.RequestHelper;
 import software.project.mainClasses.SearchTechnician;
 import software.project.mainClasses.Technician;
+import software.project.mainClasses.Customer;
 import software.project.mainClasses.Payment;
 import software.project.mainClasses.Request;
 // import software.project.mainClasses.SearchTutor;
@@ -79,9 +80,13 @@ public class RequestController {
             @RequestParam(required = false, name = "device", defaultValue = "") String device,
             @RequestParam(required = false, name = "search", defaultValue = "") String search,
             Optional<Boolean> listOnly) {
+        
+        Customer cProfile = user.getCustomerProfile();
+
 
         ModelAndView model = new ModelAndView("order");
         Device dev = Device.LAPTOP;
+        
         for (Device devi : Device.values()) {
             if (devi.name().compareTo(device) == 0) {
                 dev = devi;
@@ -99,6 +104,9 @@ public class RequestController {
         model.addObject("techs", techs);
         model.addObject("Query", device);
         model.addObject("tech", true);
+        model.addObject("CustomerProfile", cProfile);
+        model.addObject("CurrentUser", user);
+
         listOnly.ifPresent(
                 lo -> {
                     model.setViewName("techniciansList");

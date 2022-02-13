@@ -62,6 +62,8 @@ public class UserHelper {
 
     private Role role;
 
+    // private User user;
+
     
     public User toUser(PasswordEncoder encoder){
         User user = new User();

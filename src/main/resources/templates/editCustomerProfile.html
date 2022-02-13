@@ -6,156 +6,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit profile</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/profile.css}" rel="stylesheet" />
-    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/landing.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- <link th:href="@{/css/common.css}" rel="stylesheet" /> -->
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+
   </head>
   <body>
     <main>
-      <header class="row align-items-center ps-5 pe-5 shadow bg-body">
-        <div class="col fs-5">
-          <b><a href="/">THE tech</a></b>
-        </div>
-        <div class="col text-end">
-          <form th:object="${TutorProfileModel}" class="col" th:action="@{/logout}" method="post">
-            <div class="dropdown">
-              <a
-                href="#"
-                role="button"
-                class="dropdown-toggle"
-                id="signup_options"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  th:src="@{/images/default_avatar.png}"
-                  class="rounded-circle"
-                  data-bs-toggle="tooltip"
-                  title="Logged in as Tutor"
-                  alt="Avatar"
-                  height="35"
-                />
-              </a>
-              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
-                <li>
-                  <form action="/logout" method="post">
-                    <button type="submit" class="btn-sm btn w-100">
-                      Log out
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            </div>
-          </form>
+      <header class="shadow signup-nav text-light">
+        <div class="d-flex bd-highlight mb-3 " >
+          <div class="p-2 bd-highlight mx-3"><h1>BTH</h1></div>
+          <div class="ms-auto d-flex p-2 bd-highlight ">
+            <div class=" bd-highlight"><a th:href="@{/}" class="btn btn-primary btn-sm">Home</a></div>
+            <div class=" bd-highlight"><a th:href="@{/displayCustomerProfile}" class="btn btn-primary btn-sm">profile</a></div>
+          </div>
         </div>
       </header>
+
+
       <div class="con edit-profile_con row justify-content-center">
-        <section class="in-account_con edit-profile_details pt-5">
+        <section 
+        class="col-lg-6 shadow my-4 landing_desc_con p-5 align-items-center justify-content-center"
+        >
           <form
             th:action="@{/saveprofile}"
             th:object="${customerProfile}"
             enctype="multipart/form-data"
             method="POST"
           > 
-            <h4 class="text-center mb-3">Edit Your Profile Here</h4>
-            <div class="row">
-              <div class="mb-2 col">
-                <label class="form-label" for="signup_first-name"
-                  >First Name</label
-                >
-                <input
-                  type="text"
-                  th:field="*{firstName}"
-                  id="signup_firs-tname"
-                  class="form-control form-control-md"
-                />
-              </div>
-              <div class="mb-2 col">
-                <label class="form-label" for="signup_last-name"
-                  >Last Name</label
-                >
-                <input
-                  type="text"
-                  th:field="*{lastName}"
-                  id="signup_last-name"
-                  class="form-control form-control-md"
-                />
-              </div>
-            </div>
-           
-            <div class="mb-2">
-              <label class="form-label" for="signup_email">Email</label>
-              <input
-                type="email"
-                th:field="*{email}"
-                id="signup_email"
-                class="form-control form-control-md"
-              />
-            </div>
-            <div class="mb-2">
-              <label class="form-label" for="phone">Phone</label>
-              <input
-                type="tel"
-                th:field="*{phone}"
-                id="phone"
-                  oninput="checkPhone()"
-                  class="form-control form-control-md"
-                  placeholder="0987654321"
-                />
-                <div class="mb-2 text-danger" id="valid-phone-info"></div>
-            </div>
-
-            <div>    
-              <label>Photos:</label>
-              <input type="file" name="image" accept="image/png, image/jpeg" />       
-            </div>
-
-            <div class="mb-2">
-              <label class="form-label" for="Location">Location</label>
-              <select name="location" class="form-select">
-                <option
-                  th:each="location:${T(software.project.mainClasses.User.Location).values()}"
-                  th:value="${location}"
-                  th:text="${location}"
-                ></option>
-              </select>
-            </div>
-   
-  
+            
+          <h3 class="text-center text-dark mb-3">Edit profile here</h3>
+          <div class="row">
             <div class="mb-2 col">
-              <label class="form-label" for="signup_username">Username</label>
+              <label class="form-label" for="signup_first-name"
+                >First Name</label
+              >
               <input
                 type="text"
-                th:field="*{username}"
-                id="signup_username"
+                th:field="*{firstName}"
+                id="signup_firs-tname"
+                class="form-control form-control-md"
+              />
+              <span class ="validationError" 
+                    th:if = "${#fields.hasErrors('firstName')}"
+                    th:errors ="*{firstName}"> 
+                    first Name errors
+              </span>
+            </div>
+            <div class="mb-2 col">
+              <label class="form-label" for="signup_last-name"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                th:field="*{lastName}"
+                id="signup_last-name"
+                class="form-control form-control-md"
+              />
+              <span  class="validationError" 
+              th:if = "${#fields.hasErrors('lastName')}"
+              th:errors ="*{lastName}"> 
+              Last Name errors
+              </span>
+            </div>
+          </div>
+         
+          <div class="mb-2">
+            <label class="form-label" for="signup_email">Email</label>
+            <input
+              type="email"
+              th:field="*{email}"
+              id="signup_email"
+              class="form-control form-control-md"
+            />
+            <span  class="validationError" 
+            th:if = "${#fields.hasErrors('email')}"
+            th:errors ="*{email}"> 
+            email errors
+            </span>
+          </div>
+          <div class="mb-2">
+            <label class="form-label" for="first-name">Phone</label>
+            <input
+              type="tel"
+              th:field="*{phone}"
+              id="phone"
+              oninput="checkPhone()"
+              class="form-control form-control-md"
+              placeholder="0987654321"
+            />
+            <div class="mb-2 text-danger" id="valid-phone-info"></div>
+            <span  class="validationError" 
+            th:if = "${#fields.hasErrors('phone')}"
+            th:errors ="*{phone}"> 
+            phone number errors
+      </span>
+          </div>
+          <div>
+ 
+            <label>Photos: </label>
+            <input type="file"
+             name="image" accept="image/png, image/jpeg"
+             >
+
+            <!-- th:field="*{phone}" -->
+           
+            </div>
+          <div class="mb-2">
+            <label class="form-label" for="location">Location</label>
+            <select class="form-select" name="location" id="location">
+              <option
+                th:each="location:${T(software.project.mainClasses.User.Location).values()}"
+                th:value="${location}"
+                th:text="${location}"
+              ></option>
+            </select>
+          </div>
+          <div class="mb-2 col">
+            <label class="form-label" for="signup_username">Username</label>
+            <input
+              type="text"
+              th:field="*{username}"
+              id="signup_username"
+              class="form-control form-control-md"
+            />
+            <span  class="validationError" 
+            th:if = "${#fields.hasErrors('username')}"
+            th:errors ="*{username}"> 
+            username errors
+            </span>
+          </div>
+          <div class="row">
+            <div class="mb-2 col">
+              <label class="form-label" for="password">Password</label>
+              <input
+                type="password"
+                th:field="*{password}"
+                id="password"
+                oninput="checkPasswordMatch()"
+                class="form-control form-control-md"
+              />
+              <span  class="validationError" 
+              th:if = "${#fields.hasErrors('password')}"
+              th:errors ="*{password}"> 
+              first Name errors
+        </span>
+            </div>
+            <div class="mb-2 col">
+              <label class="form-label" for="confirm-password"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                id="confirm-password"
+                oninput="checkPasswordMatch()"
                 class="form-control form-control-md"
               />
             </div>
-            <div class="row">
-              <div class="mb-2 col">
-                <label class="form-label" for="password">Password</label>
-                <input
-                  type="password"
-                  th:field="*{password}"
-                  id="password"
-                  oninput="checkPasswordMatch()"
-                  class="form-control form-control-md"
-                />
-              </div>
-              <div class="mb-2 col">
-                <label class="form-label" for="confirm-password"
-                  >Confirm Password</label
-                >
-                <input
-                  type="password"
-                  id="confirm-password"
-                  oninput="checkPasswordMatch()"
-                  class="form-control form-control-md"
-                />
-              </div>
-            </div>
-            <span class="text-danger" id="password-match-info"></span>
-            <div  class="row p-3 pb-0">
-              <button
+          </div>
+          <div class="mb-2 text-danger" id="password-match-info"></div>
+          <div  class="row p-3 pb-0">
+            
+            
+          <button
                 type="submit"
                 id="signup-submit"
                 class="btn btn-primary"
@@ -166,8 +180,8 @@
           </form>
         </section>
       </div>
-      <footer class="text-center p-2 align-items-center justify-content-center">
-        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
+      <footer class="text-center text-light p-2 align-items-center justify-content-center signup-nav">
+        &copy; 2022 <b>BTH</b> | All Rights Reserved.
       </footer>
     </main>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

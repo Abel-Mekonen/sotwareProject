@@ -6,36 +6,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/css/profile.css}" rel="stylesheet" />
-    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+
 </head>
-<main style="margin-top: max(5vh, 50px); margin-bottom: max(5vh, 20px) " class="Contact mx-auto w-50">
-    <div th:if="${error}" class = "alert alert-danger text-center">
-        [[${error}]]
-    </div>
-    <div th:if="${message}" class = "alert alert-success text-center">
-        [[${message}]]
-    </div>
-    <div th:if="${success}" class = "alert alert-success text-center">
-        [[${success}]]
-    </div>
-    <h1><strong style="color:rgb(17, 116, 103);">process payment</strong></h1>
-    <form th:method ="post" th:action="@{/payment/{id}(id = ${id})}"  th:object="${payment}">
-        <input type="text" hidden th:field="*{paymentId}">
-        payment price
-        <input type="number" class="form-control" th:field="*{price}">
-        <input name="paymentStatus" hidden id="paymentStatus" value="1"/>
-        <br> Payment Type
-        <select name="PaymentTypes" class="form-control" id="PaymentTypes">
-            <option value="WIRE" >Wire transfer</option>
-            <option value="MOBILE_BANKING">Mobile Banking</option>
-        </select>
-        <br> Payment Information
-        <textarea type="text" th:field="*{accountInformation}" class="form-control" rows = "8"> </textarea>
-        <!-- <input type="date" hidden th:field="*{sentDate}"> -->
-        <button class="w-50 btn btn-md btn-primary my-2" type="submit">Pay</button>
-    </form>
-</main>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/common.js}"></script>
+<body>
+    <header class="header">
+        <div class="logo_container">
+            <!-- <img  class="logo__image" src="./images/sus.jpg" alt="t LOGO" width="80px"> -->
+        <div>
+            <h2 class="logo_description">BTH</h2>
+            <!-- <h3 class="logo_description"> All in One<br> Electronics Maintenance </h3> -->
+           </div> 
+            
+           <!-- <div class="col text-end">
+            <form th:object="${CustomerProfile}" class="col" action="/logout" method="post">
+              <div class="dropdown">
+                <a
+                  href="#"
+                  role="button"
+                  class="dropdown-toggle"
+                  id="signup_options"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    th:src="@{${CurrentUser.getPhotosImagePath}}" 
+                    class="rounded-circle"
+                    data-bs-toggle="tooltip"
+                    th:title="|Logged in as *{user.firstName} *{user.lastName} (*{user.role})|"
+                    alt="Avatar"
+                    height="35"
+                  />
+                </a>
+                <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                  <li>
+                    <form th:action="@{/logout}" method="post">
+                      <button type="submit" class="btn-sm btn w-100">
+                        Log out
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </form>  
+          </div> -->
+      
+        </div>
+      
+        
+        <nav class="nav-bar">
+            <ul class="nav-bar__list">
+                <li class="nav-bar__item activated"><a class="nav-bar__link" href="home.html" ><i class="fas fa-home nav-bar__icon colored space" style="color: #084C61;"></i><p class="nav-bar__item--mobile  mobile--active colored">Home</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href=""><i class="fas fa-address-card nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">About</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/service.html"><i class="fas fa-window-restore nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Technicians</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link"  href="html/work.html"><i class="fas fa-briefcase nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Fix Devices</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/biography.html"><i class="far fa-address-book nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Orders</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/contact.html"><i class="fas fa-phone-volume nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Contact Us</p></a></li>
+            </ul>
+        </nav> 
+      </header>
+    
+    
+    
+    
+    
+    
+    
+    
+    <main style="margin-top: max(5vh, 50px); margin-bottom: max(5vh, 20px) " class="Contact mx-auto w-50">
+        <div th:if="${error}" class = "alert alert-danger text-center">
+            [[${error}]]
+        </div>
+        <div th:if="${message}" class = "alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div th:if="${success}" class = "alert alert-success text-center">
+            [[${success}]]
+        </div>
+        <h1><strong style="color:rgb(17, 116, 103);">process payment</strong></h1>
+        <form th:method ="post" th:action="@{/payment/{id}(id = ${id})}"  th:object="${payment}">
+            <input type="text" hidden th:field="*{paymentId}">
+            payment price
+            <input type="number" class="form-control" th:field="*{price}">
+            <input name="paymentStatus" hidden id="paymentStatus" value="1"/>
+            <br> Payment Type
+            <select name="PaymentTypes" class="form-control" id="PaymentTypes">
+                <option value="WIRE" >Wire transfer</option>
+                <option value="MOBILE_BANKING">Mobile Banking</option>
+            </select>
+            <br> Payment Information
+            <textarea type="text" th:field="*{accountInformation}" class="form-control" rows = "8"> </textarea>
+            <!-- <input type="date" hidden th:field="*{sentDate}"> -->
+            <button class="w-50 btn btn-md btn-primary my-2" type="submit">Pay</button>
+        </form>
+    </main>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/common.js}"></script>
+
+
+        <div th:insert="fragments/footer :: footer"></div>
+
 </body>
+
 </html>
