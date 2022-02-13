@@ -5,32 +5,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/profile.css}" rel="stylesheet" />
-    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <!-- <link th:href="@{/css/profile.css}" rel="stylesheet" /> -->
+    <!-- <link th:href="@{/css/common.css}" rel="stylesheet" /> -->
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
   </head>
   <body>
     <main>
-      <header class="row align-items-center ps-5 pe-5 shadow bg-body">
-        <div class="col fs-5">
-          <b><a href="/">THE TUTOR</a></b>
+
+
+
+      <header class="header">
+        <div class="logo_container">
+            <!-- <img  class="logo__image" src="./images/sus.jpg" alt="t LOGO" width="80px"> -->
+        <div>
+            <h2 class="logo_description">BTH</h2>
+            <!-- <h3 class="logo_description"> All in One<br> Electronics Maintenance </h3> -->
+           </div> 
+            
+           <div class="col text-end">
+            <form th:object="${CurrentUser}" class="col" action="/logout" method="post">
+              <div class="dropdown">
+                <a
+                  href="#"
+                  role="button"
+                  class="dropdown-toggle"
+                  id="signup_options"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    th:src="@{${CurrentUser.getPhotosImagePath}}" 
+                    class="rounded-circle"
+                    data-bs-toggle="tooltip"
+                    th:title="|Logged in as *{firstName} *{lastName} (*{role})|"
+                    alt="Avatar"
+                    height="35"
+                  />
+                </a>
+                <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                  <li>
+                    <form th:action="@{/logout}" method="post">
+                      <button type="submit" class="btn-sm btn w-100">
+                        Log out
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </form>  
+          </div>
+      
         </div>
-            </a>
-              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
-                <li>
-                  <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn-sm btn w-100">
-                      Log out
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            </div>
-          </form>
-        </div>
+      
+        
+        <nav class="nav-bar">
+            <ul class="nav-bar__list">
+                <li class="nav-bar__item activated"><a class="nav-bar__link" href="home.html" ><i class="fas fa-home nav-bar__icon colored space" style="color: #084C61;"></i><p class="nav-bar__item--mobile  mobile--active colored">Home</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href=""><i class="fas fa-address-card nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">About</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/service.html"><i class="fas fa-window-restore nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Technicians</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link"  href="html/work.html"><i class="fas fa-briefcase nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Fix Devices</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/biography.html"><i class="far fa-address-book nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Orders</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/contact.html"><i class="fas fa-phone-volume nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Contact Us</p></a></li>
+            </ul>
+        </nav> 
       </header>
 
-
-      <div class="col">
+      <div class="col space-down" style="margin-top: 2em; margin-left: 5em;">
         <h4 class="text-center mt-4 mb-3">Requests sent</h4>
         <div th:if="${success}" class="alert alert-success">
           [[${success}]]
@@ -65,20 +110,40 @@
 
 <!-- allllllllllllllllllllllllllllllllllllll -->
           <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
-                  <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-75 mb-4">
+                  <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-50 mb-4">
                     <h6 class="card-header">
-                      <b>From</b>
-                      <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
-                      <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
+                      <div class="row">
+
+                        <div class="col">
+                          <b>From</b>
+                          <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
+                          <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
+                        </div>
+  
+                        <div class="col">
+                          <img width="40" class="rounded-circle" style="float: right;"  th:src = "@{${rHelpers.getTech.getUser().photosImagePath}}">
+                        </div>
+                      </div>
                     </h6>
+  
                     <div class="card-body">
-                      <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
-                      <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
-                      <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
-                      <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
-                      <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
-                      <p><b>Ordered Date</b> <i th:text = "${rHelpers.getReq.getSentDate()}"></i></p>
-                      <p><b>Ordered Date</b> <i th:text = "${rHelpers.getReq.getDevice()}"></i></p>
+                      <div class="row">
+                        <div class="col">
+                          <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+                          <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+                          <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
+          
+                        </div>
+        
+                        <div class="col">
+                          <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
+                          <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
+                          <p><b>Ordered Date</b> <i th:text = "${rHelpers.getReq.getSentDate()}"></i></p>
+                        </div>
+                       
+      
+                      </div> 
+                      
                       <div class="row">
 
                         <!-- <div class="container">
@@ -93,7 +158,6 @@
 
                         <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
                           <a th:case="DONE" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
-
                         </div>
                         <div class="card-footer" th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
                           <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
@@ -111,113 +175,249 @@
 <!-- done             hdddddddddddddddddddddddhhdhdhd -->
 
               <div class="tab-pane fade show active" id="pills-done" role="tabpanel" aria-labelledby="pills-done-tab">
-                <div  th:block th:each="rHelpers : ${done}"  class="card cards w-75 mb-4">
+                <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-50 mb-4">
                   <h6 class="card-header">
-                    <b>From</b>
-                    <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
-                    <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
+                    <div class="row">
+
+                      <div class="col">
+                        <b>From</b>
+                        <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
+                        <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
+                      </div>
+
+                      <div class="col">
+                        <img width="40" class="rounded-circle" style="float: right;"  th:src = "@{${rHelpers.getTech.getUser().photosImagePath}}">
+                      </div>
+                    </div>
                   </h6>
-                  <div class="card-body row">
-                    <div class="col">
-                      <img width="200" class="rounded-circle"  th:src = "@{${rHelpers.getTech.getUser().photosImagePath}}">
-                  </div>
+
+                  <div class="card-body">
+                    <div class="row">
                       <div class="col">
                         <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
                         <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
                         <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
+        
+                      </div>
+      
+                      <div class="col">
                         <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
                         <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
-                        <div class="row">
-
-                          <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
-                            <a th:case="PENDING" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
-                          </div>
-                          <div th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
-                            <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
-                            <span>through : </span> [[${rHelpers.getPayment.getPaymentTypes}]]
-                          </div>
+                        <p><b>Ordered Date</b> <i th:text = "${rHelpers.getReq.getSentDate()}"></i></p>
                       </div>
-                      </div>
-
                      
-                </div>
-              </div>
+    
+                    </div> 
+                    
+                    <div class="row">
+
+                      <!-- <div class="container">
+                        <form method="post" th:object="${rating}" class="mt-5">
+                      
+                            <input value="0" type="hidden" class="rating" data-glyphicon="0">
+                    
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+                    </div> -->
+                      
+
+                      <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                        <a th:case="DONE" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
+                      </div>
+                      <div class="card-footer" th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                        <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
+                        <span>through : </span> [[${rHelpers.getPayment.getPaymentTypes}]]
+                      </div>
+                  </div>
+
+                    </div>
+
+                  </div>
             </div>
-<!--pending               d          ddddddd  -->
+            
+            <!--pending               d          ddddddd  -->
             <div class="tab-pane fade show active" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab">
-              <div  th:block th:each="rHelpers : ${pending}"  class="card cards w-75 mb-4">
+              <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-50 mb-4">
                 <h6 class="card-header">
-                  <b>From</b>
-                  <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
-                  <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
-                </h6>
-                <div class="card-body">
-                  <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
-                  <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
-                  <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
-                  <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
-                  <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
                   <div class="row">
 
-                    <form th:action="@{/delete-request/{id}(id = ${rHelpers.getReq().getId()})}" method="post">
-                      <button type="submit" class="alert alert-danger">delete</button>
-                    </form>
+                    <div class="col">
+                      <b>From</b>
+                      <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
+                      <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
+                    </div>
+
+                    <div class="col">
+                      <img width="40" class="rounded-circle" style="float: right;"  th:src = "@{${rHelpers.getTech.getUser().photosImagePath}}">
+                    </div>
+                  </div>
+                </h6>
+
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+                      <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+                      <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
+      
+                    </div>
+    
+                    <div class="col">
+                      <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
+                      <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
+                      <p><b>Ordered Date</b> <i th:text = "${rHelpers.getReq.getSentDate()}"></i></p>
+                    </div>
+                   
+  
+                  </div> 
+                  
+                  <div class="row">
+
+                    <!-- <div class="container">
+                      <form method="post" th:object="${rating}" class="mt-5">
+                    
+                          <input value="0" type="hidden" class="rating" data-glyphicon="0">
+                  
+                          <button class="btn btn-primary" type="submit">Submit form</button>
+                      </form>
+                  </div> -->
+                    
+
+                    <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                      <a th:case="DONE" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
+                    </div>
+                    <div class="card-footer" th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                      <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
+                      <span>through : </span> [[${rHelpers.getPayment.getPaymentTypes}]]
+                    </div>
                 </div>
+
                   </div>
 
                 </div>
           </div>
-
 <!-- accepted ffffffffffffffffffffff -->
           <div class="tab-pane fade show active" id="pills-accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
-            <div  th:block th:each="rHelpers : ${accepted}"  class="card cards w-75 mb-4">
+            <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-50 mb-4">
               <h6 class="card-header">
-                <b>From</b>
-                <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
-                <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
-              </h6>
-              <div class="card-body">
-                <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
-                <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
-                <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
-                <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
-                <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
                 <div class="row">
+
+                  <div class="col">
+                    <b>From</b>
+                    <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
+                    <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
+                  </div>
+
+                  <div class="col">
+                    <img width="40" class="rounded-circle" style="float: right;"  th:src = "@{${rHelpers.getTech.getUser().photosImagePath}}">
+                  </div>
+                </div>
+              </h6>
+
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+                    <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+                    <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
+    
+                  </div>
+  
+                  <div class="col">
+                    <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
+                    <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
+                    <p><b>Ordered Date</b> <i th:text = "${rHelpers.getReq.getSentDate()}"></i></p>
+                  </div>
+                 
+
+                </div> 
+                
+                <div class="row">
+
+                  <!-- <div class="container">
+                    <form method="post" th:object="${rating}" class="mt-5">
+                  
+                        <input value="0" type="hidden" class="rating" data-glyphicon="0">
+                
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                    </form>
+                </div> -->
+                  
+
+                  <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                    <a th:case="DONE" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
+                  </div>
+                  <div class="card-footer" th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                    <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
+                    <span>through : </span> [[${rHelpers.getPayment.getPaymentTypes}]]
+                  </div>
               </div>
 
                 </div>
 
               </div>
         </div>
-
 <!-- declinne     bbbbbbbbbbbbbbbbb      bbbbbbbbbbbbbbb    -->
           <div class="tab-pane fade show active" id="pills-declined" role="tabpanel" aria-labelledby="pills-declined-tab">
-            <div  th:block th:each="rHelpers : ${declined}"  class="card cards w-75 mb-4">
-              <h6 class="card-header">
-                <b>From</b>
-                <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
-                <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
-              </h6>
-              <div class="card-body">
-                <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
-                <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
-                <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
-                <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
-                <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
-                <!-- <p><b>Ordered Date</b> <i th:text = "${rHelpers.getRequests.getSentDate()}"></i></p> -->
-                <div class="row">
+                        <div  th:block th:each="rHelpers : ${helpList}"  class="card cards w-50 mb-4">
+                    <h6 class="card-header">
+                      <div class="row">
 
+                        <div class="col">
+                          <b>From</b>
+                          <span th:text = "${rHelpersStat.index} + ': ' +  ${rHelpers.getTech.getUser().getFirstName()}"></span>
+                          <span th:text = "${rHelpers.getTech.getUser().getLastName()}"></span>
+                        </div>
+  
+                        <div class="col">
+                          <img width="40" class="rounded-circle" style="float: right;"  th:src = "@{${rHelpers.getTech.getUser().photosImagePath}}">
+                        </div>
+                      </div>
+                    </h6>
+  
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <p><b>Location</b> <i th:text = "${rHelpers.getTech.getUser().getLocation()}">Arada | A/A | Ethiopia</i></p>
+                          <p><b>Email</b> <i  th:text = "${rHelpers.getTech.getUser().getEmail()}">Henson.gray@gmail.com</i></p>
+                          <p><b>Phone</b> <i th:text = "${rHelpers.getTech.getUser().getPhone()}">0976348700</i></p>
+          
+                        </div>
+        
+                        <div class="col">
+                          <p><b>Device</b> <i th:text = "${rHelpers.getTech.getDevice()}">0976348700</i></p>
+                          <p><b>status</b> <i th:text = "${rHelpers.getStatus()}"></i></p>
+                          <p><b>Ordered Date</b> <i th:text = "${rHelpers.getReq.getSentDate()}"></i></p>
+                        </div>
+                       
+      
+                      </div> 
+                      
+                      <div class="row">
+
+                        <!-- <div class="container">
+                          <form method="post" th:object="${rating}" class="mt-5">
+                        
+                              <input value="0" type="hidden" class="rating" data-glyphicon="0">
+                      
+                              <button class="btn btn-primary" type="submit">Submit form</button>
+                          </form>
+                      </div> -->
+                        
+
+                        <div th:unless = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                          <a th:case="DONE" th:href="@{/makepayment/{id}(id = ${rHelpers.getReq().getId()})}" class="alert alert-success" role="button">payment</a>
+                        </div>
+                        <div class="card-footer" th:if = "${rHelpers.getPayment}" th:switch="${rHelpers.getStatus().name()}">
+                          <span>You have paid : </span> [[${rHelpers.getPayment.getPrice}]]
+                          <span>through : </span> [[${rHelpers.getPayment.getPaymentTypes}]]
+                        </div>
+                    </div>
+
+                      </div>
+
+                    </div>
               </div>
-
-                </div>
-
-              </div>
-          </div>
-
-              </div>
-          </div>
-
-
 
 
           <!-- first column ends jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
@@ -226,20 +426,40 @@
     </div>
 
 
-    <footer class="text-center p-2 align-items-center justify-content-center fixed-bottom">
-        <div class="footer_nav row">
-          <a href="/">Feed</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="/">Saved</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="/">Other</a>
-          <br />
-          <br />
-        </div>
-        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
-      </footer>
-    </main>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/common.js}"></script>
+      
+    <footer class="footer">
+      <div class="footer__main">
+          <div class="address">
+              <ul class="address__list">
+                  <li class="address__item"><a class="address__link" href="#" target="_blank"><i class="fas fa-map-marker-alt address__icon"></i>Contact</a></li>
+                  <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-envelope address__icon"></i>tech_cust@gmail.com</a></li>
+                  <li class="address__item"><a class="address__link" href="#" target="_blank"><i class="fas fa-map-marker-alt address__icon"></i>Addis Ababa,Ethiopia</a></li>
+              </ul>
+          </div>
+          <div class="address">
+              <ul class="address__list">
+                  <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-mobile-alt address__icon"></i>+251985258911</a></li>
+                  <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fas fa-envelope address__icon"></i>P.o Box</a></li>
+                  <li class="address__item"><a class="address__link" href="#"  target="_blank"><i class="fab fa-linkedin-in address__icon"></i>Zip Code</a></li>
+              </ul>
+          </div>
+          <div class="contact">
+              <h2>CONTACT</h2><br>
+              <h3>Get in Touch</h3>
+              <ul class="contact__list">
+                  <li class="contact__item"><a class="contact__link" href="#" aria-label="Email link" target="_blank" ><i class="far fa-envelope contact__icon"></i></a></li>
+                  <li class="contact__item"><a class="contact__link" href="#" aria-label="github link"  target="_blank" ><i class="fab fa-github contact__icon"></i></a> </li>
+                  <li class="contact__item"><a class="contact__link" href="#"  aria-label="linkedin link" target="_blank" ><i class="fab fa-linkedin-in contact__icon"></i></a></li>
+                  <li class="contact__item"><a class="contact__link" href="#"  aria-label="Telegram link" target="_blank" ><i class="fab fa-telegram-plane contact__icon"></i></a></li>
+              </ul>
+          </div>
+          
+      </div>
+      <p class="footer__paragraph">Copyright &copy;2021 All rights reserved | developed by Jebessa Dejene</p>
+    </footer>
+  </main>
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/js/common.js}"></script>
   </body>
 </html>
+

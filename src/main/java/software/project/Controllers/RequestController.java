@@ -20,6 +20,7 @@ import lombok.Data;
 import software.project.mainClasses.RequestHelper;
 import software.project.mainClasses.SearchTechnician;
 import software.project.mainClasses.Technician;
+import software.project.mainClasses.Customer;
 import software.project.mainClasses.Payment;
 import software.project.mainClasses.Request;
 // import software.project.mainClasses.SearchTutor;
@@ -29,6 +30,7 @@ import software.project.repository.CustomerRepository;
 import software.project.repository.PaymentRepository;
 import software.project.repository.RequestRepo;
 import software.project.repository.TechnicianRepository;
+import software.project.repository.UserRepository;
 import software.project.service.OrderService;
 
 @Data
@@ -46,6 +48,8 @@ public class RequestController {
     @Autowired
     private final TechnicianRepository technicianRepository;
 
+    @Autowired
+    private final UserRepository userRepository;
     @Autowired
     private final PaymentRepository paymentrepo;
 
@@ -76,9 +80,13 @@ public class RequestController {
             @RequestParam(required = false, name = "device", defaultValue = "") String device,
             @RequestParam(required = false, name = "search", defaultValue = "") String search,
             Optional<Boolean> listOnly) {
+        
+        Customer cProfile = user.getCustomerProfile();
+
 
         ModelAndView model = new ModelAndView("order");
         Device dev = Device.LAPTOP;
+        
         for (Device devi : Device.values()) {
             if (devi.name().compareTo(device) == 0) {
                 dev = devi;
@@ -96,6 +104,9 @@ public class RequestController {
         model.addObject("techs", techs);
         model.addObject("Query", device);
         model.addObject("tech", true);
+        model.addObject("CustomerProfile", cProfile);
+        model.addObject("CurrentUser", user);
+
         listOnly.ifPresent(
                 lo -> {
                     model.setViewName("techniciansList");
@@ -121,12 +132,16 @@ public class RequestController {
         long sendId = user.getCustomerProfile().getId();
         List<Request> requestLists = requestRepo.findByCustomerOrderBySentDateDesc(sendId);
 
+
         System.out.print(requestLists);
         List<RequestHelper> doneHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> pendingHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> declinedHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> acceptedHelpers = new ArrayList<RequestHelper>();
         List<RequestHelper> rHelpers = new ArrayList<RequestHelper>();
+
+
+       
 
         for (Request requests : requestLists) {
             RequestHelper ReqHelp = new RequestHelper();
@@ -140,6 +155,7 @@ public class RequestController {
             ;// .ifPresent(payment -> {
              // ReqHelp.setPayment(payment);
              // });
+            
 
             ReqHelp.setReq(requests);
             ReqHelp.setStatus(requests.getStatus());
@@ -154,6 +170,9 @@ public class RequestController {
             else if (requests.getStatus().name() == "ACCEPTED")
                 acceptedHelpers.add(ReqHelp);
         }
+
+        
+        mView.addObject("CurrentUser", user);
         mView.addObject("helpList", rHelpers);
         mView.addObject("done", doneHelpers);
         mView.addObject("pending", pendingHelpers);

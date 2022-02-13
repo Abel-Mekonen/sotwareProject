@@ -6,62 +6,87 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Success</title>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/css/profile.css}" rel="stylesheet" />
-    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" /> -->
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"> -->
+    <link th:href="@{/css/profile.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
   </head>
   <body>
     <main>
-      <header class="row align-items-center ps-5 pe-5 shadow bg-body">
-        <div class="col fs-5">
-          <b><a href="/displayCustomerProfile">THE Cust</a></b>
-        </div>
-        <div class="col text-end">
-          <form th:object="${TutorProfileModel}" class="col" th:action="@{/logout}" method="post">
-            <div class="dropdown">
-              <a
-                href="#"
-                role="button"
-                class="dropdown-toggle"
-                id="signup_options"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                
-                <img
-                  th:src="@{/images/default_avatar.png}"
-                  class="rounded-circle"
-                  data-bs-toggle="tooltip"
-                  title="Logged in as Tutee"
-                  alt="Avatar"
-                  height="35"
-                />
-              </a>
-              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
-                <li>
-                  <form action="/logout" method="post">
-                    <button type="submit" class="btn-sm btn w-100">
-                      Log out
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            </div>
-          </form>
-        </div>
+      <header class="header">
+        <!-- <div class="logo_container"> -->
+            <!-- <img  class="logo__image" src="./images/sus.jpg" alt="t LOGO" width="80px"> -->
+        <div>
+            <h2 class="logo_description">BTH</h2>
+            <!-- <h3 class="logo_description"> All in One<br> Electronics Maintenance </h3> -->
+           </div> 
+            
+           <!-- <div class="col text-end">
+            <form th:object="${CustomerProfile}" class="col" action="/logout" method="post">
+              <div class="dropdown">
+                <a
+                  href="#"
+                  role="button"
+                  class="dropdown-toggle"
+                  id="signup_options"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    th:src="@{${CurrentUser.getPhotosImagePath}}" 
+                    class="rounded-circle"
+                    data-bs-toggle="tooltip"
+                    th:title="|Logged in as *{user.firstName} *{user.lastName} (*{user.role})|"
+                    alt="Avatar"
+                    height="35"
+                  />
+                </a>
+                <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                  <li>
+                    <form th:action="@{/logout}" method="post">
+                      <button type="submit" class="btn-sm btn w-100">
+                        Log out
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </form>  
+          </div>
+      
+        </div> -->
+      
+        
+        <nav class="nav-bar">
+            <ul class="nav-bar__list">
+                <li class="nav-bar__item activated"><a class="nav-bar__link" href="home.html" ><i class="fas fa-home nav-bar__icon colored space" style="color: #084C61;"></i><p class="nav-bar__item--mobile  mobile--active colored">Home</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href=""><i class="fas fa-address-card nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">About</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/service.html"><i class="fas fa-window-restore nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Technicians</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link"  href="html/work.html"><i class="fas fa-briefcase nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Fix Devices</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/biography.html"><i class="far fa-address-book nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Orders</p></a></li>
+                <li class="nav-bar__item"><a class="nav-bar__link" href="html/contact.html"><i class="fas fa-phone-volume nav-bar__icon space" style="color: #084C61 ;"></i><p class="nav-bar__item--mobile">Contact Us</p></a></li>
+            </ul>
+        </nav> 
       </header>
-      <div class="con edit-profile_con row justify-content-center  align-items-center ">
+
+
+      <div class="con edit-profile_con row justify-content-center  align-items-center " style="margin-top: 5em;">
             <form class="col-auto rounded-3 p-3 bg-light text-center " th:action="@{/displayCustomerProfile}" method="post">
                 <span>Your Request is sent SuccessFully</span>
                 <br>
                 <a th:href="@{/displayCustomerProfile}" class="btn btn-primary mt-2">Back to profile</a>
             </form>
       </div>
-      <footer class="text-center p-2 align-items-center justify-content-center fixed-bottom">
-        &copy; 2022 <b>THE TUTOR</b> - All Rights Reserved.
-      </footer>
+      <div style="position: absolute; bottom: 0; width: 100%;" th:insert="fragments/footer :: footer"></div>
+
     </main>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
+  
+  
   </body>
 </html>

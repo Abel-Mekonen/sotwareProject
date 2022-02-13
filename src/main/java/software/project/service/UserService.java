@@ -57,6 +57,7 @@ public class UserService {
         registrationForm.setPhotos(fileName);
         user = registrationForm.toUser(passwordEncoder);
         user.setRole(Role.TECHNICIAN);
+        // user.setMailConfrimed(true);
         User savedUser = userRepo.save(user);
 
         var profile = new Technician();
@@ -95,12 +96,13 @@ public class UserService {
     }
 
     public String saveCustomer(RegistrationForm registrationForm, MultipartFile multipartFile, RedirectAttributes ra) {
-
+        
         User user = new User();
         String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
         registrationForm.setPhotos(fileName);
         user = registrationForm.toUser(passwordEncoder);
         user.setRole(Role.CUSTOMER);
+        // user.setMailConfrimed(true);
         User savedUser = userRepo.save(user);
         var profile = new Customer();
         profile.setUser(user);

@@ -36,16 +36,40 @@
           <h2 class="logo_description">BTH</h2>
           <!-- <h3 class="logo_description"> All in One<br> Electronics Maintenance </h3> -->
          </div> 
-          
-          <ul class="menu-drop-down" style="color: white;"  aria-labelledby="signup_options">
-            <li>
-              <form th:action="@{/logout}" method="post">
-                <button type="submit" class="btn-sm btn w-100" style="color: white;">
-                    Log out
-                </button>
-              </form>
-            </li>
-          </ul>
+<!--           
+         
+           <div class="col text-end">
+            <form th:object="${CustomerProfile}" class="col" action="/logout" method="post">
+              <div class="dropdown">
+                <a
+                  href="#"
+                  role="button"
+                  class="dropdown-toggle"
+                  id="signup_options"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    class="rounded-circle"
+                    data-bs-toggle="tooltip"
+                    th:src = "@{${technician.getUser().photosImagePath}}"
+                    th:title="|Logged in as *{user.firstName} *{user.lastName} (*{user.role})|"
+                    alt="Avatar"
+                    height="35"
+                  />
+                </a>
+                <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+                  <li>
+                    <form th:action="@{/logout}" method="post">
+                      <button type="submit" class="btn-sm btn w-100">
+                        Log out
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </form>  
+          </div> -->
       </div>
 
     
@@ -158,7 +182,7 @@
 
     <div th:unless="${ord}">
 
-      <h1>Technicians in your area</h1>
+      <h5 style="color: black;">Technicians in your area</h5>
       <div
       th:block
       th:each="technician: ${techs}"
@@ -166,7 +190,7 @@
     
       <div class="col-md-9 col-lg-4 text-center">
         <img
-          th:src="@{/images/default_avatar.png}"
+          th:src = "@{${technician.getUser().photosImagePath}}"
           class="rounded-circle img-fluid"
           alt="Avatar"
         />
@@ -174,6 +198,8 @@
       <div class="col mw-25">
         <h6 class="">
           <b>
+            <b>Name: </b>
+
             <span th:text="${technician.getUser().getFirstName()}"></span>
             <span th:text="${technician.getUser().getLastName()}"></span>
           </b>
@@ -198,14 +224,14 @@
           
         </div>
         
-        <div>
+        <!-- <div>
           <h2>Star Rating</h2>
           <span class="fa fa-star checked"></span>
           <span class="fa fa-star checked"></span>
           <span class="fa fa-star checked"></span>
           <span class="fa fa-star-half-o checked"></span>
           <span class="fa fa-star-o"></span>
-        </div>
+        </div> -->
   
         <a
           th:href="@{'/send-request?id=' + ${technician.id} + '&Deviceid=' + ${technician.device} }"
@@ -221,21 +247,23 @@
     
 
   <div th:unless="${ord}">
-    <h1>Other Technicians</h1>
+    <h5 style="color: black;">Other Technicians</h5>
     <div
     th:block
     th:each="technician: ${technicians}"
-    class="cards w-75 mb-4 p-3 row align-items-center justify-content-center"
+    class="cards w-50 mb-4 p-3 row align-items-center justify-content-center shadow p-3 mb-5 bg-white rounded"
   >
     <div class="col-md-9 col-lg-4 text-center">
       <img
-        th:src="@{/images/default_avatar.png}"
-        class="rounded-circle img-fluid"
+      th:src = "@{${technician.getUser().photosImagePath}}"
+      class="rounded-circle img-fluid"
         alt="Avatar"
       />
     </div>
     <div class="col mw-25">
       <h6 class="">
+        <b style="margin-right: 5px;">Name: </b>
+
         <b>
           <span th:text="${technician.getUser().getFirstName()}"></span>
           <span th:text="${technician.getUser().getLastName()}"></span>
@@ -261,14 +289,14 @@
         
       </div>
       
-      <div>
+      <!-- <div>
         <h2>Star Rating</h2>
         <span class="fa fa-star checked"></span>
         <span class="fa fa-star checked"></span>
         <span class="fa fa-star checked"></span>
         <span class="fa fa-star-half-o checked"></span>
         <span class="fa fa-star-o"></span>
-      </div> 
+      </div>  -->
 
       <a
           th:href="@{'/send-request?id=' + ${technician.id} + '&Deviceid=' + ${technician.device} }"
