@@ -5,36 +5,53 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-  <link th:href="@{/css/profile.css}" rel="stylesheet" />
-  <link th:href="@{/css/common.css}" rel="stylesheet" />
+  <link th:href="@{/css/landing.css}" rel="stylesheet" />
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+  <!-- <link th:href="@{/css/common.css}" rel="stylesheet" /> -->
+  <link th:href="@{/css/css.css}" rel="stylesheet" />
 
   <!-- Font Awesome Icon Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <section>
-        
-        <div align = "center">
-            <h1><strong style="color:rgb(17, 116, 103);">Resend an Email</strong></h1>
+    <header class="shadow signup-nav text-light">
+        <div class="d-flex bd-highlight mb-3 " >
+          <div class="p-2 bd-highlight mx-3"><h1>BTH</h1></div>
+          <div class="ms-auto d-flex p-2 bd-highlight ">
+            <div class=" bd-highlight"><a th:href="@{/}" class="btn btn-primary btn-sm">Home</a></div>
+            <!-- <div class=" bd-highlight"><a th:href="@{/displayCustomerProfile}" class="btn btn-primary btn-sm">profile</a></div> -->
+          </div>
         </div>
-        <form th:action="@{/resendEmail}" method="post">
-            <div th:if="${error}" class = "alert alert-danger text-center">
-                [[${error}]]
-            </div>
-            <div th:if="${message}" class = "alert alert-success text-center">
-                [[${message}]]
-            </div>
-            <div th:if="${success}" class = "alert alert-success text-center">
-                [[${success}]]
-            </div>
-            your email address: [[${mail}]]<br>
-            <input type="email" name="mail" th:value="${mail}" hidden>
-            <input type="submit" value="Resend Code" class="btn btn-primary">
-        </form>
-        <a th:href="@{/login}" role="button" class="btn btn-primary"> &lt;Back to login </a>
-        <a th:href="@{/login}"> Not my email account </a>
-    </section>
+      </header>
 
+    <section>
+        <div>
+            <div align = "center">
+                <h1><strong style="color:rgb(17, 116, 103);">Resend an Email</strong></h1>
+            </div>
+            <div class="check">
+    
+            </div>
+            <form th:action="@{/resendEmail}" method="post">
+                <div th:if="${error}" class = "alert alert-danger text-center row">
+                    [[${error}]]
+                </div>
+                <div th:if="${message}" class = "alert alert-success text-center row">
+                    [[${message}]]
+                </div>
+                <div th:if="${success}" class = "alert alert-success text-center row">
+                    [[${success}]]
+                </div>
+                your email address: [[${mail}]]<br>
+                <input type="email" name="mail" th:value="${mail}" hidden>
+                <input type="submit" value="Resend Code" class="btn btn-primary">
+            </form>
+            <a th:href="@{/login}" role="button" class="btn btn-primary"> &lt;Back to login </a>
+            <a th:href="@{/login}"> Not my email account </a>
+        </section>
+    
+        </div>
+       
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
 </body>

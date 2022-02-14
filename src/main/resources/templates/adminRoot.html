@@ -5,106 +5,200 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <link th:href="@{/css/landing.css}" rel="stylesheet" />
     <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+
 </head>
 <body>
 
-          <header class="row align-items-center ps-5 pe-5 shadow bg-body">
-        <div class="col fs-5">
-          <b><a href="/adminDashBoard">Electronic Maintenance</a></b>
-        </div>
-        <div class="col text-end">
-          <form
-            th:object="${TutorProfileModel}"
-            class="col"
-            th:action="@{/logout}"
-            method="post"
+  <header class="shadow signup-nav text-light">
+    <div class="d-flex bd-highlight mb-3 " >
+      <div class="col fs-5">
+        <b><a href="/adminDashBoard">Electronic Maintenance</a></b>
+      </div>
+       <div class="ms-auto d-flex p-2 bd-highlight ">
+        <div class=" bd-highlight"><a th:href="@{/}" class="btn btn-primary btn-sm">Home</a></div>
+        <!-- <div class=" bd-highlight"><a th:href="@{/displayCustomerProfile}" class="btn btn-primary btn-sm">profile</a></div> -->
+        <form
+        th:object="${TutorProfileModel}"
+        class="col"
+        th:action="@{/logout}"
+        method="post"
+      >
+        <div class="dropdown">
+          <a
+            href="#"
+            role="button"
+            class="dropdown-toggle"
+            id="signup_options"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
-            <div class="dropdown">
-              <a
-                href="#"
-                role="button"
-                class="dropdown-toggle"
-                id="signup_options"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  th:src="@{/images/default_avatar.png}"
-                  class="rounded-circle"
-                  data-bs-toggle="tooltip"
-                  title="Logged in as Admin"
-                  alt="Avatar"
-                  height="35"
-                />
-              </a>
-              <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
-                <li>
-                  <form action="/logout" method="post">
-                    <button type="submit" class="btn-sm btn w-100">
-                      Log out
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            </div>
-          </form>
+            <img
+              th:src="@{/images/default_avatar.png}"
+              class="rounded-circle"
+              data-bs-toggle="tooltip"
+              title="Logged in as Admin"
+              alt="Avatar"
+              height="35"
+            />
+          </a>
+          <ul class="dropdown-menu p-0" aria-labelledby="signup_options">
+            <li>
+              <form action="/logout" method="post">
+                <button type="submit" class="btn-sm btn w-100">
+                  Log out
+                </button>
+              </form>
+            </li>
+          </ul>
         </div>
-      </header>
-
-<section class="row container" style="margin-top:10vh;" align="center" >
-    <div class="col-6"  align="center">
-        <div class="card bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">Users</div>
-            <div class="card-body">
-              <h5 class="card-title">Manage Users</h5>
-              <p class="card-text">Add, Edit and Delete Users</p>
-              <a th:href="@{/adminDashBoard/users}" class="btn btn-outline-dark btn-lg active" role="button" aria-pressed="true">Go</a>
-            </div>
-        </div>
-    </div>
-      <div class="col-6"  align="center">
-        <div class="card bg-light mb-3" style="max-width: 18rem;">
-
-            <div class="card-header">
-              Messages  &ThickSpace;<span class="badge badge-primary bg-primary">[[${messages}]]</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Manage Messages</h5>
-              <p class="card-text"> See Messages, Suggestions and Feedbacks send by Technicains and Customers</p>
-              <a th:href="@{/adminDashBoard/messages}" class="btn btn-outline-dark btn-lg active" role="button" aria-pressed="true">Go</a>
-            </div>
-          </div>
+      </form>
       </div>
+    </div>
+  </header>
+
       
-      <div class="col-6" style="margin-top: 25px;" align="center">
-        <div align="center">
-            <div class="card bg-light mb-3" style="max-width: 18rem;">
-                <div class="card-header">Header</div>
-                <div class="card-body">
-                  <h5 class="card-title">Dark card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a th:href="@{/adminDashBoard/ApprovedTechnician}" class="btn btn-outline-dark btn-lg active" role="button" aria-pressed="true">Go</a>
-                </div>
-              </div>
+
+      <main class="container text-center m-auto flex-grow-1 mb-5 ">
+        <div class="container flex-grow-1 pt-4">
+          <div class="my-4 py-3 ">
+            <h1>ADMIN DASHBOARD</h1>
           </div>
-      </div>
-      <div class="col-6" style="margin-top: 25px;" align="center">
-        <div class="card bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h5 class="card-title">Info card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a th:href="@{/adminDashBoard/notApprovedTechnician}" class="btn btn-outline-dark btn-lg active" role="button" aria-pressed="true">Go</a>
-
+          <div class="row">
+            <div class="col-12">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5 justify-content-center">
+               
+               
+                <div class="col">
+                  <div class="card ">
+                    <div class="card-body p-0">
+                      <div class="bg-light py-2 shadow-sm  ">
+                      <h5 class="card-title pt-2">Manage Messages</h5>
+                      </div>
+                      <div class="p-3">
+                      <p class="card-text text-start p-3" style="border-left: 2px rgb(151, 150, 150)  solid;"> See Messages, Suggestions and Feedbacks send by Technicains and Customers</p>
+                      <a th:href="@{/adminDashBoard/messages}" class="btn w-50 btn-primary active" role="button"
+                        aria-pressed="true">Go</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+    
+                <div class="col">
+                  <div class="card ">
+                    <div class="card-body p-0">
+                      <div class="bg-light py-2 shadow-sm ">
+                      <h5 class="card-title pt-2">Manage Users</h5>
+                      </div>
+                      <div class="p-3">
+                      <p class="card-text text-start p-3" style="border-left: 2px rgb(151, 150, 150)  solid;">Some quick example text to build on the card title and make up the bulk of the
+                        card's</p>
+                      <a th:href="@{/adminDashBoard/users}" class="btn w-50 btn-primary active" role="button"
+                        aria-pressed="true">Go</a>
+                      </div>
+                    </div>
+    
+    
+                  </div>
+                </div>
+    
+                <div class="col">
+                  <div class="card ">
+                    <div class="card-body p-0">
+                      <div class="bg-light py-2 shadow-sm ">
+                      <h5 class="card-title pt-2">Info card title</h5>
+                      </div>
+                      <div class="p-3">
+                      <p class="card-text text-start p-3" style="border-left: 2px rgb(151, 150, 150)  solid;">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                      <a th:href="@{/adminDashBoard/notApprovedTechnician}" class="btn w-50 btn-primary active"
+                        role="button" aria-pressed="true">Go</a>
+                      </div>
+    
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col">
+                  <div class="card ">
+                    <div class="card-body p-0">
+                      <div class="bg-light py-2 shadow-sm ">
+                      <h5 class="card-title pt-2">Info card title</h5>
+                      </div>
+                      <div class="p-3">
+                      <p class="card-text text-start p-3" style="border-left: 2px rgb(151, 150, 150)  solid;">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                      <a th:href="@{/adminDashBoard/notApprovedTechnician}" class="btn w-50 btn-primary active"
+                        role="button" aria-pressed="true">Go</a>
+                        </div>
+    
+    
+                    </div>
+                  </div>
+                </div>
+    
+    
+                <div class="col">
+                  <div class="card ">
+                    <div class="card-body p-0">
+                      <div class="bg-light py-2 shadow-sm ">
+                      <h5 class="card-title pt-2">Info card title</h5>
+                      </div>
+                      <div class="p-3">
+                      <p class="card-text text-start p-3" style="border-left: 2px rgb(151, 150, 150) solid;">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                      <a th:href="@{/adminDashBoard/notApprovedTechnician}" class="btn w-50 btn-primary active"
+                        role="button" aria-pressed="true">Go</a>
+                        </div>
+    
+    
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- <div class="col">
+                  <div class="card ">
+                    <div class="col">
+                      <div class="card ">
+                        <div class="card-body p-0">
+                          <div>
+                          <h5 class="card-title pt-2">Info card title</h5>
+                          </div>
+                          <p class="card-text text-start p-3" style="border-left: 2px rgb(151, 150, 150)  solid;">Some quick example text to build on the card title and make up the bulk of the
+                            card's
+                            content.</p>
+                          <a th:href="@{/adminDashBoard/notApprovedTechnician}" class="btn w-50 btn-primary active"
+                            role="button" aria-pressed="true">Go</a>
+        
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+    
+              </div>
             </div>
+          </div>
+          
         </div>
-    </div>
-</sectiion>
+    
+      </main>
 
+    
+    
       <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
       <script th:src="@{/js/common.js}"></script>
+
+      <footer class="text-center text-light p-2 align-items-center justify-content-center signup-nav">
+        &copy; 2022 <b>BTH</b> | All Rights Reserved.
+      </footer>
 </body>
 </html>

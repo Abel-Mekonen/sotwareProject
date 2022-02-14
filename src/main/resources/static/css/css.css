@@ -9,6 +9,10 @@
   *,::after, ::before {
     box-sizing:content-box;
 }
+
+.spacebeetween{
+  width:100px;
+}
   
   div, article, section {
     margin: 0 10px;

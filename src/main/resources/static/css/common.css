@@ -14,10 +14,10 @@ body {
 html {
   background-color: #f3f3f3;
 }
-header {
+/* header {
   height: 50px;
   
-}
+} */
 .con {
   min-height: 90vh;
 }
@@ -52,4 +52,9 @@ footer {
 }
 #valid-phone-info{
   margin-top: 10px;
+}
+
+
+.spacebeetween{
+  width:100px;
 }

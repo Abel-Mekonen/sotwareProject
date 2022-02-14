@@ -1,6 +1,7 @@
 package software.project.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.context.support.BeanDefinitionDsl.Role;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import software.project.service.AdminDashboardService;
 import software.project.mainClasses.User;
+import software.project.mainClasses.User.Role;
+
 import software.project.mainClasses.UserHelper;
 // import software.project.mainClasses.UserHelper;
 import software.project.mainClasses.AdminAddUserForm;
+import software.project.mainClasses.Customer;
 import software.project.mainClasses.Technician;
+import software.project.repository.CustomerRepository;
 import software.project.repository.TechnicianRepository;
 import software.project.repository.UserRepository;
 // import software.project.service.AdminDashboardService;
@@ -26,6 +31,7 @@ import java.lang.ProcessBuilder.Redirect;
 import java.util.*;
 
 import lombok.AllArgsConstructor;
+import lombok.var;
 
 @Controller
 @AllArgsConstructor
@@ -35,6 +41,8 @@ public class AdminDashboardController {
     private final AdminDashboardService adminDashboardService;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private final CustomerRepository customerRepository;
     @Autowired
     private TechnicianRepository technicianRepository;
 
@@ -69,8 +77,26 @@ public class AdminDashboardController {
     @PostMapping("/adminDashBoard/users/saveUser")
     public String saveCustomer(@ModelAttribute AdminAddUserForm adminAddUserForm){
         var user = adminAddUserForm.toUser(passwordEncoder);
+        
+     
+        user.setMailConfrimed(true);
         userRepo.save(user);
-        return "redirect:/adminDashBoard/users";
+
+        var role = user.getRole();
+        if (role == (Role.CUSTOMER)){
+            var cprofile = new Customer();
+            cprofile.setUser(user);
+            customerRepository.save(cprofile);
+
+        }
+        else if(role == Role.TECHNICIAN){
+            var tprofile = new Technician();
+            tprofile.setUser(user);
+            technicianRepository.save(tprofile);
+
+        }
+
+        return "redirect:/adminDashBoard";
     }
 
     @GetMapping("/adminDashBoard/users/updateUsers")
@@ -89,7 +115,7 @@ public class AdminDashboardController {
     public String saveTutor(@RequestParam Long userId,User user, @ModelAttribute("EditByAdmin") UserHelper userHelper){
         return adminDashboardService.saveUser(userId,user,userHelper);
     }
-
+    
     @GetMapping("adminDashBoard/messages")
     public String messageList(Model model){
         return adminDashboardService.messageLists(model);
@@ -116,9 +142,6 @@ public class AdminDashboardController {
         });
         return "redirect:/adminDashBoard/ApprovedTechnician";
     }
-
-
-
 
 
     @GetMapping("adminDashBoard/notApprovedTechnician")
