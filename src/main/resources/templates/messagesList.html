@@ -7,10 +7,24 @@
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <link th:href="@{/css/landing.css}" rel="stylesheet" />
     <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
   </head>
 <body>
-
-    <section>
+    <header class="shadow signup-nav text-light">
+        <div class="d-flex bd-highlight mb-3 " >
+          <div class="p-2 bd-highlight mx-3"><h1>BTH</h1></div>
+          <div class="ms-auto d-flex p-2 bd-highlight ">
+            <div class=" bd-highlight"><a th:href="@{/adminDashBoard}" class="btn btn-primary btn-sm">Dash Board</a></div>
+            <div class=" bd-highlight"><a th:href="@{/logout}" class="btn btn-primary btn-sm">Logout</a></div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+      </header>
+      <div  class="con landing_con row ">
+    <section class="my-3 container">
         <div th:if="${error}" class = "alert alert-danger text-center">
             [[${er}]]
         </div>
@@ -43,7 +57,8 @@
                 
             </div>
         </div>
-        
+    </section>
+</div>
         <script>
             function updateOutput() {
                 $.post("test_ajax_frag").done(function (fragment) {
@@ -52,9 +67,11 @@
                 });
             }
         </script>
-    </section>
+    
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
-
+    <footer class="text-center text-light p-2 align-items-center justify-content-center signup-nav">
+        &copy; 2022 <b>BTH</b> | All Rights Reserved.
+      </footer>
 </body>
 </html>

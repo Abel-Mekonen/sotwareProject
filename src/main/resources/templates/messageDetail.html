@@ -7,20 +7,40 @@
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <link th:href="@{/css/landing.css}" rel="stylesheet" />
     <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/css.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
   </head>
 <body>
-
-    <section>
+  <header class="shadow signup-nav text-light">
+    <div class="d-flex bd-highlight mb-3 " >
+      <div class="p-2 bd-highlight mx-3"><h1>BTH</h1></div>
+      <div class="ms-auto d-flex p-2 bd-highlight ">
+        <div class=" bd-highlight"><a th:href="@{/adminDashBoard}" class="btn btn-primary btn-sm">Dash Board</a></div>
+        <div class=" bd-highlight"><a th:href="@{/logout}" class="btn btn-primary btn-sm">Logout</a></div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+  </header>
+ <div  class="con landing_con row ">
+    <section class="d-flex flex-column align-items-center justify-content-center">
         <div class="card" style="width: 18rem;" th:each="message : ${message}">
-            <div class="card-body">
-              <h2 class="card-title">send By: [[${message.getSender.getFirstName}]]</h2>
-              <h5 class="card-title">Subject: [[${message.getSubject}]]</h5>
+            <div class="card-body w-100">
+              <p>Sent By:</p>
+              <h4 class="card-title"> [[${message.getSender.getFirstName}]]</h4>
+              <p>Subject:</p>
+              <h5 class="card-title"> [[${message.getSubject}]]</h5>
+              <p>Date:</p>
               <h6 class="card-subtitle mb-2 text-muted">[[${message.getSentDate}]]</h6>
-              <p class="card-text"> [[${message.getContent}]] </p>
+              <P>Message</P>
+              <p class="card-text border border-1"> [[${message.getContent}]] </p>
             </div>
           </div>
     </section>
-    
-
+  </div>
+    <footer class="text-center text-light p-2 align-items-center justify-content-center signup-nav">
+      &copy; 2022 <b>BTH</b> | All Rights Reserved.
+    </footer>
 </body>
 </html>
