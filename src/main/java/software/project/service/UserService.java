@@ -57,7 +57,7 @@ public class UserService {
         registrationForm.setPhotos(fileName);
         user = registrationForm.toUser(passwordEncoder);
         user.setRole(Role.TECHNICIAN);
-        // user.setMailConfrimed(true);
+        user.setMailConfrimed(true);
         User savedUser = userRepo.save(user);
 
         var profile = new Technician();
@@ -102,7 +102,7 @@ public class UserService {
         registrationForm.setPhotos(fileName);
         user = registrationForm.toUser(passwordEncoder);
         user.setRole(Role.CUSTOMER);
-        // user.setMailConfrimed(true);
+        user.setMailConfrimed(true);
         User savedUser = userRepo.save(user);
         var profile = new Customer();
         profile.setUser(user);
