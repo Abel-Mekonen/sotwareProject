@@ -1,5 +1,6 @@
 package software.project.service;
 
+import io.github.pixee.security.Filenames;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +107,7 @@ public class TechnicianProfileService {
     public String saveTutor(@AuthenticationPrincipal User user, UserHelper userHelper, MultipartFile multipartFile) {
         var profile = user.getTechnicianProfile();
 
-        String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String fileName = org.springframework.util.StringUtils.cleanPath(Filenames.toSimpleFileName(multipartFile.getOriginalFilename()));
         userHelper.setPhotos(fileName);
 
         profile.setDescription(userHelper.getDescription());

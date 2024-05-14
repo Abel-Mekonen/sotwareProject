@@ -1,5 +1,6 @@
 package software.project.service;
 
+import io.github.pixee.security.Filenames;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -76,7 +77,7 @@ public class CustomerProfileService {
     public String saveCustomer(@AuthenticationPrincipal User user, UserHelper userHelper, MultipartFile multipartFile) {
         var profile = user.getCustomerProfile();
 
-        String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String fileName = org.springframework.util.StringUtils.cleanPath(Filenames.toSimpleFileName(multipartFile.getOriginalFilename()));
         userHelper.setPhotos(fileName);
         // Optional<User> pic = userRepo.findById(user.getId());
         // if (pic==null){
