@@ -1,5 +1,6 @@
 package software.project.service;
 
+import io.github.pixee.security.Filenames;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
@@ -53,7 +54,7 @@ public class UserService {
         // return "redirect:/login";
 
         User user = new User();
-        String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String fileName = org.springframework.util.StringUtils.cleanPath(Filenames.toSimpleFileName(multipartFile.getOriginalFilename()));
         registrationForm.setPhotos(fileName);
         user = registrationForm.toUser(passwordEncoder);
         user.setRole(Role.TECHNICIAN);
@@ -98,7 +99,7 @@ public class UserService {
     public String saveCustomer(RegistrationForm registrationForm, MultipartFile multipartFile, RedirectAttributes ra) {
         
         User user = new User();
-        String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String fileName = org.springframework.util.StringUtils.cleanPath(Filenames.toSimpleFileName(multipartFile.getOriginalFilename()));
         registrationForm.setPhotos(fileName);
         user = registrationForm.toUser(passwordEncoder);
         user.setRole(Role.CUSTOMER);
